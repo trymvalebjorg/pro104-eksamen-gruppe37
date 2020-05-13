@@ -123,8 +123,6 @@ main {
 .list__item__expand {
     justify-self: center;
     align-self: center;
-    transition:;
-
 }
 
 .list__item__expanded {
