@@ -4,8 +4,93 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Eksamen PRO104, Gruppe 37</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <h1>Hallais</h1>
+    <header>
+        <div class="navbar">
+            <h3 class="navbar__logo">Eksamen</h3>
+        </div>
+
+        <div class="toolbar">
+            <div class="toolbar__board">
+                <label for="prosjekt">Prosjekt:</label>
+                    <select id="prosjekt">
+                        <option value="prosjekt-1">Prosjekt 1</option>
+                        <option value="prosjekt-2">Prosjekt 2</option>
+                        <option value="prosjekt-4">Prosjekt 3</option>
+                    </select>
+            </div>
+
+            <div class="toolbar__members">
+                <p>Medlemmer: 0 0 0 0 </p>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="list">
+            <div class="list__header">
+                <img src="img/icons/album.svg" alt="an icon" class="icon">
+                <h3>To-do</h3>
+            </div>
+
+            <div class="list__item">
+                <figure class="list__item__importance dot dot--red"></figure>
+
+                <div class="list__item__text">
+                    <p class="list__item__text--date">15. mai // 08:00</p>
+                    <p class="list__item__text--task">Lage sjampanjefrokost</p>
+                </div>
+
+                <div class="list__item__expand">
+                    <img src="img/icons/chevron-down-o.svg" alt="read more" class="icon">
+                </div>
+
+                <div class="list__item__expanded">
+                    <p>lorem</p>
+                </div>
+            </div> 
+            
+            <div class="list__item">
+                <figure class="list__item__importance dot dot--yellow"></figure>
+
+                <div class="list__item__text">
+                    <p class="list__item__text--date">15. mai // 08:00</p>
+                    <p class="list__item__text--task">Lage sjampanjefrokost</p>
+                </div>
+
+                <div class="list__item__expand">
+                    <img src="img/icons/chevron-down-o.svg" alt="read more" class="icon">
+                </div>
+
+                <div class="list__item__expanded">
+                    <p>lorem</p>
+                </div>
+            </div> 
+
+            <div class="list__item">
+                <figure class="list__item__importance dot dot--green"></figure>
+
+                <div class="list__item__text">
+                    <p class="list__item__text--date">15. mai // 08:00</p>
+                    <p class="list__item__text--task">Lage sjampanjefrokost</p>
+                </div>
+
+                <div class="list__item__expand">
+                    <img src="img/icons/chevron-down-o.svg" alt="read more" class="icon">
+                </div>
+
+                <div class="list__item__expanded">
+                    <p>lorem</p>
+                </div>
+            </div> 
+        </div>
+    </main>
+
+    <footer>
+    </footer>
+
+    <script src="js/main.js"></script>
 </body>
 </html>
