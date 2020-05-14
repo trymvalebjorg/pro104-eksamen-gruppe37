@@ -16,9 +16,9 @@ body {
     font-weight: 500;
     font-size: 1.6rem;
     line-height: 1.6;
-    background: linear-gradient(360deg, rgba(241,240,245,1) 0%, rgba(224,226,230,1) 100%);
+    background: linear-gradient(360deg, rgb(240, 245, 242) 0%, #C7E6D8 100%);
     height: 100vh; /* Temporary */
-    color: #323233;
+    color: #1b3f26;
 }
 
 .icon {
@@ -49,23 +49,26 @@ body {
 
 /* Navbar  */
 .navbar {
-    margin: 3rem 10% 0 10%;
+    margin: 5rem 10% 0 10%;
 }
 
-.navbar__logo {
-    font-size: 2rem;
+.navbar__title {
+    font-size: 5rem;
+}
+.navbar__underTitle {
+    font-size: 1rem;
+
 }
 
 /* Toolbar */
 
 .toolbar {
     margin: 1rem 10% 0 10%;
-    padding: 2rem 0rem 3rem 0rem;
+    padding: 2rem 0rem 2rem 0rem;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    border-bottom: 1px dashed grey;
+    border-bottom: 1px dashed #265835;
 }
-
 
 /* Main */
 main {
@@ -77,10 +80,10 @@ main {
 
 
 .list {
-    margin-top: 5rem;
+    margin-top: 6rem;
     display: inline-block;
-    background-color: white;
-    box-shadow: 10px 9px 28px -6px rgba(0,0,0,0.37);
+    background-color: #EDFFFE;
+    box-shadow: 5px 5px 18px -10px rgba(63, 63, 63, 0.37);
     position: relative;
 }
 
@@ -90,7 +93,7 @@ main {
     flex-direction: row;
     align-items: center;
     position: absolute;
-    top: -5rem;
+    top: -6rem;
     left: 0rem;
 }
 
@@ -103,7 +106,7 @@ main {
     display: grid;
     grid-template-columns: 1fr 3fr 1fr;
     padding: 1rem;
-    border-bottom: 1px solid #ACACAC;
+    border-bottom: 1px solid #aac4b2d2;
 
 }
 
@@ -114,10 +117,13 @@ main {
 
 .list__item__text--date {
     color: #ACACAC;
+    
 }
 
 .list__item__text--task {
-    font-weight: 700;
+    font-weight: 500;
+    padding-left: 1rem;
+    padding-right: 1rem;
 }
 
 .list__item__expand {
@@ -128,6 +134,8 @@ main {
 .list__item__expanded {
     grid-column: 2 / 3;
     display: none;
+    padding-left: 1rem;
+    padding-right: 1rem;
 }
 
 .active {

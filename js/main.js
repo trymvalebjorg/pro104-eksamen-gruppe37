@@ -1,4 +1,3 @@
-
 // ReadMore for task
 let toggler = document.getElementsByClassName("list__item__expand");
 for( i = 0; i < toggler.length; i++){
@@ -7,3 +6,6 @@ for( i = 0; i < toggler.length; i++){
         this.classList.toggle('arrow-down');
     })
 }
+
+
+
