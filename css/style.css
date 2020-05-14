@@ -122,8 +122,6 @@ main {
 
 .list__item__text--task {
     font-weight: 500;
-    padding-left: 1rem;
-    padding-right: 1rem;
 }
 
 .list__item__expand {
@@ -134,8 +132,6 @@ main {
 .list__item__expanded {
     grid-column: 2 / 3;
     display: none;
-    padding-left: 1rem;
-    padding-right: 1rem;
 }
 
 .active {
