@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Eksamen PRO104, Gruppe 37</title>
+        <link href="css/boards.css" rel="stylesheet" type="text/css">
+    </head>
+<body>
+    <header>
+
+    </header>
+    <main>
+        <button class="return-btn"><a href="index.html">Back to Create a Board</a></button>
+        
+        <div id="output-div"></div>
+        <button id="create-div">Create a new div</button>
+        <div class="main-container" id="main-container">
+            <div class="grid">
+                <h3 contenteditable="true">Må gjøres</h3>
+                <form id="add-task" onsubmit="addNewTask(event)">
+                    <input type="text" value="Enter task..." id="task-desc">
+                    <input type="submit" value="Add task" id="task-submit">
+                </form>
+                <div id="task-output-div"></div>
+            </div>
+            <div class="grid">
+                <h3 contenteditable="true">Pågår</h3>
+                
+            </div>
+            <div class="grid">
+                <h3 contenteditable="true">Ferdig</h3>
+            </div>
+            <div class="grid">
+                <h3 contenteditable="true">Bugs & Tweaks</h3>
+            </div>
+        </div>
+
+    </main>
+
+    <script src="js/boards.js"></script>
+</body>
+</html>
