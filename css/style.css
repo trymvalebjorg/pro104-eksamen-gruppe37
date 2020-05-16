@@ -75,6 +75,9 @@ main {
     grid-gap: 4rem;
 }
 
+#list__form{
+    display: grid;
+}
 
 .list {
     margin-top: 5rem;
