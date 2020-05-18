@@ -130,7 +130,14 @@ main {
     grid-gap: 4rem;
 }
 
+<<<<<<< HEAD
 /* List */
+=======
+#list__form{
+    display: grid;
+}
+
+>>>>>>> a6576e156d0dbd28e2dd7f8514383448b160e181
 .list {
     margin-top: 5rem;
     display: inline-block;
