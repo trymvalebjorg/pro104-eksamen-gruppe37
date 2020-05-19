@@ -4,6 +4,7 @@ let toggler = document.getElementsByClassName("list__item__expand");
 for( i = 0; i < toggler.length; i++){
     toggler[i].addEventListener('click', function() {
         this.parentElement.querySelector('.list__item__expanded').classList.toggle('active');
+        this.parentElement.querySelector('.list__item__expanded__controls').classList.toggle('active');
         this.classList.toggle('arrow-down');
     })
 }
@@ -42,7 +43,7 @@ function showTasks(){
 
     //Looping through the taskList array which contains the input from user.
     for(let i = 0; i < taskList.length; i++){
-        const listDiv = document.querySelector('.list__item');
+        const listDiv = document.querySelector('.list');
         //Creating a new List item as a div
         const listItem = document.createElement('div');
         //Assigning attributes to the newly created div to access some of the CSS styling.
@@ -51,6 +52,7 @@ function showTasks(){
         //Outputting the HTML into our newly created div
         //Maybe this can be more dynamic????
         listDiv.innerHTML += `
+            <div class="list__item">
             <figure class="list__item__importance dot dot--green"></figure>
             <div class="list__item__text">
                 <p class="list__item__text--date">16.05.2020</p>
@@ -64,7 +66,8 @@ function showTasks(){
             <div class="list__item__expanded">
                 <p>lorem</p>
             </div> 
-        `;
+            </div>
+            `;
         //Appending the listItem div to the outputDiv
         outputDiv.appendChild(listItem);
     }
