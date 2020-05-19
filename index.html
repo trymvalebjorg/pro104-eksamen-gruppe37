@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Eksamen PRO104, Gruppe 37</title>
     <link rel="stylesheet" href="css/style.css">
-    <script type="text/javascript" src="main.js" defer></script>
 </head>
 <body>
     <header>
@@ -33,25 +32,11 @@
         <div class="list">
             <div class="list__header">
                 <img src="img/icons/album.svg" alt="an icon" class="icon">
-                <h3 contenteditable="true">To-do</h3>
+                <h3>To-do</h3>
             </div>
 
-            <div class="list__item">
-                <figure class="list__item__importance dot dot--red"></figure>
+            <button class="list__action-btn btn btn--round btn--add"></button>
 
-                <div class="list__item__text">
-                    <p class="list__item__text--date">15. mai // 08:00</p>
-                    <p contenteditable="true" class="list__item__text--task">Lage sjampanjefrokost</p>
-                </div>
-
-                <div class="list__item__expand">
-                    <img src="img/icons/chevron-down-o.svg" alt="read more" class="icon">
-                </div>
-
-                <div class="list__item__expanded">
-                    <p>lorem</p>
-                </div>
-            </div> 
             
             <div class="list__item">
                 <figure class="list__item__importance dot dot--yellow"></figure>
@@ -62,16 +47,37 @@
                 </div>
 
                 <div class="list__item__expand">
-                    <img src="img/icons/chevron-down-o.svg" alt="read more" class="icon">
+                    <img src="img/icons/triangle.svg" alt="read more" class="arrow arrow--grey">
+                </div>
+
+                <div class="list__item__expanded__controls">
+                    <button class="list__item__expanded__btn btn btn--grey btn--round btn--edit"></button>
+                    <button class="list__item__expanded__btn btn btn--grey btn--round btn--upload"></button>
+                    <button class="list__item__expanded__btn btn btn--red btn--round btn--remove"></button>
                 </div>
 
                 <div class="list__item__expanded">
-                    <p>lorem</p>
+                    <div class="list__item__expanded__members">
+                        <img class="profile-pic" src="img/profilepics/22.jpg" alt="">
+                        <img class="profile-pic" src="img/profilepics/68.jpg" alt="">
+                        <img class="profile-pic" src="img/profilepics/32.jpg" alt="">
+                        <button class="btn--add-member btn btn--round btn--add"></button>
+                    </div>
+
+                    <div class="list__item__expanded__images">
+                        <img src="https://source.unsplash.com/random/" alt="">
+                        <img src="https://source.unsplash.com/random/" alt="">
+                        <img src="https://source.unsplash.com/random/" alt="">
+                    </div>
+
+                    <div class="list__item__expanded__comments">
+                        comments
+                    </div>
                 </div>
-            </div> 
+            </div>
 
             <div class="list__item">
-                <figure class="list__item__importance dot dot--green"></figure>
+                <figure class="list__item__importance dot dot--yellow"></figure>
 
                 <div class="list__item__text">
                     <p class="list__item__text--date">15. mai // 08:00</p>
@@ -79,14 +85,448 @@
                 </div>
 
                 <div class="list__item__expand">
-                    <img src="img/icons/chevron-down-o.svg" alt="read more" class="icon">
+                    <img src="img/icons/triangle.svg" alt="read more" class="arrow arrow--grey">
+                </div>
+
+                <div class="list__item__expanded__controls">
+                    <button class="list__item__expanded__btn btn btn--grey btn--round btn--edit"></button>
+                    <button class="list__item__expanded__btn btn btn--grey btn--round btn--upload"></button>
+                    <button class="list__item__expanded__btn btn btn--red btn--round btn--remove"></button>
                 </div>
 
                 <div class="list__item__expanded">
-                    <p>lorem</p>
+                    <div class="list__item__expanded__members">
+                        <img class="profile-pic" src="img/profilepics/22.jpg" alt="">
+                        <img class="profile-pic" src="img/profilepics/68.jpg" alt="">
+                        <img class="profile-pic" src="img/profilepics/32.jpg" alt="">
+                        <button class="btn--add-member btn btn--round btn--add"></button>
+                    </div>
+
+                    <div class="list__item__expanded__images">
+                        <img src="https://source.unsplash.com/random/" alt="">
+                        <img src="https://source.unsplash.com/random/" alt="">
+                        <img src="https://source.unsplash.com/random/" alt="">
+                    </div>
+
+                    <div class="list__item__expanded__comments">
+                        comments
+                    </div>
                 </div>
-            </div> 
+            </div>
+
+            <div class="list__item">
+                <figure class="list__item__importance dot dot--yellow"></figure>
+
+                <div class="list__item__text">
+                    <p class="list__item__text--date">15. mai // 08:00</p>
+                    <p class="list__item__text--task">Lage sjampanjefrokost</p>
+                </div>
+
+                <div class="list__item__expand">
+                    <img src="img/icons/triangle.svg" alt="read more" class="arrow arrow--grey">
+                </div>
+
+                <div class="list__item__expanded__controls">
+                    <button class="list__item__expanded__btn btn btn--grey btn--round btn--edit"></button>
+                    <button class="list__item__expanded__btn btn btn--grey btn--round btn--upload"></button>
+                    <button class="list__item__expanded__btn btn btn--red btn--round btn--remove"></button>
+                </div>
+
+                <div class="list__item__expanded">
+                    <div class="list__item__expanded__members">
+                        <img class="profile-pic" src="img/profilepics/22.jpg" alt="">
+                        <img class="profile-pic" src="img/profilepics/68.jpg" alt="">
+                        <img class="profile-pic" src="img/profilepics/32.jpg" alt="">
+                        <button class="btn--add-member btn btn--round btn--add"></button>
+                    </div>
+
+                    <div class="list__item__expanded__images">
+                        <img src="https://source.unsplash.com/random/" alt="">
+                        <img src="https://source.unsplash.com/random/" alt="">
+                        <img src="https://source.unsplash.com/random/" alt="">
+                    </div>
+
+                    <div class="list__item__expanded__comments">
+                        comments
+                    </div>
+                </div>
+            </div>
         </div>
+
+        <div class="list">
+            <div class="list__header">
+                <img src="img/icons/album.svg" alt="an icon" class="icon">
+                <h3>To-do</h3>
+            </div>
+
+            <button class="list__action-btn btn btn--round btn--add"></button>
+
+            
+            <div class="list__item">
+                <figure class="list__item__importance dot dot--yellow"></figure>
+
+                <div class="list__item__text">
+                    <p class="list__item__text--date">15. mai // 08:00</p>
+                    <p class="list__item__text--task">Lage sjampanjefrokost</p>
+                </div>
+
+                <div class="list__item__expand">
+                    <img src="img/icons/triangle.svg" alt="read more" class="arrow arrow--grey">
+                </div>
+
+                <div class="list__item__expanded__controls">
+                    <button class="list__item__expanded__btn btn btn--grey btn--round btn--edit"></button>
+                    <button class="list__item__expanded__btn btn btn--grey btn--round btn--upload"></button>
+                    <button class="list__item__expanded__btn btn btn--red btn--round btn--remove"></button>
+                </div>
+
+                <div class="list__item__expanded">
+                    <div class="list__item__expanded__members">
+                        <img class="profile-pic" src="img/profilepics/22.jpg" alt="">
+                        <img class="profile-pic" src="img/profilepics/68.jpg" alt="">
+                        <img class="profile-pic" src="img/profilepics/32.jpg" alt="">
+                        <button class="btn--add-member btn btn--round btn--add"></button>
+                    </div>
+
+                    <div class="list__item__expanded__images">
+                        <img src="https://source.unsplash.com/random/" alt="">
+                        <img src="https://source.unsplash.com/random/" alt="">
+                        <img src="https://source.unsplash.com/random/" alt="">
+                    </div>
+
+                    <div class="list__item__expanded__comments">
+                        comments
+                    </div>
+                </div>
+            </div>
+
+            <div class="list__item">
+                <figure class="list__item__importance dot dot--yellow"></figure>
+
+                <div class="list__item__text">
+                    <p class="list__item__text--date">15. mai // 08:00</p>
+                    <p class="list__item__text--task">Lage sjampanjefrokost</p>
+                </div>
+
+                <div class="list__item__expand">
+                    <img src="img/icons/triangle.svg" alt="read more" class="arrow arrow--grey">
+                </div>
+
+                <div class="list__item__expanded__controls">
+                    <button class="list__item__expanded__btn btn btn--grey btn--round btn--edit"></button>
+                    <button class="list__item__expanded__btn btn btn--grey btn--round btn--upload"></button>
+                    <button class="list__item__expanded__btn btn btn--red btn--round btn--remove"></button>
+                </div>
+
+                <div class="list__item__expanded">
+                    <div class="list__item__expanded__members">
+                        <img class="profile-pic" src="img/profilepics/22.jpg" alt="">
+                        <img class="profile-pic" src="img/profilepics/68.jpg" alt="">
+                        <img class="profile-pic" src="img/profilepics/32.jpg" alt="">
+                        <button class="btn--add-member btn btn--round btn--add"></button>
+                    </div>
+
+                    <div class="list__item__expanded__images">
+                        <img src="https://source.unsplash.com/random/" alt="">
+                        <img src="https://source.unsplash.com/random/" alt="">
+                        <img src="https://source.unsplash.com/random/" alt="">
+                    </div>
+
+                    <div class="list__item__expanded__comments">
+                        comments
+                    </div>
+                </div>
+            </div>
+
+            <div class="list__item">
+                <figure class="list__item__importance dot dot--yellow"></figure>
+
+                <div class="list__item__text">
+                    <p class="list__item__text--date">15. mai // 08:00</p>
+                    <p class="list__item__text--task">Lage sjampanjefrokost</p>
+                </div>
+
+                <div class="list__item__expand">
+                    <img src="img/icons/triangle.svg" alt="read more" class="arrow arrow--grey">
+                </div>
+
+                <div class="list__item__expanded__controls">
+                    <button class="list__item__expanded__btn btn btn--grey btn--round btn--edit"></button>
+                    <button class="list__item__expanded__btn btn btn--grey btn--round btn--upload"></button>
+                    <button class="list__item__expanded__btn btn btn--red btn--round btn--remove"></button>
+                </div>
+
+                <div class="list__item__expanded">
+                    <div class="list__item__expanded__members">
+                        <img class="profile-pic" src="img/profilepics/22.jpg" alt="">
+                        <img class="profile-pic" src="img/profilepics/68.jpg" alt="">
+                        <img class="profile-pic" src="img/profilepics/32.jpg" alt="">
+                        <button class="btn--add-member btn btn--round btn--add"></button>
+                    </div>
+
+                    <div class="list__item__expanded__images">
+                        <img src="https://source.unsplash.com/random/" alt="">
+                        <img src="https://source.unsplash.com/random/" alt="">
+                        <img src="https://source.unsplash.com/random/" alt="">
+                    </div>
+
+                    <div class="list__item__expanded__comments">
+                        comments
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="list">
+            <div class="list__header">
+                <img src="img/icons/album.svg" alt="an icon" class="icon">
+                <h3>To-do</h3>
+            </div>
+
+            <button class="list__action-btn btn btn--round btn--add"></button>
+
+            
+            <div class="list__item">
+                <figure class="list__item__importance dot dot--yellow"></figure>
+
+                <div class="list__item__text">
+                    <p class="list__item__text--date">15. mai // 08:00</p>
+                    <p class="list__item__text--task">Lage sjampanjefrokost</p>
+                </div>
+
+                <div class="list__item__expand">
+                    <img src="img/icons/triangle.svg" alt="read more" class="arrow arrow--grey">
+                </div>
+
+                <div class="list__item__expanded__controls">
+                    <button class="list__item__expanded__btn btn btn--grey btn--round btn--edit"></button>
+                    <button class="list__item__expanded__btn btn btn--grey btn--round btn--upload"></button>
+                    <button class="list__item__expanded__btn btn btn--red btn--round btn--remove"></button>
+                </div>
+
+                <div class="list__item__expanded">
+                    <div class="list__item__expanded__members">
+                        <img class="profile-pic" src="img/profilepics/22.jpg" alt="">
+                        <img class="profile-pic" src="img/profilepics/68.jpg" alt="">
+                        <img class="profile-pic" src="img/profilepics/32.jpg" alt="">
+                        <button class="btn--add-member btn btn--round btn--add"></button>
+                    </div>
+
+                    <div class="list__item__expanded__images">
+                        <img src="https://source.unsplash.com/random/" alt="">
+                        <img src="https://source.unsplash.com/random/" alt="">
+                        <img src="https://source.unsplash.com/random/" alt="">
+                    </div>
+
+                    <div class="list__item__expanded__comments">
+                        comments
+                    </div>
+                </div>
+            </div>
+
+            <div class="list__item">
+                <figure class="list__item__importance dot dot--yellow"></figure>
+
+                <div class="list__item__text">
+                    <p class="list__item__text--date">15. mai // 08:00</p>
+                    <p class="list__item__text--task">Lage sjampanjefrokost</p>
+                </div>
+
+                <div class="list__item__expand">
+                    <img src="img/icons/triangle.svg" alt="read more" class="arrow arrow--grey">
+                </div>
+
+                <div class="list__item__expanded__controls">
+                    <button class="list__item__expanded__btn btn btn--grey btn--round btn--edit"></button>
+                    <button class="list__item__expanded__btn btn btn--grey btn--round btn--upload"></button>
+                    <button class="list__item__expanded__btn btn btn--red btn--round btn--remove"></button>
+                </div>
+
+                <div class="list__item__expanded">
+                    <div class="list__item__expanded__members">
+                        <img class="profile-pic" src="img/profilepics/22.jpg" alt="">
+                        <img class="profile-pic" src="img/profilepics/68.jpg" alt="">
+                        <img class="profile-pic" src="img/profilepics/32.jpg" alt="">
+                        <button class="btn--add-member btn btn--round btn--add"></button>
+                    </div>
+
+                    <div class="list__item__expanded__images">
+                        <img src="https://source.unsplash.com/random/" alt="">
+                        <img src="https://source.unsplash.com/random/" alt="">
+                        <img src="https://source.unsplash.com/random/" alt="">
+                    </div>
+
+                    <div class="list__item__expanded__comments">
+                        comments
+                    </div>
+                </div>
+            </div>
+
+            <div class="list__item">
+                <figure class="list__item__importance dot dot--yellow"></figure>
+
+                <div class="list__item__text">
+                    <p class="list__item__text--date">15. mai // 08:00</p>
+                    <p class="list__item__text--task">Lage sjampanjefrokost</p>
+                </div>
+
+                <div class="list__item__expand">
+                    <img src="img/icons/triangle.svg" alt="read more" class="arrow arrow--grey">
+                </div>
+
+                <div class="list__item__expanded__controls">
+                    <button class="list__item__expanded__btn btn btn--grey btn--round btn--edit"></button>
+                    <button class="list__item__expanded__btn btn btn--grey btn--round btn--upload"></button>
+                    <button class="list__item__expanded__btn btn btn--red btn--round btn--remove"></button>
+                </div>
+
+                <div class="list__item__expanded">
+                    <div class="list__item__expanded__members">
+                        <img class="profile-pic" src="img/profilepics/22.jpg" alt="">
+                        <img class="profile-pic" src="img/profilepics/68.jpg" alt="">
+                        <img class="profile-pic" src="img/profilepics/32.jpg" alt="">
+                        <button class="btn--add-member btn btn--round btn--add"></button>
+                    </div>
+
+                    <div class="list__item__expanded__images">
+                        <img src="https://source.unsplash.com/random/" alt="">
+                        <img src="https://source.unsplash.com/random/" alt="">
+                        <img src="https://source.unsplash.com/random/" alt="">
+                    </div>
+
+                    <div class="list__item__expanded__comments">
+                        comments
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="list">
+            <div class="list__header">
+                <img src="img/icons/album.svg" alt="an icon" class="icon">
+                <h3>To-do</h3>
+            </div>
+
+            <button class="list__action-btn btn btn--round btn--add"></button>
+
+            
+            <div class="list__item">
+                <figure class="list__item__importance dot dot--yellow"></figure>
+
+                <div class="list__item__text">
+                    <p class="list__item__text--date">15. mai // 08:00</p>
+                    <p class="list__item__text--task">Lage sjampanjefrokost</p>
+                </div>
+
+                <div class="list__item__expand">
+                    <img src="img/icons/triangle.svg" alt="read more" class="arrow arrow--grey">
+                </div>
+
+                <div class="list__item__expanded__controls">
+                    <button class="list__item__expanded__btn btn btn--grey btn--round btn--edit"></button>
+                    <button class="list__item__expanded__btn btn btn--grey btn--round btn--upload"></button>
+                    <button class="list__item__expanded__btn btn btn--red btn--round btn--remove"></button>
+                </div>
+
+                <div class="list__item__expanded">
+                    <div class="list__item__expanded__members">
+                        <img class="profile-pic" src="img/profilepics/22.jpg" alt="">
+                        <img class="profile-pic" src="img/profilepics/68.jpg" alt="">
+                        <img class="profile-pic" src="img/profilepics/32.jpg" alt="">
+                        <button class="btn--add-member btn btn--round btn--add"></button>
+                    </div>
+
+                    <div class="list__item__expanded__images">
+                        <img src="https://source.unsplash.com/random/" alt="">
+                        <img src="https://source.unsplash.com/random/" alt="">
+                        <img src="https://source.unsplash.com/random/" alt="">
+                    </div>
+
+                    <div class="list__item__expanded__comments">
+                        comments
+                    </div>
+                </div>
+            </div>
+
+            <div class="list__item">
+                <figure class="list__item__importance dot dot--yellow"></figure>
+
+                <div class="list__item__text">
+                    <p class="list__item__text--date">15. mai // 08:00</p>
+                    <p class="list__item__text--task">Lage sjampanjefrokost</p>
+                </div>
+
+                <div class="list__item__expand">
+                    <img src="img/icons/triangle.svg" alt="read more" class="arrow arrow--grey">
+                </div>
+
+                <div class="list__item__expanded__controls">
+                    <button class="list__item__expanded__btn btn btn--grey btn--round btn--edit"></button>
+                    <button class="list__item__expanded__btn btn btn--grey btn--round btn--upload"></button>
+                    <button class="list__item__expanded__btn btn btn--red btn--round btn--remove"></button>
+                </div>
+
+                <div class="list__item__expanded">
+                    <div class="list__item__expanded__members">
+                        <img class="profile-pic" src="img/profilepics/22.jpg" alt="">
+                        <img class="profile-pic" src="img/profilepics/68.jpg" alt="">
+                        <img class="profile-pic" src="img/profilepics/32.jpg" alt="">
+                        <button class="btn--add-member btn btn--round btn--add"></button>
+                    </div>
+
+                    <div class="list__item__expanded__images">
+                        <img src="https://source.unsplash.com/random/" alt="">
+                        <img src="https://source.unsplash.com/random/" alt="">
+                        <img src="https://source.unsplash.com/random/" alt="">
+                    </div>
+
+                    <div class="list__item__expanded__comments">
+                        comments
+                    </div>
+                </div>
+            </div>
+
+            <div class="list__item">
+                <figure class="list__item__importance dot dot--yellow"></figure>
+
+                <div class="list__item__text">
+                    <p class="list__item__text--date">15. mai // 08:00</p>
+                    <p class="list__item__text--task">Lage sjampanjefrokost</p>
+                </div>
+
+                <div class="list__item__expand">
+                    <img src="img/icons/triangle.svg" alt="read more" class="arrow arrow--grey">
+                </div>
+
+                <div class="list__item__expanded__controls">
+                    <button class="list__item__expanded__btn btn btn--grey btn--round btn--edit"></button>
+                    <button class="list__item__expanded__btn btn btn--grey btn--round btn--upload"></button>
+                    <button class="list__item__expanded__btn btn btn--red btn--round btn--remove"></button>
+                </div>
+
+                <div class="list__item__expanded">
+                    <div class="list__item__expanded__members">
+                        <img class="profile-pic" src="img/profilepics/22.jpg" alt="">
+                        <img class="profile-pic" src="img/profilepics/68.jpg" alt="">
+                        <img class="profile-pic" src="img/profilepics/32.jpg" alt="">
+                        <button class="btn--add-member btn btn--round btn--add"></button>
+                    </div>
+
+                    <div class="list__item__expanded__images">
+                        <img src="https://source.unsplash.com/random/" alt="">
+                        <img src="https://source.unsplash.com/random/" alt="">
+                        <img src="https://source.unsplash.com/random/" alt="">
+                    </div>
+
+                    <div class="list__item__expanded__comments">
+                        comments
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+        
     </main>
 
     <footer>
@@ -94,5 +534,4 @@
 
     <script src="js/main.js"></script>
 </body>
-</html>
 </html>

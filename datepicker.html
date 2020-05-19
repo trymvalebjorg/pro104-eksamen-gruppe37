@@ -1,27 +1,72 @@
-
-
 <!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Date Picker</title>
-    <link rel="stylesheet" href="css/datepicker.css" />
-    <script src="js/datepicker.js" defer></script>
-    
-</head>
-<body>
-	
-	<div class="datepicker">
-		<div class="datepicker__dateselected"></div>
-		<div class="datepicker__dates">
-			<div class="datepicker__dates__month">
-				<div class="datepicker__dates__month__prevmth datepicker__dates__month_arrows">&lt;</div>
-				<div class="datepicker__dates__month__mth"></div>
-				<div class="datepicker__dates__month__nextmth datepicker__dates__month_arrows">&gt;</div>
-			</div>
-			<div class="datepicker__dates__days"></div>
-		</div>
-	</div>
-</body>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="css/datepicker.css">
+        <script type="text/javascript" src="js/datepicker.js" defer></script>
+    </head>
+
+    <body>
+
+        <!--<div class="date-time-picker">
+            <div class="datepicker">
+                <div class="datepicker__dateselected"></div>
+                <div class="datepicker__dates">
+                    <div class="datepicker__dates__month">
+                        <div class="datepicker__dates__month__prevmth datepicker__dates__month_arrows">&lt;</div>
+                        <div class="datepicker__dates__month__mth"></div>
+                        <div class="datepicker__dates__month__nextmth datepicker__dates__month_arrows">&gt;</div>
+                    </div>
+                    <div class="datepicker__dates__days"></div>
+                </div>
+            </div>
+
+            <div class="timepicker" data-time="00:00">
+                <div class="timepicker__hour">
+                    <div class="timepicker__hour__hr-up"></div>
+                    <input type="number" class="timepicker__hour__hr" value="00" />
+                    <div class="timepicker__hour__hr-down"></div>
+                </div>
+                <div class="timepicker__separator">:</div>
+                <div class="timepicker__minute">
+                    <div class="timepicker__minute__min-up"></div>
+                    <input type="number" class="timepicker__minute__min" value="00">
+                    <div class="timepicker__minute__min-down"></div>
+                </div>
+            </div>
+        </div>-->
+
+        <div class="date-time-picker">
+            <div class="datepicker__dateselected"></div>
+
+            <div class="datepicker-timepicker">
+                <div class="datepicker">
+                    <div class="datepicker__dates">
+                        <div class="datepicker__dates__month">
+                            <img src="img/icons/arrow.svg" alt="arrow" class="datepicker__dates__month__prevmth datepicker__dates__month_arrows">
+                            <div class="datepicker__dates__month__mth"></div>
+                            <img src="img/icons/arrow.svg" alt="arrow" class="datepicker__dates__month__nextmth datepicker__dates__month_arrows">
+                        </div>
+                        <div class="datepicker__dates__days"></div>
+                    </div>
+                </div>
+
+                <div class="timepicker" data-time="00:00">
+                    <div class="timepicker__hour">
+                        <img src="img/icons/arrow.svg" alt="arrow" class="timepicker__hour__hr-up">
+                        <input type="number" class="timepicker__hour__hr" value="00" />
+                        <img src="img/icons/arrow.svg" alt="arrow" class="timepicker__hour__hr-down">
+                    </div>
+                    <div class="timepicker__separator">:</div>
+                    <div class="timepicker__minute">
+                        <img src="img/icons/arrow.svg" alt="arrow" class="timepicker__minute__min-up">
+                        <input type="number" class="timepicker__minute__min" value="00">
+                        <img src="img/icons/arrow.svg" alt="arrow" class="timepicker__minute__min-down">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        
+    </body>
 </html>
