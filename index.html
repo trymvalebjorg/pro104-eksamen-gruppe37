@@ -23,11 +23,15 @@
             </div>
 
             <div class="toolbar__members">
-                <p>Medlemmer: 0 0 0 0 </p>
+                <p id="test">Medlemmer: </p>
+                
             </div>
+            <form id="add__member" onsubmit="addMember(event)">
+                <input type="text" id="member__input">
+                <input type="submit" id="member__input__btn" value="Add member">
+            </form>
         </div>
     </header>
-
     <main>
         <!-- LIST ONE-->
         <div class="list">
@@ -81,7 +85,7 @@
                 <div class="list__item__expand">
                     <img src="img/icons/chevron-down-o.svg" alt="read more" class="icon">
                 </div>
-
+                
                 <div class="list__item__expanded">
                     <p>lorem</p>
                 </div>
@@ -90,7 +94,7 @@
             </div> 
             <form id="list__form" class="list__item">
                 <input class="list__item__input" type="text">
-                <input class="list__item__submit" type="submit">
+                <input class="list__item__submit" type="submit" value="Add task">
             </form>
             <!-- LIST TWO -->
             
