@@ -130,7 +130,12 @@ main {
     grid-gap: 4rem;
 }
 
-/* List */
+
+#list__form{
+    display: grid;
+}
+
+
 .list {
     margin-top: 5rem;
     display: inline-block;
