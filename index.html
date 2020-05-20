@@ -52,7 +52,8 @@
 
                 <div class="list__item__expanded__controls">
                     <button class="list__item__expanded__btn btn btn--grey btn--round btn--edit"></button>
-                    <input class="list__item__expanded__btn btn btn--grey btn--round btn--upload" type="file" id="files" name="files[]" multiple>
+                    <input class="list__item__expanded__btn btn btn--grey btn--round btn--upload" type="file" id="files" name="files[]" style="display: none;" multiple>
+                    <input class="list__item__expanded__btn btn btn--grey btn--round btn--upload" type="button" onclick="document.getElementById('files').click();" multiple>
                     <button class="list__item__expanded__btn btn btn--red btn--round btn--remove"></button>
                 </div>
 
@@ -61,7 +62,9 @@
                         <img class="profile-pic" src="img/profilepics/22.jpg" alt="">
                         <img class="profile-pic" src="img/profilepics/68.jpg" alt="">
                         <img class="profile-pic" src="img/profilepics/32.jpg" alt="">
-                        <button class="btn--add-member btn btn--round btn--add"></button>
+                        <output id="profilepic__list"></output>
+                        <input class="btn--add-member btn btn--round btn--add" type="file" id="profiles" name="profiles[]" style="display: none;">
+                        <input class="btn--add-member btn btn--round btn--add" type="button" onclick="document.getElementById('profiles').click();">
                     </div>
 
                     <div class="list__item__expanded__images">
