@@ -1,4 +1,6 @@
 
+/*
+
 // ReadMore for task
 let toggler = document.getElementsByClassName("list__item__expand");
 for( i = 0; i < toggler.length; i++){
@@ -130,3 +132,136 @@ function main(){
 
 // ---------------- MAIN FUNCTIONS -------------------------
 main();
+
+*/
+const list__item = document.querySelectorAll('list__item')
+const list = document.querySelectorAll('.list')
+
+list__item.forEach(list__item => {
+    list__item.addEventListener('dragstart', () => {
+        list__item.classList.add('dragging')
+  })
+
+  list__item.addEventListener('dragend', () => {
+    list__item.classList.remove('dragging')
+  })
+})
+
+list.forEach(clist => {
+    list.addEventListener('dragover', e => {
+    e.preventDefault()
+    const afterElement = getDragAfterElement(list, e.clientY)
+    const draggable = document.querySelector('.list__item')
+    if (afterElement == null) {
+        list.appendChild(list__item)
+    } else {
+        list.insertBefore(list__item, afterElement)
+    }
+  })
+})
+
+function getDragAfterElement(list, y) {
+  const draggableElements = [...list.querySelectorAll('.list__item:not(.list__item.dragging)')]
+
+  return draggableElements.reduce((closest, child) => {
+    const box = child.getBoundingClientRect()
+    const offset = y - box.top - box.height / 2
+    if (offset < 0 && offset > closest.offset) {
+      return { offset: offset, element: child }
+    } else {
+      return closest
+    }
+  }, { offset: Number.NEGATIVE_INFINITY }).element
+}
+
+function saveListObject(obj) {
+    const objectKey = createLocalStorageKey();
+    updateObject(objectKey, JSON.stringify(obj));
+    return objectKey;
+}
+
+function loadObject(key) {
+    return JSON.parse(localStorage.getItem(key));
+}
+
+function updateObject(objKey, obj) {
+    localStorage.setItem(objKey, JSON.stringify(obj));
+}
+
+function createLocalStorageKey(prefix = 'list') {
+    const date = new Date()
+    return prefix + '_' + date.toISOString();
+}
+
+function createList() {
+    const listObject = {
+        items: []
+    };
+
+    saveObject(listObject);
+}
+
+function addListItem() {
+    const objectKey = createLocalStorageKey('');
+    
+}
+
+function getLists() {
+    const listKeys = Object.keys(localStorage).filter(key => {
+        return key.split('_')[0] === 'list';
+    });
+
+    const lists = listKeys.map(listKey => {
+        const listObject = loadObject(listKey);
+        return {
+            listKey,
+            items: listObject.items.map(item => loadObject(item)),
+        };
+    });
+}
+
+function saveListObject(obj) {
+    const objectKey = createLocalStorageKey();
+    updateObject(objectKey, JSON.stringify(obj));
+    return objectKey;
+}
+
+function loadObject(key) {
+    return JSON.parse(localStorage.getItem(key));
+}
+
+function updateObject(objKey, obj) {
+    localStorage.setItem(objKey, JSON.stringify(obj));
+}
+
+function createLocalStorageKey(prefix = 'list') {
+    const date = new Date()
+    return prefix + '_' + date.toISOString();
+}
+
+function createList() {
+    const listObject = {
+        items: []
+    };
+
+    saveObject(listObject);
+}
+
+function addListItem() {
+    const objectKey = createLocalStorageKey('');
+    
+}
+
+function getLists() {
+    const listKeys = Object.keys(localStorage).filter(key => {
+        return key.split('_')[0] === 'list';
+    });
+
+    const lists = listKeys.map(listKey => {
+        const listObject = loadObject(listKey);
+        return {
+            listKey,
+            items: listObject.items.map(item => loadObject(item)),
+        };
+    });
+}

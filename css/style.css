@@ -182,6 +182,9 @@ main {
     border-bottom: 1px solid rgba(112,112,112,.2);
 
 }
+.list__item.dragging {
+    opacity: .5;
+}
 
 .list__item__importance {
     justify-self: center;
