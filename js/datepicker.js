@@ -1,6 +1,5 @@
 //Henter klokkeslett-elementer fra HTML
 const timepickerElement = document.querySelector('.timepicker');
-let time = timepickerElement.dataset.time;
 const hrElement = document.querySelector('.timepicker__hour__hr');
 const minElement = document.querySelector('.timepicker__minute__min');
 const hrUpElement = document.querySelector('.timepicker__hour__hr-up');
@@ -16,6 +15,8 @@ const mthElement = document.querySelector('.datepicker__dates__month__mth');
 const nextMthElement = document.querySelector('.datepicker__dates__month__nextmth');
 const prevMthElement = document.querySelector('.datepicker__dates__month__prevmth');
 const daysElement = document.querySelector('.datepicker__dates__days');
+const dayAndTimeElement = document.querySelector('.datepicker-timepicker');
+const reminder = document.querySelector('.varsel');
 
 const months = ['Januar', 'Februar', 'Mars', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Desember'];
 
@@ -30,9 +31,15 @@ let selectedDay = day;
 let selectedMonth = month;
 let selectedYear = year;
 
+//let time = timepickerElement.dataset.time;
 let hour = date.getHours();
 let minute = date.getMinutes();
-selectedDate.setHours(hour, minute);
+//selectedDate.setHours(hour, minute);
+/*selectedDate.setHours(hour, minute);
+selectedDate.setDate(day);
+selectedDate.setMonth(month);
+selectedDate.setFullYear(year);*/
+
 setTime();
 
 //Legger til måned og år i mthElement
@@ -42,7 +49,6 @@ mthElement.textContent = months[month] + ' ' + year;
 selectedDateElement.textContent = formatDate(date);
 //selectedDateElement.dataset.value = selectedDate;
 
-
 //Fyller datoer i kaledeneren
 populateDates();
 
@@ -50,11 +56,16 @@ populateDates();
 datepickerElement.addEventListener('click', toggleDatePicker);
 nextMthElement.addEventListener('click', goToNextMonth);
 prevMthElement.addEventListener('click', goToPrevMonth);
+selectedDateElement.addEventListener('click', toggleDatePicker);
 
 //
 function toggleDatePicker (e) {
 	if (!checkEventPathForClass(e.path, 'dates')) {
-		datesElement.classList.toggle('active');
+		//datesElement.classList.toggle('active');
+		dayAndTimeElement.classList.toggle('active');
+		reminder.classList.toggle('active');
+
+
 	}
 }
 
@@ -115,6 +126,7 @@ function populateDates (e) {
 			selectedDay = (i + 1);
 			selectedMonth = month;
 			selectedYear = year;
+			selectedTime = selectedDate.setHours(hour, minute);
 
 			selectedDateElement.textContent = formatDate(selectedDate);
 			selectedDateElement.dataset.value = selectedDate;

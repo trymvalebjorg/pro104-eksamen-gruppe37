@@ -1,29 +1,85 @@
-body{
-	background-color: khaki;
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap');
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background: linear-gradient(360deg, rgba(241,240,245,1) 0%, rgba(224,226,230,1) 100%);
+    height: 100vh; /* Temporary */
+    color: #323233;
 }
-.date-time-picker{
-	background-color: red;
+
+.date-time-picker {
+	display: grid;
+	grid-template-rows: 0.5fr 3fr 0.5fr;
 }
+
+.varsel {
+	background-color: whitesmoke;
+	border: 0.1rem solid grey;
+	display: grid;
+	grid-template-columns: 1fr 6fr;
+	align-items: center;
+}
+
+select {
+	border:none;
+	background: none;
+	font-family: 'Montserrat', sans-serif;
+	font-size: 1rem;
+	width: 50%;
+	justify-self: left;
+}
+
+
+.clock {
+	height: 1.5rem;
+	padding: 0.5rem;
+	justify-self: center;
+}
+
+.reminder {
+	color: #00aeef;
+	justify-self: left;
+}
+
+/* Dato- og klokkeslett-output */
+.datepicker__dateselected {
+	text-align: center;
+	font-size: 1.5rem;
+}
+
+.datepicker-timepicker.active, .varsel.active {
+	display: none;
+}
+
+/* Kalender- og klokkeslett-container*/
+/*.datepicker-timepicker {
+	display: grid;
+	grid-template-columns: 1.7fr 1fr;
+	border: 0.1rem solid grey;
+}*/
 
 .datepicker-timepicker{
 	display: grid;
-	grid-template-columns: 1.5fr 1fr;
+	grid-template-columns: 1.7fr 1fr;
 	border: 0.1rem solid grey;
 }
 
+
+/* Kalender styling */
 .datepicker {
+	display: grid;
 	user-select: none;
 	border-right: 0.1rem solid grey;
 }
 
 .datepicker__dates {
-	display: none;
-	background-color: lightgray;
+	background-color: whitesmoke;
 }
 
-.datepicker__dates.active {
+/*.datepicker__dates.active {
 	display: block;
-}
+}*/
 
 .datepicker__dates__month {
 	display: grid;
@@ -32,10 +88,10 @@ body{
 	align-items: center;
 	text-align: center;
 	padding: .6rem;
-	border-bottom: 0.1rem solid lightblue;
+	border-bottom: 0.1rem solid #00aeef;
 }
 
-.datepicker__dates__month__mth{
+.datepicker__dates__month__mth {
 	font-size: 1.2rem;
 	font-weight: bold;
 }
@@ -48,7 +104,7 @@ body{
 	opacity: 0.6;
 }
 
-.datepicker__dates__month__prevmth{
+.datepicker__dates__month__prevmth {
 	transform: rotate(180deg);
 }
 
@@ -74,7 +130,7 @@ body{
 }
 
 .day.selected {
-    background-color:lightblue;
+    background-color:#00aeef;
 	border-radius: 2rem;
 	font-size: 1.1rem;
 	font-weight: bold;
@@ -86,21 +142,24 @@ body{
 	font-weight: bold;
 }
 
-
-
+/* Klokkeslett styling */
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
 	-webkit-appearance: none;
 }
 
 .timepicker {
-	display: flex;
-	flex-direction: row;
+	display: grid;
+	grid-template-columns: 3fr 0.2fr 3fr;
 	align-items: center;
 	justify-content: center;
 	padding: 1rem;
-	background-color: lightcoral;
+	background-color: whitesmoke;
 	user-select: none;
+}
+
+.timepicker__separator{
+	font-size: 1.5rem;
 }
 
 .timepicker__hour__hr,
@@ -119,6 +178,7 @@ input[type="number"]::-webkit-inner-spin-button {
 	margin: auto;
 	height: .8rem;
 	cursor: pointer;
+	padding: 0.5rem;
 	opacity: 0.6;
 }
 
@@ -140,180 +200,3 @@ input[type="number"]::-webkit-inner-spin-button {
 	height: 1.2rem;
 	opacity: 1;
 }
-
-
-/*.timepicker * {
-	padding: 0.5rem;
-}
-*/
-
-
-/*.date-time-picker {
-	background-color: red;
-	display: grid;
-	grid-template-columns: 1fr;
-}
-
-.datepicker {
-	position: relative;
-	cursor: pointer;
-	user-select: none;
-}
-
-.datepicker:hover {
-	background-color: #F3F3F3;
-}
-
-.datepicker__dateselected {
-    color: #ACACAC;
-    font-size: 2rem;
-    margin-bottom: -.5rem;
-}
-
-.datepicker__dates {
-	display: none;
-	position: absolute;
-	top: 100%;
-	left: 0;
-	right: 0;
-	background-color: lightgray;
-}
-
-.datepicker__dates.active {
-	display: block;
-}
-
-.datepicker__dates__month {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	border-bottom: 2px solid #EEE;
-}
-
-.datepicker__dates__month_arrows {
-	width: 35px;
-	height: 35px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	color: #313131;
-	font-size: 20px;
-}
-
-.datepicker__dates__month_arrows:hover {
-	background-color: #F3F3F3;
-}
-
-.datepicker__dates__month_arrows:active {
-	background-color:darkgrey;
-}
-
-.datepicker .datepicker__dates .datepicker__dates__days {
-	display: grid;
-	grid-template-columns: repeat(7, 1fr);
-	height: 200px;
-}
-.datepicker .datepicker__dates .datepicker__dates__days .day { 
-	display: flex;
-	justify-content: center;
-	align-items: center;
-    color: #313131;
-    
-}
-
-.datepicker .datepicker__dates .datepicker__dates__days .day.selected {
-    background-color:darkgrey;
-    border: .05rem solid black;
-}
-
-body {
-	background-color: #FFCE00;
-	font-family: 'Saira', sans-serif;
-}
-
-input[type="number"]::-webkit-outer-spin-button,
-input[type="number"]::-webkit-inner-spin-button {
-	-webkit-appearance: none;
-}
-
-
-
-
-.timepicker {
-	display: flex;
-	justify-content: space-around;
-	align-items: center;
-
-	width: 100%;
-	max-width: 200px;
-	margin: 0 auto;
-	padding: 25px 15px;
-
-	background-color: #F3F3F3;
-	border-radius: 8px;
-
-	font-size: 42px;
-	font-weight: 700;
-
-	user-select: none;
-}
-
-
-.timepicker__hour,
-.timepicker__minute {
-	position: relative;
-	min-width: 60px;
-	text-align: center;
-	display: flex;
-	justify-content: stretch;
-	align-items: stretch;
-}
-
-.timepicker__hour__hr,
-.timepicker__minute__min {
-	background: none;
-	font-size: 42px;
-	appearance: none;
-	border: none;
-	outline: none;
-	display: block;
-	width: 100%;
-	text-align: center;
-	font-family: 'Saira', sans-serif;
-}
-
-.timepicker__hour__hr-up, .timepicker__hour__hr-down,
-.timepicker__minute__min-up, .timepicker__minute__min-down {
-	position: absolute;
-	left: 50%;
-	transform: translateX(-50%);
-
-
-	border-left: 20px solid transparent;
-	border-right: 20px solid transparent;
-
-	cursor: pointer;
-	
-}
-
-.timepicker__hour__hr-up,
-.timepicker__minute__min-up {
-	top: -10px;
-	border-bottom: 20px solid #AAA;
-}
-
-.timepicker .timepicker__hour .timepicker__hour__hr-down,
-.timepicker .timepicker__minute .timepicker__minute__min-down {
-	bottom: -10px;
-	border-top: 20px solid #AAA;
-}
-
-.timepicker__hour__hr-up:hover,
-.timepicker__hour__hr-down:hover,
-.timepicker__minute__min-up:hover,
-.timepicker__minute__min-down:hover {
-	border-bottom-color: #53565A;
-	border-top-color: #53565A;
-}
-
-*/
