@@ -9,8 +9,52 @@ function showTaskForm(formDiv) {
     }
 }
 
+//Ikke ferdig
 function assignTask(event) {
+    event.preventDefault();
+   
+    //Lager en assignedList i localStorage
+    let assignedList = JSON.parse(localStorage.getItem("assignedList")) || [];
+    //Henter HTML input fieldene
+    let taskValue = document.getElementById("assign__member__form--task");
+    let memberValue = document.getElementById("assign__member__form--member");
 
+    //Definerer en variabel for "riktig oppgave", brukt senere for å linke input fieldet med en oppgave skrevet i en liste.
+    let correctTask = document.getElementsByClassName("list__item__text--task");
+
+
+    //Henter ut list item, der oppgaven er og der medlemmet skal tildeles
+    let listDiv = document.getElementsByClassName("list__item");
+    
+    //Henter direkte verdier fra input fields
+    let taskVal = taskValue.value;
+    let memVal = memberValue.value;
+
+    
+    
+
+    let divInfo = document.createElement('div');
+    divInfo.className = "list__item__text";
+
+    //Looper gjennom alle oppgavene, og sjekker om teksten inni matcher verdien i input fieldet
+    for(let i = 0; i < correctTask.length; i++){
+        //Hvis innholdet i listen er likt som verdien i input fieldet
+        if(correctTask[i].innerText == taskVal){
+            //Hvis det stemmer, push verdiene til localstorage arrayet
+            assignedList.push({taskVal, memVal});
+            //Sett assignedList til localStorage(oversikt over hvem som gjør hva)
+            localStorage.setItem("assignedList", JSON.stringify(assignedList));
+    
+            //Hvis den spesifikke div'en i listen har verdien av taskVal, skriv deretter ut diven
+            for(let i2 = 0; i2 < listDiv.length; i2++){
+                if(listDiv[i2].innerText.includes(taskVal)){
+                    divInfo.innerHTML += `
+                    <p class="list__item__text--task">Assigned to: ${memVal}</p>`;
+                    listDiv[i2].appendChild(divInfo);
+                }
+            }
+        }
+    }
 }
 
 //Funksjon for å legge til medlemmer
@@ -31,6 +75,26 @@ function addMember(event) {
     localStorage.setItem("memberList", JSON.stringify(memberList));
     //Kaller på renderMembers funksjonen for å få printet ut navnet
     renderMembers();
+}
+
+function renderOptions(){
+    //Henter ut localStorage
+    let memberList = JSON.parse(localStorage.getItem("memberList"));
+    let taskList = JSON.parse(localStorage.getItem("tasks"));
+    //Henter ut select-tagsa
+    let assignTaskSelect = document.getElementById("assign__member__form--task");
+    let assignMemberSelect = document.getElementById("assign__member__form--member");
+
+    for(let i = 0; i < memberList.length; i++){
+        assignMemberSelect.innerHTML += `
+            <option>${memberList[i].memberName}</option>
+        `;
+    }
+    for(let i2 = 0; i2 < taskList.length; i2++){
+        assignTaskSelect.innerHTML += `
+            <option>${taskList[i2].task}</option>
+        `;
+    }
 }
 
 //Funksjon for å vise medlemmer
@@ -96,8 +160,7 @@ function renderTasks(outputDiv, listName) {
             divInfo.className = "list__item__text"
             divInfo.innerHTML += `<p class="list__item__text--date">15. mai // 08:00</p>`
             divInfo.innerHTML += `<p class="list__item__text--task">${task.task}</p>`
-            console.log(newDiv)
-            console.log(divInfo)
+            
             newDiv.appendChild(divInfo)
 
             outputDiv.appendChild(newDiv);
@@ -132,7 +195,8 @@ function renderLists() {
         taskInput.type = "text";
         form.appendChild(taskInput);
         let addTaskButton = document.createElement("input");
-        addTaskButton.type = "submit"
+        addTaskButton.type = "submit";
+        addTaskButton.value = "Add task";
         //Her kjører vi addTask funksjonen med oppgave og liste som input
         addTaskButton.onclick = function (event) {
             event.preventDefault();
@@ -159,6 +223,7 @@ function renderLists() {
 }
 
 
+
 function main() {
 
     //Setter opp default lister
@@ -175,6 +240,8 @@ function main() {
     renderLists();
     //Denne funksjonen rendrer medlemmene uten å måtte refreshe
     renderMembers();
+
+    renderOptions();
 }
 
 main();

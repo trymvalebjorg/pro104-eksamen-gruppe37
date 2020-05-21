@@ -42,10 +42,20 @@
                 </form>
             </div>
         </div>
-
+        <!-- ASSIGN MEMBER FORM -->
+        <div id="assign__member__div" class="toolbar">
+            <form id="assign__member__form" onsubmit="assignTask(event)">
+                <select id="assign__member__form--task">
+                </select>
+                <select id="assign__member__form--member">
+                </select>
+                <input id="assign__member__form--submit" type="submit" value="Assign task">
+            </form>
+        </div>
 
         </div>
     </header>
+    <div class="list__item__text--task" id="test"></div>
 
     <main id="listOutput">
         <div class="list">
