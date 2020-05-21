@@ -1,75 +1,88 @@
-//Henter klokkeslett-elementer fra HTML
-const timepickerElement = document.querySelector('.timepicker');
-const hrElement = document.querySelector('.timepicker__hour__hr');
-const minElement = document.querySelector('.timepicker__minute__min');
-const hrUpElement = document.querySelector('.timepicker__hour__hr-up');
-const hrDownElement = document.querySelector('.timepicker__hour__hr-down');
-const minUpElement = document.querySelector('.timepicker__minute__min-up');
-const minDownElement = document.querySelector('.timepicker__minute__min-down');
+/////////////////////////////////////////////////////////////////////////////////////////
+//HTML-INNHENTING 
+const selectedDateElement = document.querySelector('.duedate__selected');
+const calendarTimeReminderElement = document.querySelector('.duedate__picker');
+const reminderElement = document.querySelector('.duedate__reminder');
+const reminderOutputElement = document.querySelector('.duedate__reminder__output');
+const reminderMenuElement = document.querySelector('.duedate__reminder--menu');
+const reminderPopUpElement = document.querySelector('.reminder-popup');
+let reminderInputValue = document.querySelector("[name='reminder']").value;
+const overlayElement = document.querySelector('.overlay');
 
-//Henter dato-elementer fra HTML
-const datepickerElement = document.querySelector('.datepicker');
-const selectedDateElement = document.querySelector('.datepicker__dateselected');
-const datesElement = document.querySelector('.datepicker__dates');
-const mthElement = document.querySelector('.datepicker__dates__month__mth');
-const nextMthElement = document.querySelector('.datepicker__dates__month__nextmth');
-const prevMthElement = document.querySelector('.datepicker__dates__month__prevmth');
-const daysElement = document.querySelector('.datepicker__dates__days');
-const dayAndTimeElement = document.querySelector('.datepicker-timepicker');
-const reminder = document.querySelector('.varsel');
+//Henter klokkeslett-elementer fra HTML
+const duedateTimeElement = document.querySelector('.duedate__picker__time');
+const hrElement = document.querySelector('.duedate__picker__time__hour__hr');
+const minElement = document.querySelector('.duedate__picker__time__minute__min');
+const hrUpElement = document.querySelector('.duedate__picker__time__hour__hr-up');
+const hrDownElement = document.querySelector('.duedate__picker__time__hour__hr-down');
+const minUpElement = document.querySelector('.duedate__picker__time__minute__min-up');
+const minDownElement = document.querySelector('.duedate__picker__time__minute__min-down');
+
+//Henter kalender-elementer fra HTML
+const calendarElement = document.querySelector('.duedate__picker__calendar');
+const mthElement = document.querySelector('.duedate__picker__calendar__month__mth');
+const nextMthElement = document.querySelector('.duedate__picker__calendar__month__nextmth');
+const prevMthElement = document.querySelector('.duedate__picker__calendar__month__prevmth');
+const daysElement = document.querySelector('.duedate__picker__calendar__days');
+
+/////////////////////////////////////////////////////////////////////////////////////////
+//EVENT LISTENERS
+
+//Event listners som trigger funksjon ved klikk
+nextMthElement.addEventListener('click', goToNextMonth);
+prevMthElement.addEventListener('click', goToPrevMonth);
+selectedDateElement.addEventListener('click', toggleActiveClass);
+hrUpElement.addEventListener('click', hour_up);
+hrDownElement.addEventListener('click', hour_down);
+minUpElement.addEventListener('click', minute_up);
+minDownElement.addEventListener('click', minute_down);
+
+//Event listners som trigger funksjon ved forandring
+hrElement.addEventListener('change', hour_change);
+minElement.addEventListener('change', minute_change);
+reminderMenuElement.addEventListener('change', chooseReminderTime);
+
+/////////////////////////////////////////////////////////////////////////////////////////
 
 const months = ['Januar', 'Februar', 'Mars', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Desember'];
 
-//Oppretter et nytt dato-objekt, og metoder som henter dato, måned og år
+let currentDate = new Date();
 let date = new Date();
 let day = date.getDate();
 let month = date.getMonth();
 let year = date.getFullYear();
-
 let selectedDate = date;
 let selectedDay = day;
 let selectedMonth = month;
 let selectedYear = year;
-
-//let time = timepickerElement.dataset.time;
 let hour = date.getHours();
 let minute = date.getMinutes();
-//selectedDate.setHours(hour, minute);
-/*selectedDate.setHours(hour, minute);
-selectedDate.setDate(day);
-selectedDate.setMonth(month);
-selectedDate.setFullYear(year);*/
 
 setTime();
+populateDates();
 
 //Legger til måned og år i mthElement
 mthElement.textContent = months[month] + ' ' + year;
 
-//Legger til valgt dato til selectedDateElement-div og dataset.value leser verdien
-selectedDateElement.textContent = formatDate(date);
-//selectedDateElement.dataset.value = selectedDate;
+/////////////////////////////////////////////////////////////////////////////////////////
+//FUNKSJONER 
 
-//Fyller datoer i kaledeneren
-populateDates();
-
-//Event listeners som trigger funksjoner ved klikk
-datepickerElement.addEventListener('click', toggleDatePicker);
-nextMthElement.addEventListener('click', goToNextMonth);
-prevMthElement.addEventListener('click', goToPrevMonth);
-selectedDateElement.addEventListener('click', toggleDatePicker);
-
-//
-function toggleDatePicker (e) {
-	if (!checkEventPathForClass(e.path, 'dates')) {
-		//datesElement.classList.toggle('active');
-		dayAndTimeElement.classList.toggle('active');
-		reminder.classList.toggle('active');
-
-
+//Legger 0 foran datoen hvis datoen er før den tiende,
+function formatDate (d) {
+	let day = d.getDate();
+	if (day < 10) {
+		day = '0' + day;
 	}
+	return day + ' . ' + months[month].toLowerCase() + ' ' + year + " // " + time ;
 }
 
-//Øker "månedstall" og årstall når funksjonen trigges 
+//Legger til klassen "active" til HTML-elementer
+function toggleActiveClass () {
+		calendarTimeReminderElement.classList.toggle('active');
+		overlayElement.classList.toggle('active');
+}
+
+//Øker "månedstall" og årstall, fyller antall dager for måneden, månedsnavn og årstall
 function goToNextMonth (e) {
     month++;
 	if (month > 11) {
@@ -78,10 +91,9 @@ function goToNextMonth (e) {
     }
 	mthElement.textContent = months[month] + ' ' + year;
     populateDates();
-    datesElement.classList.toggle('active');
 }
 
-//Minsker "månedstall" og årstall når funksjonen trigges 
+//Minsker "månedstall" og årstall, fyller antall dager for måneden, månedsnavn og årstall
 function goToPrevMonth (e) {
 	month--;
 	if (month < 0) {
@@ -90,7 +102,6 @@ function goToPrevMonth (e) {
 	}
 	mthElement.textContent = months[month] + ' ' + year;
     populateDates();
-    datesElement.classList.toggle('active');
 }
 
 //Fyller inn datoer i kalenderen
@@ -111,7 +122,7 @@ function populateDates (e) {
         } 
     }
 
-//Lager div'er med datoer utifra antall dager i måneden og legger inn i daysElement
+//Lager div'er med datoer utifra antall dager i måneden
 	for (let i = 0; i < amountDays; i++) {
 		const dayElement = document.createElement('div');
 		dayElement.classList.add('day');
@@ -121,66 +132,24 @@ function populateDates (e) {
 			dayElement.classList.add('selected');
 		}
 
+//Dersom en dato klikkes på oppdateres teksten i selectedDateElement samt verdien
 		dayElement.addEventListener('click', function () {
 			selectedDate = new Date(year + '-' + (month + 1) + '-' + (i + 1));
 			selectedDay = (i + 1);
 			selectedMonth = month;
 			selectedYear = year;
 			selectedTime = selectedDate.setHours(hour, minute);
-
 			selectedDateElement.textContent = formatDate(selectedDate);
 			selectedDateElement.dataset.value = selectedDate;
-
 			populateDates();
 		});
-
+		
 		daysElement.appendChild(dayElement);
 	}
 }
 
-// HELPER FUNCTIONS
-function checkEventPathForClass (path, selector) {
-	for (let i = 0; i < path.length; i++) {
-		if (path[i].classList && path[i].classList.contains(selector)) {
-			return true;
-		}
-	}
-	
-	return false;
-}
-
-
-function formatDate (d) {
-	let day = d.getDate();
-	if (day < 10) {
-		day = '0' + day;
-	}
-
-	let year = d.getFullYear();
-
-	return day + ' . ' + months[month].toLowerCase() + ' ' + year + " // " + time ;
-}
-
-
-
-
-
-//let time = timepickerElement.dataset.time;
-/*let hour = date.getHours();
-let minute = date.getMinutes();
-selectedDate.setHours(hour, minute);
-setTime();*/
-
-// EVENT LISTENERS
-hrUpElement.addEventListener('click', hour_up);
-hrDownElement.addEventListener('click', hour_down);
-
-minUpElement.addEventListener('click', minute_up);
-minDownElement.addEventListener('click', minute_down);
-
-hrElement.addEventListener('change', hour_change);
-minElement.addEventListener('change', minute_change);
-
+/*Dersom det skrives et tall over 23 settes talles til 23, eller 0 dersom tallet er under 0
+  Oppdaterer selectedDate og selectedDateElement */
 function hour_change (e) {
 	if (e.target.value > 23) {
 		e.target.value = 23;
@@ -191,10 +160,18 @@ function hour_change (e) {
 	if (e.target.value == "") {
 		e.target.value = formatTime(hour);
 	}
-
 	hour = e.target.value;
+
+	hrElement.value = formatTime(hour);
+	minElement.value = formatTime(minute);
+    duedateTimeElement.dataset.time = formatTime(hour) + ':' + formatTime(minute);
+	time = formatTime(hour) + ':' + formatTime(minute);
+	selectedDate.setHours(hrElement.value, minElement.value);
+	selectedDateElement.textContent = formatDate(date);
 }
 
+/*Dersom det skrives et tall over 59 settes talles til 59, eller 0 dersom tallet er under 0
+  Oppdaterer selectedDate og selectedDateElement */
 function minute_change (e) {
 	if (e.target.value > 59) {
 		e.target.value = 59;
@@ -205,10 +182,17 @@ function minute_change (e) {
 	if (e.target.value == "") {
 		e.target.value = formatTime(minute);
 	}
-
 	minute = e.target.value;
+
+	hrElement.value = formatTime(hour);
+	minElement.value = formatTime(minute);
+    duedateTimeElement.dataset.time = formatTime(hour) + ':' + formatTime(minute);
+	time = formatTime(hour) + ':' + formatTime(minute);
+	selectedDate.setHours(hrElement.value, minElement.value);
+	selectedDateElement.textContent = formatDate(date);
 }
 
+//Øker timer, dersom timen er større enn 23 endres tallet til 0
 function hour_up () {
 	hour++;
 	if (hour > 23) {
@@ -216,6 +200,8 @@ function hour_up () {
 	}
 	setTime();
 }
+
+//Minsker timer, dersom timen er mindre enn 0 endres tallet til 23
 function hour_down () {
 	hour--;
 	if (hour < 0) {
@@ -224,6 +210,7 @@ function hour_down () {
 	setTime();
 }
 
+//Øker minutter, dersom minuttene er større enn 59 endres tallet til 0
 function minute_up () {
 	minute++;
 	if (minute > 59) {
@@ -231,8 +218,9 @@ function minute_up () {
 		hour++;
 	}
     setTime();
-    
 }
+
+//Minsker minutter, dersom minutter er mindre enn 0 endres tallet til 59
 function minute_down () {
 	minute--;
 	if (minute < 0) {
@@ -242,16 +230,17 @@ function minute_down () {
 	setTime();
 }
 
+//Legger til time og minutter til selectedDateElement og oppdaterer selectedDate tid
 function setTime () {
 	hrElement.value = formatTime(hour);
 	minElement.value = formatTime(minute);
-    timepickerElement.dataset.time = formatTime(hour) + ':' + formatTime(minute);
-    time = formatTime(hour) + ':' + formatTime(minute);
-    selectedDate.setHours(hrElement.value, minElement.value);
-    //return day + ' . ' + months[month].toLowerCase() + ' ' + year + " // " + time ;
-    
+    duedateTimeElement.dataset.time = formatTime(hour) + ':' + formatTime(minute);
+	time = formatTime(hour) + ':' + formatTime(minute);
+	selectedDate.setHours(hrElement.value, minElement.value, 0);
+	selectedDateElement.textContent = formatDate(date);
 }
 
+//Legger til 0 foran tiden dersom klokken er under 10
 function formatTime (time) {
 	if (time < 10) {
 		time = '0' + time;
@@ -259,3 +248,66 @@ function formatTime (time) {
 	return time;
 }
 
+//Legger til klassen "active" til reminderPopUpElement
+function showReminderPopUp(){
+	reminderPopUpElement.classList.toggle('active');
+	if (!calendarTimeReminderElement.className === 'duedate__picker active'){
+		calendarTimeReminderElement.classList.toggle('active');
+	}
+}
+
+//Trigger funksjonen showReminderPopUp etter nedtelling av millisekunder 
+function chooseReminderTime(){
+	let reminderDefaultValue = document.querySelector(".duedate__reminder--menu__default");
+	let reminderInputValue = document.querySelector("[name='reminder']").value;
+	let currentDate = new Date();
+
+	switch (reminderInputValue){
+		case "1min":
+			const minInMs = 60000;
+			window.setTimeout(showReminderPopUp, selectedDate - currentDate - minInMs);
+			break;
+
+		case "5min":
+			const fiveMinInMs = 300000;
+			window.setTimeout(showReminderPopUp, selectedDate - currentDate - fiveMinInMs);
+			break;
+
+		case "15min":
+			const fifteenMinInMs = 900000;
+			window.setTimeout(showReminderPopUp, selectedDate - currentDate - fifteenMinInMs);
+			break;
+
+		case "30min":
+			const thirtyMinInMs = 1800000;
+			window.setTimeout(showReminderPopUp, selectedDate - currentDate - thirtyMinInMs);
+			break;
+
+		case "1hr":
+			const oneHourInMs = 3600000;
+			window.setTimeout(showReminderPopUp, selectedDate - currentDate - oneHourInMs);
+			break;
+		
+		case "2hr":
+			const twoHoursInMs = 7200000;
+			window.setTimeout(showReminderPopUp, selectedDate - currentDate - twoHoursInMs);
+			break;
+
+		case "1day":
+			const oneDayInMs = 86400000;
+			window.setTimeout(showReminderPopUp, selectedDate - currentDate - oneDayInMs);
+			break;
+
+		case "remove":
+				reminderDefaultValue.selected = true;
+			break;
+	}
+}
+
+function overlayToggle() {
+	overlayElement.classList.toggle('active');
+
+	if (calendarTimeReminderElement.className === 'duedate__picker active'){
+		calendarTimeReminderElement.classList.toggle('active');
+	}
+}

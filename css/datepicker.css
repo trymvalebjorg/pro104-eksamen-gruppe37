@@ -1,87 +1,48 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap');
 
-body {
-    font-family: 'Montserrat', sans-serif;
-    background: linear-gradient(360deg, rgba(241,240,245,1) 0%, rgba(224,226,230,1) 100%);
-    height: 100vh; /* Temporary */
-    color: #323233;
+.overlay.active{
+	display: block;
+	position: fixed;
+	height: 100%;
+	width: 100%;
+	background-color:black;
+	opacity: 0.5;
+	z-index: 5;
 }
 
-.date-time-picker {
-	display: grid;
-	grid-template-rows: 0.5fr 3fr 0.5fr;
-}
-
-.varsel {
-	background-color: whitesmoke;
-	border: 0.1rem solid grey;
-	display: grid;
-	grid-template-columns: 1fr 6fr;
-	align-items: center;
-}
-
-select {
-	border:none;
-	background: none;
-	font-family: 'Montserrat', sans-serif;
-	font-size: 1rem;
-	width: 50%;
-	justify-self: left;
-}
-
-
-.clock {
-	height: 1.5rem;
-	padding: 0.5rem;
-	justify-self: center;
-}
-
-.reminder {
-	color: #00aeef;
-	justify-self: left;
-}
-
-/* Dato- og klokkeslett-output */
-.datepicker__dateselected {
-	text-align: center;
-	font-size: 1.5rem;
-}
-
-.datepicker-timepicker.active, .varsel.active {
+.overlay{
 	display: none;
 }
 
-/* Kalender- og klokkeslett-container*/
-/*.datepicker-timepicker {
-	display: grid;
-	grid-template-columns: 1.7fr 1fr;
-	border: 0.1rem solid grey;
-}*/
-
-.datepicker-timepicker{
-	display: grid;
-	grid-template-columns: 1.7fr 1fr;
-	border: 0.1rem solid grey;
+/* Valgt forfallsdato og tid */
+.duedate__selected {
+	font-size: 1rem;
+	cursor: pointer;
+	color: #ACACAC;
 }
 
-
-/* Kalender styling */
-.datepicker {
+/* Kalender, tid og påminnelse kontainer */
+.duedate__picker.active{
+	position: absolute;
 	display: grid;
-	user-select: none;
+	grid-template-columns: 1.7fr 1fr;
+	border: 0.1rem solid grey;
+	width: 35rem;
+	height: 25rem;
+	z-index: 10;
+}
+
+.duedate__picker {
+	display: none;
+}
+
+/* Kalender */
+.duedate__picker__calendar {
 	border-right: 0.1rem solid grey;
-}
-
-.datepicker__dates {
 	background-color: whitesmoke;
 }
 
-/*.datepicker__dates.active {
-	display: block;
-}*/
-
-.datepicker__dates__month {
+.duedate__picker__calendar__month {
 	display: grid;
 	grid-template-columns: 1fr 4fr 1fr;
 	justify-items: center;
@@ -91,37 +52,36 @@ select {
 	border-bottom: 0.1rem solid #00aeef;
 }
 
-.datepicker__dates__month__mth {
-	font-size: 1.2rem;
+.duedate__picker__calendar__month__mth {
+	font-size: 1.rem;
 	font-weight: bold;
 }
 
-.datepicker__dates__month_arrows {
-	height: .8rem;
+.duedate__picker__calendar__month__prevmth {
+	transform: rotate(180deg);
+}
+
+.arrows {
+	display: grid;
+	height: 1rem;
 	color: #313131;
-	font-size: 20px;
 	cursor: pointer;
 	opacity: 0.6;
 }
 
-.datepicker__dates__month__prevmth {
-	transform: rotate(180deg);
-}
-
-.datepicker__dates__month_arrows:hover {
-	height: 1rem;
+.arrows:hover {
+	height: 1.2rem;
 	opacity: 1;
 }
 
-
-.datepicker__dates__days {
+.duedate__picker__calendar__days {
 	display: grid;
 	grid-template-columns: repeat(7, 1fr);
 	padding: 1rem;
 }
 
 .day { 
-	font-size: 1rem;
+	font-size: 1.5rem;
 	color: #313131;
 	padding: 0.3rem;
 	text-align: center;
@@ -130,9 +90,9 @@ select {
 }
 
 .day.selected {
-    background-color:#00aeef;
+	background-color:#00aeef;
 	border-radius: 2rem;
-	font-size: 1.1rem;
+	font-size: 1.6rem;
 	font-weight: bold;
 	opacity: 1;
 }
@@ -142,13 +102,13 @@ select {
 	font-weight: bold;
 }
 
-/* Klokkeslett styling */
+/* Klokke */ 
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
 	-webkit-appearance: none;
 }
 
-.timepicker {
+.duedate__picker__time {
 	display: grid;
 	grid-template-columns: 3fr 0.2fr 3fr;
 	align-items: center;
@@ -158,45 +118,188 @@ input[type="number"]::-webkit-inner-spin-button {
 	user-select: none;
 }
 
-.timepicker__separator{
+.duedate__picker__time__separator{
 	font-size: 1.5rem;
 }
 
-.timepicker__hour__hr,
-.timepicker__minute__min {
+.duedate__picker__time__hour__hr,
+.duedate__picker__time__minute__min {
 	background: none;
 	font-size: 2rem;
 	border: none;
 	outline: none;
 	width: 100%;
 	text-align: center;
-}
-
-.timepicker__hour__hr-up, .timepicker__hour__hr-down,
-.timepicker__minute__min-up, .timepicker__minute__min-down {
-	display: block;
-	margin: auto;
-	height: .8rem;
-	cursor: pointer;
 	padding: 0.5rem;
-	opacity: 0.6;
 }
 
-.timepicker__hour__hr-up,
-.timepicker__minute__min-up {
+.duedate__picker__time__hour__hr-up,
+.duedate__picker__time__minute__min-up {
 	transform: rotate(-90deg);
+	margin: auto;
 }
 
-.timepicker__hour__hr-down,
-.timepicker__minute__min-down {
+.duedate__picker__time__hour__hr-down,
+.duedate__picker__time__minute__min-down {
 	transform: rotate(90deg);
+	margin: auto;
 }
 
-
-.timepicker__hour__hr-up:hover,
-.timepicker__hour__hr-down:hover,
-.timepicker__minute__min-up:hover,
-.timepicker__minute__min-down:hover {
-	height: 1.2rem;
-	opacity: 1;
+/* Påminnelse */
+.duedate__reminder {
+	background-color: whitesmoke;
+	border-top: 0.1rem solid grey;
+	grid-column: span 2;
+	display: grid;
+	grid-template-columns: 1fr 6fr;
+	align-items: center;
 }
+
+.duedate__reminder__bell {
+	height: 2.8rem;
+	padding: 0.5rem;
+	justify-self: center;
+}
+
+.duedate__reminder--menu {
+	display: grid;
+	border:none;
+	background: none;
+	font-family: 'Montserrat', sans-serif;
+	font-size: 1.5rem;
+	justify-self: left;
+	color:#00aeef;
+	cursor: pointer;
+}
+
+.reminder-popup{
+	display: none;
+}
+
+.reminder-popup.active{
+	position: fixed;
+	display: grid;
+	grid-template-rows: 2fr 4fr 2fr 1fr;
+	background-color: white;
+	border: 2px solid darkgrey;
+	height: 40rem;
+	width: 35rem;
+	top: 20%;
+	left:40%;
+	z-index: 11;
+}
+
+.reminder-popup__header{
+	justify-self: center;
+	align-self: center;
+	color: #00aeef;
+}
+
+.reminder-popup__text{
+	text-align: center;
+	padding: 1rem;
+}
+
+.reminder-popup__button {
+	height: 3rem;
+	justify-self: center;
+	cursor: pointer;
+}
+
+.reminder-popup__button:hover {
+	height: 3.2rem;
+}
+
+.reminder-popup__bell{
+	height: 5rem;
+	justify-self: center;
+	align-self: center;
+	-webkit-animation: ring 4s .7s ease-in-out infinite;
+	-webkit-transform-origin: 50% 4px;
+	-moz-animation: ring 4s .7s ease-in-out infinite;
+	-moz-transform-origin: 50% 4px;
+	animation: ring 4s .7s ease-in-out infinite;
+	transform-origin: 50% 4px;
+  }
+  
+  @-webkit-keyframes ring {
+	0% { -webkit-transform: rotateZ(0); }
+	1% { -webkit-transform: rotateZ(30deg); }
+	3% { -webkit-transform: rotateZ(-28deg); }
+	5% { -webkit-transform: rotateZ(34deg); }
+	7% { -webkit-transform: rotateZ(-32deg); }
+	9% { -webkit-transform: rotateZ(30deg); }
+	11% { -webkit-transform: rotateZ(-28deg); }
+	13% { -webkit-transform: rotateZ(26deg); }
+	15% { -webkit-transform: rotateZ(-24deg); }
+	17% { -webkit-transform: rotateZ(22deg); }
+	19% { -webkit-transform: rotateZ(-20deg); }
+	21% { -webkit-transform: rotateZ(18deg); }
+	23% { -webkit-transform: rotateZ(-16deg); }
+	25% { -webkit-transform: rotateZ(14deg); }
+	27% { -webkit-transform: rotateZ(-12deg); }
+	29% { -webkit-transform: rotateZ(10deg); }
+	31% { -webkit-transform: rotateZ(-8deg); }
+	33% { -webkit-transform: rotateZ(6deg); }
+	35% { -webkit-transform: rotateZ(-4deg); }
+	37% { -webkit-transform: rotateZ(2deg); }
+	39% { -webkit-transform: rotateZ(-1deg); }
+	41% { -webkit-transform: rotateZ(1deg); }
+  
+	43% { -webkit-transform: rotateZ(0); }
+	100% { -webkit-transform: rotateZ(0); }
+  }
+  
+  @-moz-keyframes ring {
+	0% { -moz-transform: rotate(0); }
+	1% { -moz-transform: rotate(30deg); }
+	3% { -moz-transform: rotate(-28deg); }
+	5% { -moz-transform: rotate(34deg); }
+	7% { -moz-transform: rotate(-32deg); }
+	9% { -moz-transform: rotate(30deg); }
+	11% { -moz-transform: rotate(-28deg); }
+	13% { -moz-transform: rotate(26deg); }
+	15% { -moz-transform: rotate(-24deg); }
+	17% { -moz-transform: rotate(22deg); }
+	19% { -moz-transform: rotate(-20deg); }
+	21% { -moz-transform: rotate(18deg); }
+	23% { -moz-transform: rotate(-16deg); }
+	25% { -moz-transform: rotate(14deg); }
+	27% { -moz-transform: rotate(-12deg); }
+	29% { -moz-transform: rotate(10deg); }
+	31% { -moz-transform: rotate(-8deg); }
+	33% { -moz-transform: rotate(6deg); }
+	35% { -moz-transform: rotate(-4deg); }
+	37% { -moz-transform: rotate(2deg); }
+	39% { -moz-transform: rotate(-1deg); }
+	41% { -moz-transform: rotate(1deg); }
+	43% { -moz-transform: rotate(0); }
+	100% { -moz-transform: rotate(0); }
+  }
+  
+  @keyframes ring {
+	0% { transform: rotate(0); }
+	1% { transform: rotate(30deg); }
+	3% { transform: rotate(-28deg); }
+	5% { transform: rotate(34deg); }
+	7% { transform: rotate(-32deg); }
+	9% { transform: rotate(30deg); }
+	11% { transform: rotate(-28deg); }
+	13% { transform: rotate(26deg); }
+	15% { transform: rotate(-24deg); }
+	17% { transform: rotate(22deg); }
+	19% { transform: rotate(-20deg); }
+	21% { transform: rotate(18deg); }
+	23% { transform: rotate(-16deg); }
+	25% { transform: rotate(14deg); }
+	27% { transform: rotate(-12deg); }
+	29% { transform: rotate(10deg); }
+	31% { transform: rotate(-8deg); }
+	33% { transform: rotate(6deg); }
+	35% { transform: rotate(-4deg); }
+	37% { transform: rotate(2deg); }
+	39% { transform: rotate(-1deg); }
+	41% { transform: rotate(1deg); }
+	43% { transform: rotate(0); }
+	100% { transform: rotate(0); }
+  }
