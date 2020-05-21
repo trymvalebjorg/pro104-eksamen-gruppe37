@@ -8,6 +8,7 @@ const reminderMenuElement = document.querySelector('.duedate__reminder--menu');
 const reminderPopUpElement = document.querySelector('.reminder-popup');
 let reminderInputValue = document.querySelector("[name='reminder']").value;
 const overlayElement = document.querySelector('.overlay');
+const reminderButtonElement = document.querySelector('.reminder-popup__button');
 
 //Henter klokkeslett-elementer fra HTML
 const duedateTimeElement = document.querySelector('.duedate__picker__time');
@@ -251,9 +252,8 @@ function formatTime (time) {
 //Legger til klassen "active" til reminderPopUpElement
 function showReminderPopUp(){
 	reminderPopUpElement.classList.toggle('active');
-	if (!calendarTimeReminderElement.className === 'duedate__picker active'){
-		calendarTimeReminderElement.classList.toggle('active');
-	}
+	overlayElement.classList.add('active');
+	reminderButtonElement.addEventListener('click', overlayToggle);
 }
 
 //Trigger funksjonen showReminderPopUp etter nedtelling av millisekunder 
@@ -306,8 +306,11 @@ function chooseReminderTime(){
 
 function overlayToggle() {
 	overlayElement.classList.toggle('active');
-
 	if (calendarTimeReminderElement.className === 'duedate__picker active'){
-		calendarTimeReminderElement.classList.toggle('active');
+		calendarTimeReminderElement.classList.remove('active');
+	}
+
+	if (reminderPopUpElement.className === 'reminder-popup active'){
+		overlayElement.classList.add('active');
 	}
 }
