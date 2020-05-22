@@ -30,9 +30,6 @@ function assignTask(event) {
     let taskVal = taskValue.value;
     let memVal = memberValue.value;
 
-    
-    
-
     let divInfo = document.createElement('div');
     divInfo.className = "list__item__text";
 
@@ -49,13 +46,14 @@ function assignTask(event) {
             for(let i2 = 0; i2 < listDiv.length; i2++){
                 if(listDiv[i2].innerText.includes(taskVal)){
                     divInfo.innerHTML += `
-                    <p class="list__item__text--task">Assigned to: ${memVal}</p>`;
+                    <p class="list__item__text--task">Assigned to: ${assignedList[i2].memVal}</p>`;
                     listDiv[i2].appendChild(divInfo);
                 }
             }
         }
     }
 }
+
 
 //Funksjon for å legge til medlemmer
 function addMember(event) {
@@ -84,7 +82,7 @@ function renderOptions(){
     //Henter ut select-tagsa
     let assignTaskSelect = document.getElementById("assign__member__form--task");
     let assignMemberSelect = document.getElementById("assign__member__form--member");
-
+    
     for(let i = 0; i < memberList.length; i++){
         assignMemberSelect.innerHTML += `
             <option>${memberList[i].memberName}</option>
@@ -124,7 +122,6 @@ function createList(event) {
     //Input fra bruker
     let listName = document.getElementById("add__list__form--text");
 
-
     //Pusher verdien av listenavnet til localstorage
     listStorage.push(listName.value);
     //Resetter input-verdien
@@ -155,12 +152,15 @@ function renderTasks(outputDiv, listName) {
             newDiv.className = "list__item"
             newDiv.innerHTML += '<figure class="list__item__importance dot dot--yellow"></figure>'
 
+            //Drag and drop!
+            newDiv.draggable = true;
+
             //Task basert info i div
             let divInfo = document.createElement("div");
             divInfo.className = "list__item__text"
-            divInfo.innerHTML += `<p class="list__item__text--date">15. mai // 08:00</p>`
-            divInfo.innerHTML += `<p class="list__item__text--task">${task.task}</p>`
-            
+            divInfo.innerHTML += `<p class="list__item__text--date">15. mai // 08:00</p>`;
+            divInfo.innerHTML += `<p class="list__item__text--task">${task.task}</p>`;
+            divInfo.innerHTML += `<p class="list__item__text--task>Assigned to: </p>`;
             newDiv.appendChild(divInfo)
 
             outputDiv.appendChild(newDiv);
@@ -222,10 +222,59 @@ function renderLists() {
 
 }
 
+//Drag and drop
+function dragAndDrop(){
+    let listItemsDrag = document.querySelectorAll('.list__item');
+    let listsDrag = document.querySelectorAll('.list');
+    
+    let draggedItem = null;
+    
+    for(let i = 0; i < listItemsDrag.length; i++){
+        const item = listItemsDrag[i];
+    
+        item.addEventListener('dragstart', function(){
+            console.log("drag start");
+            draggedItem = item;
+            setTimeout(function(){
+                item.style.display = "none";
+            }, 0)
+            
+        });
+    
+        item.addEventListener('dragend', function(){
+            console.log("dragend");
+            setTimeout(function(){
+                draggedItem.style.display = 'grid';
+                draggedItem = null;
+            }, 0);
+        })
+    
+        for(let i2 = 0; i2 < listsDrag.length; i2++){
+            const list = listsDrag[i2];
+
+            list.addEventListener('dragover', function(e){
+                e.preventDefault();
+            });
+
+            list.addEventListener('dragenter', function(e){
+                e.preventDefault();
+            })
+
+            list.addEventListener('dragleave', function(){
+
+            })
+
+            list.addEventListener('drop', function(event){
+                console.log('drop');
+                this.append(draggedItem);
+            })
+        }
+    }
+}
+
 
 
 function main() {
-
     //Setter opp default lister
     if (!JSON.parse(localStorage.getItem("lists"))) {
         localStorage.setItem("lists", JSON.stringify(
@@ -240,8 +289,10 @@ function main() {
     renderLists();
     //Denne funksjonen rendrer medlemmene uten å måtte refreshe
     renderMembers();
-
+    //Denne funksjonen rendrer oppgaver og medlemmer i drop-down menyen automatisk
     renderOptions();
+    //Denne funksjonen kjører hele drag-n-drop funksjonaliteten.
+    dragAndDrop();
 }
 
 main();
