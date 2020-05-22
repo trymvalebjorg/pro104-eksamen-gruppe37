@@ -1,7 +1,9 @@
+
+renderLists();
 // ReadMore for task
 let toggler = document.getElementsByClassName("list__item__expand");
-for( i = 0; i < toggler.length; i++){
-    toggler[i].addEventListener('click', function() {
+for (i = 0; i < toggler.length; i++) {
+    toggler[i].addEventListener('click', function () {
         this.parentElement.querySelector('.list__item__expanded').classList.toggle('active');
         this.parentElement.querySelector('.list__item__expanded__controls').classList.toggle('active');
         this.classList.toggle('arrow-down');
@@ -53,24 +55,43 @@ function newList(item) {
     let newList = document.createElement('div');
     let header = document.createElement('div');
     let actionBtn = document.createElement('button');
-    let addTask = document.createElement('div');
-   
-    newList.className = 'list'; 
-   
+    let listItem = document.createElement('div');
+    let listItemText = document.createElement('div');
+
+    newList.className = 'list';
+
     header.className = 'list__header';
     header.innerHTML = `
         <img src="img/icons/album.svg" alt="an icon" class="icon">
         <h3>${item.title}</h3>`;
-    
+
     actionBtn.className = 'list__action-btn btn btn--round btn--add';
-    
-    addTask.className = 'list__item';
-    addTask.innerHTML = "Create a new task!"
+
+    listItem.className = 'list__item--empty';
+
+    listItemText.className = 'list__item__text';
+    listItemText.innerHTML = '<p class="list__item__text--task">Klikk + her for å legge til ny oppgave </p>';
 
     main.appendChild(newList);
     newList.appendChild(actionBtn);
     newList.appendChild(header);
-    newList.appendChild(addTask);
+    newList.appendChild(listItem);
+    listItem.appendChild(listItemText);
 
 }
 
+function renderLists() {
+    let lists = getLists();
+    lists.forEach(function (item) {
+        newList(item);
+    })
+}
+
+function showEditModal() {
+
+}
+
+function updateList() {
+    let allLists = getLists();
+    let listId = 
+}

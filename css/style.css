@@ -175,7 +175,13 @@ main {
     grid-template-columns: 1fr 3fr 1fr;
     padding: 2rem;
     border-bottom: 1px solid rgba(112,112,112,.2);
+}
 
+.list__item--empty {
+    display: grid;
+    grid-template-columns: 5fr 1fr;
+    padding: 2rem;
+    border-bottom: 1px solid rgba(112,112,112,.2);
 }
 
 .list__item__importance {
@@ -243,6 +249,11 @@ main {
 
 .arrow-down {
     transform: rotate(180deg);  
+}
+
+.guide-arrow {
+    width: 3rem;
+    height: 3rem;
 }
 
 .profile-pic {
