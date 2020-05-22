@@ -86,12 +86,3 @@ function renderLists() {
         newList(item);
     })
 }
-
-function showEditModal() {
-
-}
-
-function updateList() {
-    let allLists = getLists();
-    let listId = 
-}
