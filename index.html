@@ -1,106 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Eksamen PRO104, Gruppe 37</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
     <header>
         <div class="navbar">
             <h3 class="navbar__logo">Eksamen</h3>
-            <h6 class="navbar__underTitle"> BoardName</h6>
-            
         </div>
 
         <div class="toolbar">
             <div class="toolbar__board">
                 <label for="prosjekt">Prosjekt:</label>
-                    <select id="prosjekt">
-                        <option value="prosjekt-1">Prosjekt 1</option>
-                        <option value="prosjekt-2">Prosjekt 2</option>
-                        <option value="prosjekt-4">Prosjekt 3</option>
-                    </select>
+                <select id="prosjekt">
+                    <option value="prosjekt-1">Prosjekt 1</option>
+                    <option value="prosjekt-2">Prosjekt 2</option>
+                    <option value="prosjekt-4">Prosjekt 3</option>
+                </select>
             </div>
 
             <div class="toolbar__members">
-                <p id="test">Medlemmer: </p>
-                
+                <p id="toolbar__members--output">Medlemmer: </p>
             </div>
-            <form id="add__member" onsubmit="addMember(event)">
-                <input type="text" id="member__input">
-                <input type="submit" id="member__input__btn" value="Add member">
+            <!-- ADD MEMBER FORM -->
+            <div id="add__member__div">
+                <form id="add__member__form" onsubmit="addMember(event)">
+                    <input type="text" id="add__member__form--text">
+                    <input type="submit" id="add__member__form--submit" value="Add member">
+                </form>
+            </div>
+            <!-- ADD LIST FORM -->
+            <div id="add__list__div">
+                <form id="add__list__form">
+                    <input id="add__list__form--text" type="text">
+                    <input id="add__list__form--submit" type="submit" value="Add new list">
+                </form>
+            </div>
+        </div>
+        <!-- ASSIGN MEMBER FORM -->
+        <div id="assign__member__div" class="toolbar">
+            <form id="assign__member__form" onsubmit="assignTask(event)">
+                <select id="assign__member__form--task">
+                </select>
+                <select id="assign__member__form--member">
+                </select>
+                <input id="assign__member__form--submit" type="submit" value="Assign task">
             </form>
         </div>
+
+        </div>
     </header>
-    <main>
-        <!-- LIST ONE-->
+    <div class="list__item__text--task" id="test"></div>
+
+    <main id="listOutput">
         <div class="list">
             <div class="list__header">
                 <img src="img/icons/album.svg" alt="an icon" class="icon">
                 <h3>To-do</h3>
             </div>
 
-            <div class="list__item" draggable="true">
-                <figure class="list__item__importance dot dot--red"></figure>
+            <button class="list__action-btn btn btn--round btn--add"></button>
+            <!-- ASSIGN TASK FORM -->
+            <div id="assign__task__div" class="task__input__form">
+                <form id="assign__task__form">
+                    <input id="assign__task__form-task" type="text">
+                    <input id="assign__task__form-submit" type="submit" value="Add task">
+                </form>
+            </div>
 
-                <div class="list__item__text">
-                    <p class="list__item__text--date">15. mai // 08:00</p>
-                    <p class="list__item__text--task">Lage sjampanjefrokost</p>
-                </div>
-
-                <div class="list__item__expand">
-                    <img src="img/icons/chevron-down-o.svg" alt="read more" class="icon">
-                </div>
-
-                <div class="list__item__expanded">
-                    <p>lorem</p>
-                </div>
-            </div> 
-            
-            <div class="list__item" draggable="true">
+            <div class="list__item">
                 <figure class="list__item__importance dot dot--yellow"></figure>
 
                 <div class="list__item__text">
                     <p class="list__item__text--date">15. mai // 08:00</p>
                     <p class="list__item__text--task">Lage sjampanjefrokost</p>
                 </div>
-
-                <div class="list__item__expand">
-                    <img src="img/icons/chevron-down-o.svg" alt="read more" class="icon">
-                </div>
-
-                <div class="list__item__expanded">
-                    <p>lorem</p>
-                </div>
-            </div> 
-
-            <div class="list__item" draggable="true">
-                <figure class="list__item__importance dot dot--green"></figure>
-
-                <div class="list__item__text">
-                    <p class="list__item__text--date">15. mai // 08:00</p>
-                    <p class="list__item__text--task">Lage sjampanjefrokost</p>
-                </div>
-
-                <div class="list__item__expand">
-                    <img src="img/icons/chevron-down-o.svg" alt="read more" class="icon">
-                </div>
-                
-                <div class="list__item__expanded">
-                    <p>lorem</p>
-                </div>
-                <div class="list__item" draggable="true" id="output__div"></div>
-                
-            </div> 
-            <form id="list__form" class="list__item" draggable="true">
-                <input class="list__item__input" type="text">
-                <input class="list__item__submit" type="submit" value="Add task">
-            </form>
-            <!-- LIST TWO -->
-            
+            </div>
         </div>
+ 
     </main>
 
     <footer>
@@ -108,4 +90,5 @@
 
     <script src="js/main.js"></script>
 </body>
+
 </html>

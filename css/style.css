@@ -267,3 +267,7 @@ main {
     background-repeat: no-repeat;
 }
 
+
+.task__input__form{
+    display: none;
+}
