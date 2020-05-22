@@ -10,6 +10,9 @@
     <script src="js/datepicker.js"defer></script>
 </head>
 <body>
+
+   
+
     <div class="overlay" onclick="overlayToggle()"></div>
     <header>
         <div class="navbar">
@@ -38,12 +41,11 @@
                 <img src="img/icons/album.svg" alt="an icon" class="icon">
                 <h3>To-do</h3>
             </div>
-
             <button class="list__action-btn btn btn--round btn--add"></button>
-
-            
             <div class="list__item">
-                <figure class="list__item__importance dot dot--yellow"></figure>
+
+                <figure class="list__item__importance dot dot--yellow" onclick="addImportanceMenu()">
+                </figure>
 
                 <div class="list__item__text">
                 <p class="list__item__text--date">

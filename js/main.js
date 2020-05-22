@@ -9,9 +9,26 @@ for( i = 0; i < toggler.length; i++){
         this.classList.toggle('arrow-down');
     })
 }
-let importanceDotElements = document.querySelectorAll(".dot");
-importanceDotElements.addEventListener('click', myFunction);
 
-function myFunction(){
-    e.target.console.log("Dot has been clicked");
+function addImportanceMenu(){
+    let selectedDot = this.document.querySelector('.dot');
+        selectedDot.innerHTML = `
+            <div class="list__item__importance__menu">
+                <h5 class="list__item__importance__menu__header">Velg prioritering</h5>
+                <figure class="list__item__importance__menu__dot dot--green not-important" onclick="changeImportance()"></figure>
+                <p class="list__item__importance__menu__priority not-important" onclick="changeImportance()">Ikke viktig</p>
+                <figure class="list__item__importance__menu__dot dot--yellow important"></figure>
+                <p class="list__item__importance__menu__priority important">Ganske viktig</p>
+                <figure class="list__item__importance__menu__dot dot--red very-important"></figure>
+                <p class="list__item__importance__menu__priority very-important">Veldig viktig</p>
+            </div>
+        `;
+    
+    let importanceMenuElements = document.querySelector('.list__item__importance__menu');
+    importanceMenuElements.classList.add('active');
+   
+}
+
+function changeImportance(){
+    console.log('ChangeImportance function triggered');
 }
