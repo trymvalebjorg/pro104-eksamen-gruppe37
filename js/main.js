@@ -40,13 +40,14 @@ function assignTask(event) {
             //Hvis det stemmer, push verdiene til localstorage arrayet
             assignedList.push({taskVal, memVal});
             //Sett assignedList til localStorage(oversikt over hvem som gjør hva)
-            localStorage.setItem("assignedList", JSON.stringify(assignedList));
     
             //Hvis den spesifikke div'en i listen har verdien av taskVal, skriv deretter ut diven
             for(let i2 = 0; i2 < listDiv.length; i2++){
                 if(listDiv[i2].innerText.includes(taskVal)){
                     divInfo.innerHTML += `
                     <p class="list__item__text--task">Assigned to: ${assignedList[i2].memVal}</p>`;
+                    localStorage.setItem("assignedList", JSON.stringify(assignedList));
+
                     listDiv[i2].appendChild(divInfo);
                 }
             }
@@ -160,7 +161,6 @@ function renderTasks(outputDiv, listName) {
             divInfo.className = "list__item__text"
             divInfo.innerHTML += `<p class="list__item__text--date">15. mai // 08:00</p>`;
             divInfo.innerHTML += `<p class="list__item__text--task">${task.task}</p>`;
-            divInfo.innerHTML += `<p class="list__item__text--task>Assigned to: </p>`;
             newDiv.appendChild(divInfo)
 
             outputDiv.appendChild(newDiv);
@@ -224,46 +224,62 @@ function renderLists() {
 
 //Drag and drop
 function dragAndDrop(){
+    //Henter ut hoved-liste og list-items
     let listItemsDrag = document.querySelectorAll('.list__item');
     let listsDrag = document.querySelectorAll('.list');
     
+    //Oppretter en variabel som er itemet som blir dratt.
     let draggedItem = null;
     
+    //Looper igjennom liste-items
     for(let i = 0; i < listItemsDrag.length; i++){
+        //Setter en variabel items til alle items som for-loopen finner
         const item = listItemsDrag[i];
     
+        //Setter på en event-listener, denne er spesifikk til da man starter å dra itemet.
         item.addEventListener('dragstart', function(){
             console.log("drag start");
+            //Setter draggedItem til selve liste-itemet man drar
             draggedItem = item;
+            //En timeout, for å gjøre flyttingen penere
             setTimeout(function(){
                 item.style.display = "none";
             }, 0)
             
         });
     
+        //Setter på en event-listener, som hører etter når man slipper list-itemet
         item.addEventListener('dragend', function(){
             console.log("dragend");
+            //Setter da verdien av itemet til grid (samme som i CSS'en), og tømmer draggedItem variabelen (denne blir satt når man drar, og fjernet når man slipper)
             setTimeout(function(){
                 draggedItem.style.display = 'grid';
                 draggedItem = null;
             }, 0);
         })
     
+        //Looper igjennom alle listene
         for(let i2 = 0; i2 < listsDrag.length; i2++){
+            //Definerer en variabel liste, som er alle listene for-loopen finner
             const list = listsDrag[i2];
 
+            //En eventlistener, som fyrer når list-itemet som blir dratt er satt over en liste. man må fjerne default-oppførsel slik at den ikke forsvinner
             list.addEventListener('dragover', function(e){
                 e.preventDefault();
             });
 
+            //Samme som over, bare at denne fyrer på når 
             list.addEventListener('dragenter', function(e){
                 e.preventDefault();
             })
 
+            //Denne gjør ingenting foreløpig.
             list.addEventListener('dragleave', function(){
 
             })
 
+            //Hører etter når man slipper museknappen, og da appendes itemet man holder til listen man drar det til.
+            //Her må localStorage settes?
             list.addEventListener('drop', function(event){
                 console.log('drop');
                 this.append(draggedItem);
