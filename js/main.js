@@ -18,6 +18,7 @@ function showTaskForm(formDiv) {
     }
 }
 
+
 //Ikke ferdig
 function assignTask(event) {
     event.preventDefault();
@@ -152,6 +153,7 @@ function addTask(task, list) {
     //Kaller på render lists funksjonen, som også tar seg av å legge til oppgaver
     renderLists();
 }
+
 
 function renderTasks(outputDiv, listName) {
     let storage = JSON.parse(localStorage.getItem("tasks")) || [];
@@ -296,6 +298,56 @@ function dragAndDrop(){
         }
     }
 }
+// Drag and drop Task
+function dragAndDropTask(){
+    const taskDrag = document.querySelectorAll('.list');
+    const dragContainer = document.querySelectorAll('main');
+    
+    let draggedItem = null;
+    
+    for (let i = 0; i < taskDrag.length; i++) {
+        const itemDrag = taskDrag[i];
+    
+        itemDrag.addEventListener('dragstart', function () {
+            draggedItem = itemDrag;
+            setTimeout(function () {
+                itemDrag.style.display = 'none';
+            }, 0)
+        });
+    
+        itemDrag.addEventListener('dragend', function () {
+            setTimeout(function () {
+                draggedItem.style.display = 'grid';
+                draggedItem = null;
+            }, 0);
+        })
+    
+        for (let j = 0; j < dragContainer.length; j ++) {
+            const listDrag = dragContainer[j];
+    
+            listDrag.addEventListener('dragover', function (e) {
+                e.preventDefault();
+            });
+            
+            listDrag.addEventListener('dragenter', function (e) {
+                e.preventDefault();
+                this.style.backgroundColor = '';
+            });
+    
+            listDrag.addEventListener('dragleave', function (e) {
+                this.style.backgroundColor = '';
+            });
+    
+            listDrag.addEventListener('drop', function (e) {
+                console.log('drop');
+                this.append(draggedItem);
+                this.style.backgroundColor = '';
+            });
+        }
+    }
+}
+
+
 
 
 
@@ -319,6 +371,9 @@ function main() {
     renderOptions();
     //Denne funksjonen kjører hele drag-n-drop funksjonaliteten.
     dragAndDrop();
+    //
+    dragAndDropTask();
+    
 }
 
 main();
