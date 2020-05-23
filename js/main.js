@@ -296,52 +296,6 @@ function dragAndDrop(){
         }
     }
 }
-// ikke fungerende
-function saveListObject(obj) {
-    const objectKey = createLocalStorageKey();
-    updateObject(objectKey, JSON.stringify(obj));
-    return objectKey;
-}
-
-function loadObject(key) {
-    return JSON.parse(localStorage.getItem(key));
-}
-
-function updateObject(objKey, obj) {
-    localStorage.setItem(objKey, JSON.stringify(obj));
-}
-
-function createLocalStorageKey(prefix = 'list') {
-    const date = new Date()
-    return prefix + '_' + date.toISOString();
-}
-
-function createList() {
-    const listObject = {
-        items: []
-    };
-
-    saveObject(listObject);
-}
-
-function addListItem() {
-    const objectKey = createLocalStorageKey('');
-    
-}
-
-function getLists() {
-    const listKeys = Object.keys(localStorage).filter(key => {
-        return key.split('_')[0] === 'list';
-    });
-
-    const lists = listKeys.map(listKey => {
-        const listObject = loadObject(listKey);
-        return {
-            listKey,
-            items: listObject.items.map(item => loadObject(item)),
-        };
-    });
-}
 
 
 
