@@ -290,6 +290,7 @@ function dragAndDrop(){
 
 
 
+
 function main() {
     //Setter opp default lister
     if (!JSON.parse(localStorage.getItem("lists"))) {

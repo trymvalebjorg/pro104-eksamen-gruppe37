@@ -17,45 +17,56 @@
         <div class="toolbar">
             <div class="toolbar__board">
                 <label for="prosjekt">Prosjekt:</label>
-                <select id="prosjekt">
+                <select id="prosjekt" class="input">
                     <option value="prosjekt-1">Prosjekt 1</option>
                     <option value="prosjekt-2">Prosjekt 2</option>
                     <option value="prosjekt-4">Prosjekt 3</option>
                 </select>
             </div>
-
-            <div class="toolbar__members">
-                <p id="toolbar__members--output">Medlemmer: </p>
+            <!-- ADD LIST FORM -->
+            <div id="add__list__div">
+                <form id="add__list__form">
+                    <input 
+                    type="text"
+                    class="input"
+                    id="add__list__form--text" 
+                    placeholder="Add List"
+                    />
+                    
+                    <button id="add__list__form--submit" class="btn create" class="input">+</button>
+                </form>
             </div>
             <!-- ADD MEMBER FORM -->
             <div id="add__member__div">
                 <form id="add__member__form" onsubmit="addMember(event)">
-                    <input type="text" id="add__member__form--text">
-                    <input type="submit" id="add__member__form--submit" value="Add member">
+                    <input 
+                    type="text" 
+                    class="input"
+                    id="add__member__form--text"
+                    placeholder="Add Member"
+                    />
+                    <button id="add__member__form--submit"  class="btn create" class="input">+</button>
+                    <div class="toolbar__members">
+                        <p id="toolbar__members--output">Member: </p>
+                    </div>
                 </form>
             </div>
-            <!-- ADD LIST FORM -->
-            <div id="add__list__div">
-                <form id="add__list__form">
-                    <input id="add__list__form--text" type="text">
-                    <input id="add__list__form--submit" type="submit" value="Add new list">
+            
+    
+            <!-- ASSIGN MEMBER FORM -->
+            <div id="assign__member__div">
+                <form id="assign__member__form" onsubmit="assignTask(event)">
+                    <label for="assign__member__form--task">Task:</label>
+                    <select id="assign__member__form--task" class="input">
+                    </select>
+                    <label for="assign__member__form--member">Member:</label>
+                    <select id="assign__member__form--member" class="input">
+                    </select>
+                    <button id="assign__member__form--submit" class="btn create" class="input">Assign</button>
                 </form>
             </div>
-        </div>
-        <!-- ASSIGN MEMBER FORM -->
-        <div id="assign__member__div" class="toolbar">
-            <form id="assign__member__form" onsubmit="assignTask(event)">
-                <select id="assign__member__form--task">
-                </select>
-                <select id="assign__member__form--member">
-                </select>
-                <input id="assign__member__form--submit" type="submit" value="Assign task">
-            </form>
-        </div>
-
         </div>
     </header>
-    <div class="list__item__text--task" id="test"></div>
 
     <main id="listOutput">
         <div class="list">
@@ -65,15 +76,21 @@
             </div>
 
             <button class="list__action-btn btn btn--round btn--add"></button>
+            
             <!-- ASSIGN TASK FORM -->
             <div id="assign__task__div" class="task__input__form">
-                <form id="assign__task__form">
-                    <input id="assign__task__form-task" type="text">
-                    <input id="assign__task__form-submit" type="submit" value="Add task">
+                <form id="assign__task__form" class="input">
+                    <input
+                    type="text"
+                    id="assign__task__form-task"
+                    placeholder="Add Task"
+                    class="input"
+                    />
+                    <button id="assign__task__form-submit" class="btn create" class="input">+</button>
                 </form>
             </div>
 
-            <div class="list__item">
+            <div class="list__item" draggable="true">
                 <figure class="list__item__importance dot dot--yellow"></figure>
 
                 <div class="list__item__text">
