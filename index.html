@@ -31,6 +31,7 @@
                     class="input"
                     id="add__list__form--text" 
                     placeholder="Add List"
+                    required
                     />
                     
                     <button id="add__list__form--submit" class="btn create" class="input">+</button>
@@ -44,6 +45,7 @@
                     class="input"
                     id="add__member__form--text"
                     placeholder="Add Member"
+                    required
                     />
                     <button id="add__member__form--submit"  class="btn create" class="input">+</button>
                     <div class="toolbar__members">
@@ -79,12 +81,13 @@
             
             <!-- ASSIGN TASK FORM -->
             <div id="assign__task__div" class="task__input__form">
-                <form id="assign__task__form" class="input">
+                <form id="assign__task__form" >
                     <input
                     type="text"
                     id="assign__task__form-task"
                     placeholder="Add Task"
                     class="input"
+                    required
                     />
                     <button id="assign__task__form-submit" class="btn create" class="input">+</button>
                 </form>
@@ -92,11 +95,6 @@
 
             <div class="list__item" draggable="true">
                 <figure class="list__item__importance dot dot--yellow"></figure>
-
-                <div class="list__item__text">
-                    <p class="list__item__text--date">15. mai // 08:00</p>
-                    <p class="list__item__text--task">Lage sjampanjefrokost</p>
-                </div>
             </div>
         </div>
  
