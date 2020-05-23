@@ -186,6 +186,9 @@ main {
 }
 
 /* List */
+#listOutPut{
+    display: ;
+}
 .list {
     margin-top: 5rem;
     display: inline-block;
