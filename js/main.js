@@ -1,3 +1,12 @@
+let toggler = document.getElementsByClassName("list__item__expand");
+for( i = 0; i < toggler.length; i++){
+    toggler[i].addEventListener('click', function() {
+        this.parentElement.querySelector('.list__item__expanded').classList.toggle('active');
+        this.parentElement.querySelector('.list__item__expanded__controls').classList.toggle('active');
+        this.classList.toggle('arrow-down');
+    })
+}
+
 //Denne funksjonen sjekker om formen sin display er "display:none",
 function showTaskForm(formDiv) {
     //Hvis displayet er skjult, så sett verdien av displayet til block
@@ -102,7 +111,7 @@ function renderMembers(){
     let memberList = JSON.parse(localStorage.getItem("memberList")) || [];
     //Henter outputdiv for å skrive ut verdien som blir hentet fra localstorage
     let toolbarMemberOutput = document.getElementById("toolbar__members--output");
-    toolbarMemberOutput.innerHTML = "Medlemmer: ";
+    toolbarMemberOutput.innerHTML = "Member: ";
     //Looper gjennom å skriver ut alle member-navn som er lagret i localstorage
     for(let i = 0; i < memberList.length; i++){
         //Printer det ut

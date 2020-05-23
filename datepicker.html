@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="css/datepicker.css">
+        <script type="text/javascript" src="js/datepicker.js" defer></script>
+    </head>
+
+    <body>
+        <div class="date-time-picker">
+
+            <div class="datepicker__dateselected"></div>
+
+            <div class="datepicker-timepicker">
+
+                <div class="datepicker">
+                    <div class="datepicker__dates">
+                        <div class="datepicker__dates__month">
+                            <img src="img/icons/arrow.svg" alt="arrow" class="datepicker__dates__month__prevmth datepicker__dates__month_arrows">
+                            <div class="datepicker__dates__month__mth"></div>
+                            <img src="img/icons/arrow.svg" alt="arrow" class="datepicker__dates__month__nextmth datepicker__dates__month_arrows">
+                        </div>
+                        <div class="datepicker__dates__days"></div>
+                    </div>
+                </div>
+
+                <div class="timepicker" data-time="00:00">
+                    <div class="timepicker__hour">
+                        <img src="img/icons/arrow.svg" alt="arrow" class="timepicker__hour__hr-up">
+                        <input type="number" class="timepicker__hour__hr" value="00" />
+                        <img src="img/icons/arrow.svg" alt="arrow" class="timepicker__hour__hr-down">
+                    </div>
+                    <div class="timepicker__separator">:</div>
+                    <div class="timepicker__minute">
+                        <img src="img/icons/arrow.svg" alt="arrow" class="timepicker__minute__min-up">
+                        <input type="number" class="timepicker__minute__min" value="00">
+                        <img src="img/icons/arrow.svg" alt="arrow" class="timepicker__minute__min-down">
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="varsel">
+                <img src="img/icons/bell.svg" class="clock">
+                <div class="reminder">Legg til påminnelse</div>
+                <label for="reminder"></label>
+                    <select name="reminder" class="reminder1">
+                        <option value="5min">5 minutter før</option>
+                        <option value="10min">10 minutter før</option>
+                        <option value="15min">15 minutter før</option>
+                        <option value="30min">30 minutter før</option>
+                        <option value="1hr">1 time før</option>
+                        <option value="2hr">2 timer før</option>
+                        <option value="1day">1 dag før</option>
+                        <option value="remove">Ingen varsel</option>
+                    </select>
+                
+            </div>
+
+            </div>
+            
+        </div>
+    </body>
+</html>

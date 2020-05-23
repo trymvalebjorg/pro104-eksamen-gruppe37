@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Eksamen PRO104, Gruppe 37</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/datepicker.css">
+    <script src="js/datepicker.js"></script>
+    
 </head>
 
 <body>
@@ -49,7 +52,7 @@
                     />
                     <button id="add__member__form--submit"  class="btn create" class="input">+</button>
                     <div class="toolbar__members">
-                        <p id="toolbar__members--output">Member: </p>
+                        <p id="toolbar__members--output">Member:</p>
                     </div>
                 </form>
             </div>
@@ -59,11 +62,9 @@
             <div id="assign__member__div">
                 <form id="assign__member__form" onsubmit="assignTask(event)">
                     <label for="assign__member__form--task">Task:</label>
-                    <select id="assign__member__form--task" class="input">
-                    </select>
+                    <select id="assign__member__form--task" class="input"></select>
                     <label for="assign__member__form--member">Member:</label>
-                    <select id="assign__member__form--member" class="input">
-                    </select>
+                    <select id="assign__member__form--member" class="input"></select>
                     <button id="assign__member__form--submit" class="btn create" class="input">Assign</button>
                 </form>
             </div>
@@ -94,9 +95,60 @@
             </div>
 
             <div class="list__item" draggable="true">
-                <figure class="list__item__importance dot dot--yellow"></figure>
-            </div>
-        </div>
+                <figure class="list__item__importance dot dot--yellow" onclick="addImportanceMenu()">
+                </figure>
+
+                <div class="list__item__text">
+                <p class="list__item__text--date">
+<!--DATEPICKER-->                      
+            
+                    <div class="duedate__selected"></div>
+                        <div class="duedate__picker">
+                            <div class="duedate__picker__calendar">
+                                <div class="duedate__picker__calendar__month">
+                                    <img src="img/icons/arrow.svg" alt="arrow" class="duedate__picker__calendar__month__prevmth arrows">
+                                    <div class="duedate__picker__calendar__month__mth"></div>
+                                    <img src="img/icons/arrow.svg" alt="arrow" class="duedate__picker__calendar__month__nextmth arrows">
+                                </div>
+                                <div class="duedate__picker__calendar__days"></div>
+                            </div>
+                            <div class="duedate__picker__time" data-time="00:00">
+                                <div class="duedate__picker__time__hour">
+                                    <img src="img/icons/arrow.svg" alt="arrow" class="duedate__picker__time__hour__hr-up arrows">
+                                    <input type="number" class="duedate__picker__time__hour__hr" value="00" />
+                                    <img src="img/icons/arrow.svg" alt="arrow" class="duedate__picker__time__hour__hr-down arrows">
+                                </div>
+                                <div class="duedate__picker__time__separator">:</div>
+                                <div class="duedate__picker__time__minute">
+                                    <img src="img/icons/arrow.svg" alt="arrow" class="duedate__picker__time__minute__min-up arrows">
+                                    <input type="number" class="duedate__picker__time__minute__min" value="00">
+                                    <img src="img/icons/arrow.svg" alt="arrow" class="duedate__picker__time__minute__min-down arrows">
+                                </div>
+                            </div>
+                            <div class="duedate__reminder">
+                                <img src="img/icons/bell.svg" class="duedate__reminder__bell">
+                                <label for="reminder">
+                                <select name="reminder" class="duedate__reminder--menu">
+                                    <option value="default" class="duedate__reminder--menu__default" selected disabled>Legg til påminnelse</option>
+                                    <option value="1min">1 minutt før</option>
+                                    <option value="5min">5 minutter før</option>
+                                    <option value="15min">15 minutter før</option>
+                                    <option value="30min">30 minutter før</option>
+                                    <option value="1hr">1 time før</option>
+                                    <option value="2hr">2 timer før</option>
+                                    <option value="1day">1 dag før</option>
+                                    <option value="remove">Ingen varsel</option>
+                                </select>
+                            </label>
+                            </div>
+                        </div>
+                    
+                    <div class="reminder-popup">
+                        <h2 class="reminder-popup__header">Påminnelse</h1>
+                        <img src="img/icons/bell.svg" class="reminder-popup__bell">
+                        <div class="reminder-popup__text"><u>Møt gruppe på Discord</u> på listen <u>Må gjøres</u> forfaller om 5 minutter.</div>
+                        <img src="img/icons/check-o.svg" class="reminder-popup__button" onclick="showReminderPopUp()">
+                    </div>
  
     </main>
 
