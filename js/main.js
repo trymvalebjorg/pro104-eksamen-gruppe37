@@ -154,7 +154,6 @@ function addTask(task, list) {
     renderLists();
 }
 
-
 function renderTasks(outputDiv, listName) {
     let storage = JSON.parse(localStorage.getItem("tasks")) || [];
     for (let task of storage) {
@@ -301,44 +300,44 @@ function dragAndDrop(){
 // Drag and drop Task
 function dragAndDropTask(){
     const taskDrag = document.querySelectorAll('.list');
-    const dragContainer = document.querySelectorAll('.listOutPut');
+    const dragContainer = document.querySelectorAll('.main');
     
     let draggedItem = null;
     
     for (let i = 0; i < taskDrag.length; i++) {
-        const itemDrag = taskDrag[i];
+        const item = taskDrag[i];
     
-        itemDrag.addEventListener('dragstart', function () {
-            draggedItem = itemDrag;
+        item.addEventListener('dragstart', function () {
+            draggedItem = item;
             setTimeout(function () {
-                itemDrag.style.display = 'none';
+                item.style.display = 'none';
             }, 0)
         });
     
-        itemDrag.addEventListener('dragend', function () {
+        item.addEventListener('dragend', function () {
             setTimeout(function () {
-                draggedItem.style.display = 'grid';
+                draggedItem.style.display = 'block';
                 draggedItem = null;
             }, 0);
         })
     
         for (let j = 0; j < dragContainer.length; j ++) {
-            const listDrag = dragContainer[j];
+            const list = dragContainer[j];
     
-            listDrag.addEventListener('dragover', function (e) {
+            list.addEventListener('dragover', function (e) {
                 e.preventDefault();
             });
             
-            listDrag.addEventListener('dragenter', function (e) {
+            list.addEventListener('dragenter', function (e) {
                 e.preventDefault();
                 this.style.backgroundColor = '';
             });
     
-            listDrag.addEventListener('dragleave', function (e) {
+            list.addEventListener('dragleave', function (e) {
                 this.style.backgroundColor = '';
             });
     
-            listDrag.addEventListener('drop', function (e) {
+            list.addEventListener('drop', function (e) {
                 console.log('drop');
                 this.append(draggedItem);
                 this.style.backgroundColor = '';
@@ -346,7 +345,6 @@ function dragAndDropTask(){
         }
     }
 }
-
 
 
 

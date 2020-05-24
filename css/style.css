@@ -182,13 +182,9 @@ main {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-gap: 4rem;
-    
 }
 
 /* List */
-#listOutPut{
-    display: ;
-}
 .list {
     margin-top: 5rem;
     display: inline-block;
