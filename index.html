@@ -35,7 +35,7 @@
                 </form>
             </div>
             <!-- ADD LIST FORM -->
-            <div id="add__list__div">
+            <div id="add__list__div" onsubmit="saveList(); return false;"">
                 <form id="add__list__form">
                     <input id="add__list__form--text" type="text">
                     <input id="add__list__form--submit" type="submit" value="Add new list">
@@ -64,6 +64,7 @@
                 <h3>To-do</h3>
             </div>
 
+            
             <button class="list__action-btn btn btn--round btn--add"></button>
             <!-- ASSIGN TASK FORM -->
             <div id="assign__task__div" class="task__input__form">
@@ -75,16 +76,13 @@
 
             <div class="list__item">
                 <figure class="list__item__importance dot dot--yellow"></figure>
-
                 <div class="list__item__text">
                     <p class="list__item__text--date">15. mai // 08:00</p>
                     <p class="list__item__text--task">Lage sjampanjefrokost</p>
                 </div>
             </div>
         </div>
- 
     </main>
-
     <footer>
     </footer>
 

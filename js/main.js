@@ -12,7 +12,7 @@ function showTaskForm(formDiv) {
 //Ikke ferdig
 function assignTask(event) {
     event.preventDefault();
-   
+
     //Lager en assignedList i localStorage
     let assignedList = JSON.parse(localStorage.getItem("assignedList")) || [];
     //Henter HTML input fieldene
@@ -22,10 +22,9 @@ function assignTask(event) {
     //Definerer en variabel for "riktig oppgave", brukt senere for å linke input fieldet med en oppgave skrevet i en liste.
     let correctTask = document.getElementsByClassName("list__item__text--task");
 
-
     //Henter ut list item, der oppgaven er og der medlemmet skal tildeles
     let listDiv = document.getElementsByClassName("list__item");
-    
+
     //Henter direkte verdier fra input fields
     let taskVal = taskValue.value;
     let memVal = memberValue.value;
@@ -34,21 +33,16 @@ function assignTask(event) {
     divInfo.className = "list__item__text";
 
     //Looper gjennom alle oppgavene, og sjekker om teksten inni matcher verdien i input fieldet
-    for(let i = 0; i < correctTask.length; i++){
+    for (let i = 0; i < correctTask.length; i++) {
         //Hvis innholdet i listen er likt som verdien i input fieldet
-        if(correctTask[i].innerText == taskVal){
+        if (correctTask[i].innerText == taskVal) {
             //Hvis det stemmer, push verdiene til localstorage arrayet
-            assignedList.push({taskVal, memVal});
+            assignedList.push({ taskVal, memVal });
             //Sett assignedList til localStorage(oversikt over hvem som gjør hva)
-    
             //Hvis den spesifikke div'en i listen har verdien av taskVal, skriv deretter ut diven
-            for(let i2 = 0; i2 < listDiv.length; i2++){
-                if(listDiv[i2].innerText.includes(taskVal)){
-                    divInfo.innerHTML += `
-                    <p class="list__item__text--task">Assigned to: ${assignedList[i2].memVal}</p>`;
+            for (let i2 = 0; i2 < listDiv.length; i2++) {
+                if (listDiv[i2].innerText.includes(taskVal)) {
                     localStorage.setItem("assignedList", JSON.stringify(assignedList));
-
-                    listDiv[i2].appendChild(divInfo);
                 }
             }
         }
@@ -76,20 +70,21 @@ function addMember(event) {
     renderMembers();
 }
 
-function renderOptions(){
+function renderOptions() {
     //Henter ut localStorage
     let memberList = JSON.parse(localStorage.getItem("memberList"));
     let taskList = JSON.parse(localStorage.getItem("tasks"));
     //Henter ut select-tagsa
     let assignTaskSelect = document.getElementById("assign__member__form--task");
     let assignMemberSelect = document.getElementById("assign__member__form--member");
-    
-    for(let i = 0; i < memberList.length; i++){
+
+    for (let i = 0; i < memberList.length; i++) {
         assignMemberSelect.innerHTML += `
             <option>${memberList[i].memberName}</option>
         `;
     }
-    for(let i2 = 0; i2 < taskList.length; i2++){
+
+    for (let i2 = 0; i2 < taskList.length; i2++) {
         assignTaskSelect.innerHTML += `
             <option>${taskList[i2].task}</option>
         `;
@@ -97,18 +92,18 @@ function renderOptions(){
 }
 
 //Funksjon for å vise medlemmer
-function renderMembers(){
+function renderMembers() {
     //Henter ut member list fra localstorage
     let memberList = JSON.parse(localStorage.getItem("memberList")) || [];
     //Henter outputdiv for å skrive ut verdien som blir hentet fra localstorage
     let toolbarMemberOutput = document.getElementById("toolbar__members--output");
     toolbarMemberOutput.innerHTML = "Medlemmer: ";
     //Looper gjennom å skriver ut alle member-navn som er lagret i localstorage
-    for(let i = 0; i < memberList.length; i++){
+    for (let i = 0; i < memberList.length; i++) {
         //Printer det ut
         toolbarMemberOutput.innerHTML += `${memberList[i].memberName}`;
         //Hvis telleren vår er en mindre enn lengden på hele arrayet, legg til et komma for å separere navnene
-        if(i< memberList.length-1){
+        if (i < memberList.length - 1) {
             toolbarMemberOutput.innerHTML += ", "
         }
     }
@@ -146,6 +141,7 @@ function addTask(task, list) {
 
 function renderTasks(outputDiv, listName) {
     let storage = JSON.parse(localStorage.getItem("tasks")) || [];
+    let assignedList = JSON.parse(localStorage.getItem("assignedList")) || [];
     for (let task of storage) {
         if (task.list == listName) {
             //Hoveddiv
@@ -153,16 +149,53 @@ function renderTasks(outputDiv, listName) {
             newDiv.className = "list__item"
             newDiv.innerHTML += '<figure class="list__item__importance dot dot--yellow"></figure>'
 
-            //Drag and drop!
-            newDiv.draggable = true;
+            
 
             //Task basert info i div
             let divInfo = document.createElement("div");
-            divInfo.className = "list__item__text"
+            divInfo.className = "list__item__text";
             divInfo.innerHTML += `<p class="list__item__text--date">15. mai // 08:00</p>`;
             divInfo.innerHTML += `<p class="list__item__text--task">${task.task}</p>`;
-            newDiv.appendChild(divInfo)
 
+            let assignedDiv = document.createElement("div");
+            assignedDiv.className = "list__item__text";
+            assignedDiv.innerHTML += `<p class="list__item__text--task">Assigned to: </p>`;
+
+
+            //Sjekker om assignlisten har samme task verdi som tasks, og hvis dette er tilfelle skriver den ut hvilket teammedlem som er tildelt oppgaven.
+            for(let i = 0; i < assignedList.length; i++){
+                if(assignedList[i].taskVal == task.task){ 
+                    assignedDiv.innerHTML += `${assignedList[i].memVal} `;
+                }
+            }
+         
+            divInfo.appendChild(assignedDiv);
+            newDiv.appendChild(divInfo)
+            
+
+            //Drag and drop!
+            newDiv.setAttribute("draggable", true);
+            newDiv.addEventListener("dragover", function (event) {
+                event.preventDefault()
+            })
+
+            newDiv.addEventListener("drop", function (event) {
+                event.preventDefault();
+                let taskData = event.dataTransfer.getData("taskName")
+                let alleTasks = JSON.parse(localStorage.getItem("tasks"))
+                for(let oppgave of alleTasks){
+                    if(oppgave.task == taskData){
+                        oppgave.list = task.list;
+                    }
+                }
+                localStorage.setItem("tasks", JSON.stringify(alleTasks));
+                renderLists();
+            })
+
+            newDiv.addEventListener("dragstart", function (event) {
+                event.dataTransfer.setData("taskName", task.task)
+            })
+            
             outputDiv.appendChild(newDiv);
         }
     }
@@ -222,71 +255,17 @@ function renderLists() {
 
 }
 
-//Drag and drop
-function dragAndDrop(){
-    //Henter ut hoved-liste og list-items
-    let listItemsDrag = document.querySelectorAll('.list__item');
-    let listsDrag = document.querySelectorAll('.list');
-    
-    //Oppretter en variabel som er itemet som blir dratt.
-    let draggedItem = null;
-    
-    //Looper igjennom liste-items
-    for(let i = 0; i < listItemsDrag.length; i++){
-        //Setter en variabel items til alle items som for-loopen finner
-        const item = listItemsDrag[i];
-    
-        //Setter på en event-listener, denne er spesifikk til da man starter å dra itemet.
-        item.addEventListener('dragstart', function(){
-            console.log("drag start");
-            //Setter draggedItem til selve liste-itemet man drar
-            draggedItem = item;
-            //En timeout, for å gjøre flyttingen penere
-            setTimeout(function(){
-                item.style.display = "none";
-            }, 0)
-            
-        });
-    
-        //Setter på en event-listener, som hører etter når man slipper list-itemet
-        item.addEventListener('dragend', function(){
-            console.log("dragend");
-            //Setter da verdien av itemet til grid (samme som i CSS'en), og tømmer draggedItem variabelen (denne blir satt når man drar, og fjernet når man slipper)
-            setTimeout(function(){
-                draggedItem.style.display = 'grid';
-                draggedItem = null;
-            }, 0);
-        })
-    
-        //Looper igjennom alle listene
-        for(let i2 = 0; i2 < listsDrag.length; i2++){
-            //Definerer en variabel liste, som er alle listene for-loopen finner
-            const list = listsDrag[i2];
-
-            //En eventlistener, som fyrer når list-itemet som blir dratt er satt over en liste. man må fjerne default-oppførsel slik at den ikke forsvinner
-            list.addEventListener('dragover', function(e){
-                e.preventDefault();
-            });
-
-            //Samme som over, bare at denne fyrer på når 
-            list.addEventListener('dragenter', function(e){
-                e.preventDefault();
-            })
-
-            //Denne gjør ingenting foreløpig.
-            list.addEventListener('dragleave', function(){
-
-            })
-
-            //Hører etter når man slipper museknappen, og da appendes itemet man holder til listen man drar det til.
-            //Her må localStorage settes?
-            list.addEventListener('drop', function(event){
-                console.log('drop');
-                this.append(draggedItem);
-            })
+function changeListName(oldName, newName) {
+    let storage = JSON.parse(localStorage.getItem("lists"))
+    for (let i = 0; i < storage.length; i++) {
+        if (storage[i] == oldName) {
+            storage[i] = newName;
         }
     }
+    localStorage.setItem("lists", JSON.stringify(storage));
 }
+
+
 
 
 
@@ -307,8 +286,8 @@ function main() {
     renderMembers();
     //Denne funksjonen rendrer oppgaver og medlemmer i drop-down menyen automatisk
     renderOptions();
-    //Denne funksjonen kjører hele drag-n-drop funksjonaliteten.
-    dragAndDrop();
+    
 }
+
 
 main();

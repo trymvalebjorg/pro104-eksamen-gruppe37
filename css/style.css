@@ -193,6 +193,11 @@ main {
     font-weight: 700;
 }
 
+.list__item__text--assigned{
+    font-weight: 600;
+    font-size: 1rem;
+}
+
 .list__item__expand {
     justify-self: center;
     align-self: center;
