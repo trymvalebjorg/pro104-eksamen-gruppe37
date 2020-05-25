@@ -16,7 +16,7 @@ function uploadImages(evt) {
 
         reader.addEventListener("load", function (){
             if(this.result && localStorage){
-                window.localStorage.setItem(name, this.result);
+                window.localStorage.setItem(name+".image", this.result);
             } else {
                 alert();
             }
@@ -270,14 +270,14 @@ function uploadImages(evt) {
   }
 
 
-// Function to upload profile pictures to localStorage
-function uploadProfiles(evt) {
+  // Function to upload profile pictures to localStorage
+  function uploadProfiles(evt) {
     var name = event.target.files[0].name; // FileList object
     var reader = new FileReader();
 
         reader.addEventListener("load", function (){
             if(this.result && localStorage){
-                window.localStorage.setItem(name, this.result);
+                window.localStorage.setItem(name+".profile", this.result);
             } else {
                 alert();
             }
@@ -539,5 +539,12 @@ function uploadProfiles(evt) {
         image.setAttribute("class", "profile-pic");
         parentDiv.append(image);
       }
+    }
+  }
+
+// Function to remove last uploaded image
+  function removeImages(){
+    for(let i = 0; i < window.localStorage.length; i++){
+      let res = window.localStorage.removeItem(window.localStorage.key(i));
     }
   }
