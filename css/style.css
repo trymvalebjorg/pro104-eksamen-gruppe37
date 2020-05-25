@@ -143,15 +143,11 @@ body {
     display: grid;
     grid-template-columns: repeat(4, 2fr, 2fr, 2fr);
     grid-auto-flow: column;
+    border-bottom: 1px dashed #1b3f26;
     
     
     
 }
-.toolbar__2{
-    margin: 1rem 10% 0 10%;
-    padding: 0rem 0rem 2rem 0rem;
-    display: grid;
-    border-bottom: 1px dashed #1b3f26;
     
 
 
