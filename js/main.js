@@ -15,7 +15,9 @@ let notImportant;
 let veryImportant;
 let important;
 
+
 function addImportanceMenu(){
+    
     selectedDot = this.document.querySelector('.dot');
         selectedDot.innerHTML = `
             <div class="list__item__importance__menu">
@@ -29,11 +31,21 @@ function addImportanceMenu(){
             </div>
         `;
     
-    importanceMenuElements = this.document.querySelector('.list__item__importance__menu');
-
-    importanceMenuElements.classList.add('active');
+    /*importanceMenuElements = document.querySelector('.list__item__importance__menu');
+    importanceMenuElements.classList.add('active');*/
     
-    overlayElement.classList.toggle('active');
+    /*importanceMenuElements = this.document.querySelectorAll('.list__item__importance__menu');
+    for (var i = 0; i < importanceMenuElements.length; ++i) {
+        importanceMenuElements[i].classList.add('active');
+    }*/
+
+    importanceMenuElements = document.getElementsByClassName('list__item__importance__menu');
+    for (var i = 0; i < importanceMenuElements.length; ++i) {
+        importanceMenuElements[i].classList.add('active');
+        break;
+    }
+
+    overlayElement.classList.add('active');
 
     notImportant = document.getElementsByClassName('not-important');
     veryImportant = document.getElementsByClassName('very-important');
@@ -42,6 +54,7 @@ function addImportanceMenu(){
     for( i = 0; i < notImportant.length; i++){
         notImportant[i].addEventListener('click', changeImportance);
     }
+
     for( i = 0; i < veryImportant.length; i++){
         veryImportant[i].addEventListener('click', changeImportance);
     }
@@ -51,6 +64,7 @@ function addImportanceMenu(){
 }
 
 function changeImportance(){
+
         let selectedImportanceClass = event.target.classList[1];
         let selectedDotClass = selectedDot.classList[2];
 
@@ -58,8 +72,8 @@ function changeImportance(){
 
         if (selectedImportanceClass  === "dot--green" || selectedImportanceClass  === "not-important"){
             selectedDot.classList.add('dot--green');
-            console.log("green added");
-
+            console.log("green added"); 
+            
         } else if (selectedImportanceClass === "dot--yellow" || selectedImportanceClass  === "important"){
             selectedDot.classList.add('dot--yellow');
             console.log("yellow added");

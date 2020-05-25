@@ -7,13 +7,14 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/datepicker.css">
     <script src="js/main.js" defer></script>
-    <script src="js/datepicker.js"defer></script>
+    <!-- <script src="js/datepicker.js"defer></script> -->
+    <script src="js/datepicker1.js"defer></script>
 </head>
 <body>
 
    
 
-    <div class="overlay" onclick="overlayToggle()"></div>
+    <div class="overlay"></div>
     <header>
         <div class="navbar">
             <h3 class="navbar__logo">Eksamen</h3>
@@ -39,7 +40,7 @@
         <div class="list">
             <div class="list__header">
                 <img src="img/icons/album.svg" alt="an icon" class="icon">
-                <h3>To-do</h3>
+                <h3>Viktig</h3>
             </div>
             <button class="list__action-btn btn btn--round btn--add"></button>
             <div class="list__item">
@@ -50,7 +51,7 @@
                 <div class="list__item__text">
                 <p class="list__item__text--date">
 <!--DATEPICKER-->                      
-            
+            <!--
                         <div class="duedate__selected"></div>
                         <div class="duedate__picker">
                             <div class="duedate__picker__calendar">
@@ -98,6 +99,7 @@
                         <div class="reminder-popup__text"><u>Møt gruppe på Discord</u> på listen <u>Må gjøres</u> forfaller om 5 minutter.</div>
                         <img src="img/icons/check-o.svg" class="reminder-popup__button" onclick="showReminderPopUp()">
                     </div>
+                -->
 <!--DATEPICKER-->
              </p>
                     <p class="list__item__text--task">Lage sjampanjefrokost</p>
@@ -137,8 +139,8 @@
                 <figure class="list__item__importance dot dot--yellow"></figure>
 
                 <div class="list__item__text">
-                    <p class="list__item__text--date">15. mai // 08:00</p>
-                    <p class="list__item__text--task">Lage sjampanjefrokost</p>
+                    <p class="list__item__text--date">15 mai // 08:00</p>
+                    <p class="list__item__text--task">Mental breakdown</p>
                 </div>
 
                 <div class="list__item__expand">
@@ -176,7 +178,7 @@
 
                 <div class="list__item__text">
                     <p class="list__item__text--date">15. mai // 08:00</p>
-                    <p class="list__item__text--task">Lage sjampanjefrokost</p>
+                    <p class="list__item__text--task">Spise kake</p>
                 </div>
 
                 <div class="list__item__expand">

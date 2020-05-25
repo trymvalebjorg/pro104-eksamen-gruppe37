@@ -1,14 +1,72 @@
+let datepickerOutputElement = document.querySelectorAll('.list__item__text--date');
+
+
+for(var i=0; datepickerOutputElement.length > i; i++){
+datepickerOutputElement[i].innerHTML=` <div class="duedate__selected"></div>
+<div class="duedate__picker">
+	<div class="duedate__picker__calendar">
+		<div class="duedate__picker__calendar__month">
+			<img src="img/icons/arrow.svg" alt="arrow" class="duedate__picker__calendar__month__prevmth arrows">
+			<div class="duedate__picker__calendar__month__mth"></div>
+			<img src="img/icons/arrow.svg" alt="arrow" class="duedate__picker__calendar__month__nextmth arrows">
+		</div>
+		<div class="duedate__picker__calendar__days"></div>
+	</div>
+	<div class="duedate__picker__time" data-time="00:00">
+		<div class="duedate__picker__time__hour">
+			<img src="img/icons/arrow.svg" alt="arrow" class="duedate__picker__time__hour__hr-up arrows">
+			<input type="number" class="duedate__picker__time__hour__hr" value="00" />
+			<img src="img/icons/arrow.svg" alt="arrow" class="duedate__picker__time__hour__hr-down arrows">
+		</div>
+		<div class="duedate__picker__time__separator">:</div>
+		<div class="duedate__picker__time__minute">
+			<img src="img/icons/arrow.svg" alt="arrow" class="duedate__picker__time__minute__min-up arrows">
+			<input type="number" class="duedate__picker__time__minute__min" value="00">
+			<img src="img/icons/arrow.svg" alt="arrow" class="duedate__picker__time__minute__min-down arrows">
+		</div>
+	</div>
+	<div class="duedate__reminder">
+		<img src="img/icons/bell.svg" class="duedate__reminder__bell">
+		<label for="reminder">
+		<select name="reminder" class="duedate__reminder--menu">
+			<option value="default" class="duedate__reminder--menu__default" selected disabled>Legg til påminnelse</option>
+			<option value="1min">1 minutt før</option>
+			<option value="5min">5 minutter før</option>
+			<option value="15min">15 minutter før</option>
+			<option value="30min">30 minutter før</option>
+			<option value="1hr">1 time før</option>
+			<option value="2hr">2 timer før</option>
+			<option value="1day">1 dag før</option>
+			<option value="remove">Ingen varsel</option>
+		</select>
+	</label>
+	</div>
+</div>
+
+<div class="reminder-popup">
+<h2 class="reminder-popup__header">Påminnelse</h1>
+<img src="img/icons/bell.svg" class="reminder-popup__bell">
+<div class="reminder-popup__text"><u>Møt gruppe på Discord</u> på listen <u>Må gjøres</u> forfaller om 5 minutter.</div>
+<img src="img/icons/check-o.svg" class="reminder-popup__button" onclick="showReminderPopUp()">
+</div>`;
+
+
+}
+const selectedDateElement = document.querySelector('.duedate__selected');
+
+
 /////////////////////////////////////////////////////////////////////////////////////////
 //HTML-INNHENTING 
-const selectedDateElement = document.querySelector('.duedate__selected');
+
+//const selectedDateElement = document.querySelector('.duedate__selected');
 const calendarTimeReminderElement = document.querySelector('.duedate__picker');
-const reminderElement = document.querySelector('.duedate__reminder');
 const reminderOutputElement = document.querySelector('.duedate__reminder__output');
 const reminderMenuElement = document.querySelector('.duedate__reminder--menu');
 const reminderPopUpElement = document.querySelector('.reminder-popup');
 let reminderInputValue = document.querySelector("[name='reminder']").value;
 const overlayElement = document.querySelector('.overlay');
 const reminderButtonElement = document.querySelector('.reminder-popup__button');
+
 
 //Henter klokkeslett-elementer fra HTML
 const duedateTimeElement = document.querySelector('.duedate__picker__time');
@@ -20,7 +78,6 @@ const minUpElement = document.querySelector('.duedate__picker__time__minute__min
 const minDownElement = document.querySelector('.duedate__picker__time__minute__min-down');
 
 //Henter kalender-elementer fra HTML
-const calendarElement = document.querySelector('.duedate__picker__calendar');
 const mthElement = document.querySelector('.duedate__picker__calendar__month__mth');
 const nextMthElement = document.querySelector('.duedate__picker__calendar__month__nextmth');
 const prevMthElement = document.querySelector('.duedate__picker__calendar__month__prevmth');
@@ -65,6 +122,10 @@ populateDates();
 //Legger til måned og år i mthElement
 mthElement.textContent = months[month] + ' ' + year;
 
+
+
+
+
 /////////////////////////////////////////////////////////////////////////////////////////
 //FUNKSJONER 
 
@@ -79,8 +140,13 @@ function formatDate (d) {
 
 //Legger til klassen "active" til HTML-elementer
 function toggleActiveClass () {
-		calendarTimeReminderElement.classList.toggle('active');
-		overlayElement.classList.toggle('active');
+		calendarTimeReminderElement.classList.add('active');
+		overlayElement.classList.add('active');
+
+		overlayElement.onclick = function(){
+			calendarTimeReminderElement.classList.remove('active');
+			overlayElement.classList.remove('active');
+		}
 }
 
 //Øker "månedstall" og årstall, fyller antall dager for måneden, månedsnavn og årstall
@@ -251,9 +317,16 @@ function formatTime (time) {
 
 //Legger til klassen "active" til reminderPopUpElement
 function showReminderPopUp(){
-	reminderPopUpElement.classList.toggle('active');
+	reminderPopUpElement.classList.add('active');
 	overlayElement.classList.add('active');
-	reminderButtonElement.addEventListener('click', overlayToggle);
+
+	reminderButtonElement.onclick = function(){
+		if (calendarTimeReminderElement.className === 'duedate__picker'){
+			overlayElement.classList.remove('active');
+		}
+
+		reminderPopUpElement.classList.remove('active');
+	};
 }
 
 //Trigger funksjonen showReminderPopUp etter nedtelling av millisekunder 
@@ -301,16 +374,5 @@ function chooseReminderTime(){
 		case "remove":
 				reminderDefaultValue.selected = true;
 			break;
-	}
-}
-
-function overlayToggle() {
-	overlayElement.classList.toggle('active');
-	if (calendarTimeReminderElement.className === 'duedate__picker active'){
-		calendarTimeReminderElement.classList.remove('active');
-	}
-
-	if (reminderPopUpElement.className === 'reminder-popup active'){
-		overlayElement.classList.add('active');
 	}
 }
