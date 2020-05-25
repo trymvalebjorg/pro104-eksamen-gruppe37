@@ -1,13 +1,13 @@
-//Denne funksjonen sjekker om formen sin display er "display:none",
-function showTaskForm(formDiv) {
-    //Hvis displayet er skjult, så sett verdien av displayet til block
-    if (formDiv.style.display == "") {
-        formDiv.style.display = "block";
-        //Hvis displayet er synlig, gjør det det til display none igjen
-    } else {
-        formDiv.style.display = "";
-    }
-}
+// //Denne funksjonen sjekker om formen sin display er "display:none",
+// function showTaskForm(formDiv) {
+//     //Hvis displayet er skjult, så sett verdien av displayet til block
+//     if (formDiv.style.display == "") {
+//         formDiv.style.display = "block";
+//         //Hvis displayet er synlig, gjør det det til display none igjen
+//     } else {
+//         formDiv.style.display = "";
+//     }
+// }
 
 //Ikke ferdig
 function assignTask(event) {
@@ -67,6 +67,24 @@ function addMember(event) {
     renderMembers();
 }
 
+//Funksjon for å vise medlemmer
+function renderMembers() {
+    //Henter ut member list fra localstorage
+    let memberList = JSON.parse(localStorage.getItem("memberList")) || [];
+    //Henter outputdiv for å skrive ut verdien som blir hentet fra localstorage
+    let toolbarMemberOutput = document.getElementById("toolbar__members--output");
+    toolbarMemberOutput.innerHTML = "Medlemmer: ";
+    //Looper gjennom å skriver ut alle member-navn som er lagret i localstorage
+    for (let i = 0; i < memberList.length; i++) {
+        //Printer det ut
+        toolbarMemberOutput.innerHTML += `${memberList[i].memberName}`;
+        //Hvis telleren vår er en mindre enn lengden på hele arrayet, legg til et komma for å separere navnene
+        if (i < memberList.length - 1) {
+            toolbarMemberOutput.innerHTML += ", "
+        }
+    }
+}
+
 function renderOptions() {
     //Henter ut localStorage
     let memberList = JSON.parse(localStorage.getItem("memberList"));
@@ -86,43 +104,6 @@ function renderOptions() {
             <option>${taskList[i2].task}</option>
         `;
     }
-}
-
-//Funksjon for å vise medlemmer
-function renderMembers() {
-    //Henter ut member list fra localstorage
-    let memberList = JSON.parse(localStorage.getItem("memberList")) || [];
-    //Henter outputdiv for å skrive ut verdien som blir hentet fra localstorage
-    let toolbarMemberOutput = document.getElementById("toolbar__members--output");
-    toolbarMemberOutput.innerHTML = "Medlemmer: ";
-    //Looper gjennom å skriver ut alle member-navn som er lagret i localstorage
-    for (let i = 0; i < memberList.length; i++) {
-        //Printer det ut
-        toolbarMemberOutput.innerHTML += `${memberList[i].memberName}`;
-        //Hvis telleren vår er en mindre enn lengden på hele arrayet, legg til et komma for å separere navnene
-        if (i < memberList.length - 1) {
-            toolbarMemberOutput.innerHTML += ", "
-        }
-    }
-}
-
-//Funksjon for å dynamisk lage nye lister
-function createList(event) {
-    event.preventDefault();
-    //Henter ut lists fra localstorage
-    let listStorage = JSON.parse(localStorage.getItem("lists")) || [];
-
-    //Input fra bruker
-    let listName = document.getElementById("add__list__form--text");
-
-    //Pusher verdien av listenavnet til localstorage
-    listStorage.push(listName.value);
-    //Resetter input-verdien
-    listName.value = "";
-    //Legger det i localStorage
-    localStorage.setItem("lists", JSON.stringify(listStorage));
-    //Kaller på main funksjonen, som har en onsubmit som lagrer listen
-    main();
 }
 
 //Funksjon for å legge til tasks, tar imot hvilken oppgave og en liste
@@ -218,9 +199,28 @@ function renderTasks(outputDiv, listName) {
     }
 }
 
+//Funksjon for å dynamisk lage nye lister
+function createList(event) {
+    event.preventDefault();
+    //Henter ut lists fra localstorage
+    let listStorage = JSON.parse(localStorage.getItem("lists")) || [];
+
+    //Input fra bruker
+    let listName = document.getElementById("add__list__form--text");
+
+    //Pusher verdien av listenavnet til localstorage
+    listStorage.push(listName.value);
+    //Resetter input-verdien
+    listName.value = "";
+    //Legger det i localStorage
+    localStorage.setItem("lists", JSON.stringify(listStorage));
+    //Kaller på main funksjonen, som har en onsubmit som lagrer listen
+    main();
+}
+
 function renderLists() {
     //Henter ut lists fra localstorage
-    let listStorage = JSON.parse(localStorage.getItem("lists"));
+    let listStorage = JSON.parse(localStorage.getItem("lists")) || [];
     let output = document.getElementById("listOutput");
     output.innerHTML = "";
     
@@ -237,10 +237,10 @@ function renderLists() {
         listHeader.innerHTML += `<h3>${list}</h3>`;
         newDiv.appendChild(listHeader);
         
-        let listBody = document.createElement('div');
-        listBody.className = 'list__item--empty';
-        listBody.innerHTML = '<p>Trykk på pluss-tegnet for å legge til en oppgave</p>';
-        newDiv.appendChild(listBody);
+        // let listBody = document.createElement('div');
+        // listBody.className = 'list__item--empty';
+        // listBody.innerHTML = '<p>Trykk på pluss-tegnet for å legge til en oppgave</p>';
+        // newDiv.appendChild(listBody);
 
         //Form for input av ny task, har display="none" som default.
         let inputFormDiv = document.createElement("div");
@@ -254,24 +254,24 @@ function renderLists() {
         let addTaskButton = document.createElement("button");
         addTaskButton.type = "submit";
         addTaskButton.className = "action-btn btn btn--round btn--add"
-        
+
         //Her kjører vi addTask funksjonen med oppgave og liste som input
         addTaskButton.onclick = function (event) {
             event.preventDefault();
             addTask(taskInput.value, list);
+            //hvorfor fyrer ikke denne?
+            inputFormDiv.classList.toggle('none');
         }
+
         form.appendChild(addTaskButton)
         inputFormDiv.appendChild(form)
-        newDiv.appendChild(inputFormDiv)
-
+        newDiv.appendChild(inputFormDiv);
+        
         //Knapp for å vise input
         let addTaskButton2 = document.createElement("button");
         addTaskButton2.onclick = function () {
-            showTaskForm(inputFormDiv);
-
+            inputFormDiv.classList.toggle('none');
         }
-        addTaskButton2.className = "list__action-btn btn btn--round btn--add"
-        newDiv.appendChild(addTaskButton2);
 
         output.appendChild(newDiv);
 
@@ -293,14 +293,6 @@ function renderLists() {
 
 }
 
-function addListForm() {
-
-        //Henter ut submitknappen
-        let listNameSubmit = document.getElementById("add__list__form--submit");
-        //Lager listen ved å kalle på createList funksjonen
-        listNameSubmit.onclick = createList;
-}
-
 function changeListName(oldName, newName) {
     let storage = JSON.parse(localStorage.getItem("lists"))
     for (let i = 0; i < storage.length; i++) {
@@ -311,14 +303,20 @@ function changeListName(oldName, newName) {
     localStorage.setItem("lists", JSON.stringify(storage));
 }
 
+function addListForm() {
+        //Henter ut submitknappen
+        let listNameSubmit = document.getElementById("add__list__form--submit");
+        //Lager listen ved å kalle på createList funksjonen
+        listNameSubmit.onclick = createList;
+}
 
 function main() {
     //Setter opp default lister
-    if (!JSON.parse(localStorage.getItem("lists"))) {
-        localStorage.setItem("lists", JSON.stringify(
-            ["Må gjøres", "Pågår", "Ferdig"]
-        ))
-    }
+    // if (!JSON.parse(localStorage.getItem("lists"))) {
+    //     localStorage.setItem("lists", JSON.stringify(
+    //         ["Må gjøres", "Pågår", "Ferdig"]
+    //     ))
+    // }
 
     //Denne funksjonen rendrer listene uten å måtte refreshe
     renderLists();
@@ -337,7 +335,7 @@ function main() {
             this.parentElement.querySelector('.list__item__expanded__controls').classList.toggle('active');
             this.classList.toggle('arrow-down');
         })
-}
+    }
 
 }
 
