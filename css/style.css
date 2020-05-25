@@ -16,9 +16,9 @@ body {
     font-weight: 500;
     font-size: 1.6rem;
     line-height: 1.6;
-    background: linear-gradient(360deg, rgba(241,240,245,1) 0%, rgba(224,226,230,1) 100%);
+    background: #C7E6D8;
     height: 100vh; /* Temporary */
-    color: #323233;
+    color: #1b3f26;
 }
 
 input {
@@ -115,6 +115,21 @@ input {
 .dot--green {
    background-color: #60FF70;
 }
+/*input*/
+input{
+    background-color: #EDFFFE;
+    border: 0;
+    font-size: inherit;
+    outline: none;
+    
+}
+.label{
+    background-color: #EDFFFE;
+    border: 0;
+    font-size: inherit;
+    outline: none;
+
+}
 
 /* Navbar  */
 .navbar {
@@ -132,7 +147,9 @@ input {
     padding: 2rem 0rem 3rem 0rem;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    border-bottom: 1px dashed grey;
+    grid-auto-flow: column;
+    border-bottom: 1px dashed #1b3f26;
+    
 }
 
 /* Main */
@@ -147,7 +164,7 @@ main {
 .list {
     margin-top: 5rem;
     display: inline-block;
-    background-color: white;
+    background-color: #EDFFFE;
     box-shadow: 10px 9px 28px -6px rgba(0,0,0,0.37);
     position: relative;
     align-self: start;

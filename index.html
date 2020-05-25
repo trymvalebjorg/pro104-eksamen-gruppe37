@@ -16,29 +16,33 @@
         </div>
 
         <div class="toolbar">
-
-            <div class="toolbar__members">
-                <p id="toolbar__members--output">Medlemmer: </p>
-            </div>
             <!-- ADD MEMBER FORM -->
             <div id="add__member__div">
                 <form id="add__member__form" onsubmit="addMember(event)">
-                    <input type="text" id="add__member__form--text">
-                    <input type="submit" id="add__member__form--submit" value="Add member">
+                    <input class="input"
+                    type="text" 
+                    id="add__member__form--text"
+                    placeholder="Add member"
+                    required
+                    />
+
+                    <button id="add__member__form--submit"  class="list__item__expanded__btn btn btn--grey btn--round btn--add" id="add-list-btn" ></button>
                 </form>
             </div>
-
-        </div>
-        <!-- ASSIGN MEMBER FORM -->
-        <div id="assign__member__div" class="toolbar">
-            <form id="assign__member__form" onsubmit="assignTask(event)">
-                <select id="assign__member__form--task">
-                </select>
-                <select id="assign__member__form--member">
-                </select>
-                <input id="assign__member__form--submit" type="submit" value="Assign task">
-            </form>
-        </div>
+            <div class="toolbar__members">
+                <p id="toolbar__members--output">Medlemmer: </p>
+            </div>
+            <!-- ASSIGN MEMBER FORM -->
+            <div id="assign__member__div">
+                <form id="assign__member__form" onsubmit="assignTask(event)">
+                    <label for="assign__member__form--task">Task:</label>
+                    <select id="assign__member__form--task" class="label"></select>
+                    <label for="assign__member__form--member">Member:</label>
+                    <select id="assign__member__form--member" class="label"></select>
+                   
+                    <button id="assign__member__form--submit" class="list__item__expanded__btn btn btn--grey btn--round btn--add" id="add-list-btn" ></button></button>
+                </form>
+            </div>
     </header>
     <div class="list__item__text--task" id="test"></div>
 
