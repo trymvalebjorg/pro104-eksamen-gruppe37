@@ -87,7 +87,7 @@ function renderMembers() {
 
 function renderOptions() {
     //Henter ut localStorage
-    let memberList = JSON.parse(localStorage.getItem("memberList"));
+    let memberList = JSON.parse(localStorage.getItem("memberList")) || [];
     let taskList = JSON.parse(localStorage.getItem("tasks"));
     //Henter ut select-tagsa
     let assignTaskSelect = document.getElementById("assign__member__form--task");
@@ -108,7 +108,7 @@ function renderOptions() {
 
 //Funksjon for å legge til tasks, tar imot hvilken oppgave og en liste
 function addTask(task, list) {
-    let storage = JSON.parse(localStorage.getItem("tasks")) || []
+    let storage = JSON.parse(localStorage.getItem("tasks")) || [];
     
     //Pusher oppgaven OG hvilken liste
     storage.push({ task: task, list: list })

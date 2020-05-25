@@ -16,16 +16,9 @@
         </div>
 
         <div class="toolbar">
-
             <div class="toolbar__members">
-                <p id="toolbar__members--output">Medlemmer: </p>
-            </div>
-            <!-- ADD MEMBER FORM -->
-            <div id="add__member__div">
-                <form id="add__member__form" onsubmit="addMember(event)">
-                    <input type="text" id="add__member__form--text">
-                    <input type="submit" id="add__member__form--submit" value="Add member">
-                </form>
+                <p id="toolbar__members--output">Medlemmer:</p>
+                <button data-micromodal-trigger="modal-1" class="action-btn btn btn--round btn--primary btn--add"></button>
             </div>
 
         </div>
@@ -54,18 +47,21 @@
       <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
         <header class="modal__header">
           <h2 class="modal__title" id="modal-1-title">
-            En modal
+            Legg til et medlem
           </h2>
           <button class="modal__close" aria-label="Close modal" data-micromodal-close></button>
         </header>
-        <main class="modal__content" id="modal-1-content">
-          <p>
-          </p>
-        </main>
+        <div class="modal__content" id="modal-1-content">
+            <div id="add__member__div">
+                <form id="add__member__form" onsubmit="addMember(event)">
+                    <label for="add__member__form--text">Navn: </label>
+                    <input type="text" id="add__member__form--text">
+            </div>
+        </div>
         <footer class="modal__footer">
-          <button class="modal__btn modal__btn-primary">Continue</button>
-          <button class="modal__btn" data-micromodal-close aria-label="Close this dialog window">Close</button>
+          <button data-micromodal-close id="add__member__form--submit" class="modal__btn modal__btn-primary">Legg til </button>
         </footer>
+        </form>
       </div>
     </div>
   </div>
