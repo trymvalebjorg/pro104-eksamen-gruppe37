@@ -300,7 +300,7 @@ function dragAndDrop(){
 // Drag and drop Task
 function dragAndDropTask(){
     const taskDrag = document.querySelectorAll('.list');
-    const dragContainer = document.querySelectorAll('.main');
+    const dragContainer = document.querySelectorAll('#listOutput');
     
     let draggedItem = null;
     
