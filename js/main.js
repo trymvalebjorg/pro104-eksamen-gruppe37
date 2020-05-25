@@ -47,8 +47,6 @@ function assignTask(event) {
     }
 }
 
-
-
 //Funksjon for å legge til medlemmer
 function addMember(event) {
     event.preventDefault();
@@ -130,6 +128,7 @@ function createList(event) {
 //Funksjon for å legge til tasks, tar imot hvilken oppgave og en liste
 function addTask(task, list) {
     let storage = JSON.parse(localStorage.getItem("tasks")) || []
+    
     //Pusher oppgaven OG hvilken liste
     storage.push({ task: task, list: list })
 
@@ -141,14 +140,15 @@ function addTask(task, list) {
 function renderTasks(outputDiv, listName) {
     let storage = JSON.parse(localStorage.getItem("tasks")) || [];
     let assignedList = JSON.parse(localStorage.getItem("assignedList")) || [];
+    
     for (let task of storage) {
+
         if (task.list == listName) {
+            
             //Hoveddiv
             let newDiv = document.createElement("div");
             newDiv.className = "list__item"
             newDiv.innerHTML += '<figure class="list__item__importance dot dot--yellow"></figure>'
-
-
 
             //Task basert info i div
             let divInfo = document.createElement("div");
@@ -156,25 +156,37 @@ function renderTasks(outputDiv, listName) {
             divInfo.innerHTML += `<p class="list__item__text--date">15. mai // 08:00</p>`;
             divInfo.innerHTML += `<p class="list__item__text--task">${task.task}</p>`;
 
-            let assignedDiv = document.createElement("div");
-            assignedDiv.className = "list__item__text";
-            assignedDiv.innerHTML += `<p class="list__item__text--task">Assigned to: </p>`;
+            let listItemExpandBtn = document.createElement("div");
+            listItemExpandBtn.className = "list__item__expand";
+            listItemExpandBtn.innerHTML = '<img src="img/icons/triangle.svg" alt="read more" class="arrow arrow--grey">';
+
+            let listItemExanded = document.createElement("div");
+            listItemExanded.className = "list__item__expanded";
+
+            let listItemMembers = document.createElement("div");
+            listItemMembers.className = "list__item__expanded__members";
+            listItemMembers.innerHTML += 'Assigned to: '
+
+            let listItemExpandedControls = document.createElement("div");
+            listItemExpandedControls.className = ""
 
 
             //Sjekker om assignlisten har samme task verdi som tasks, og hvis dette er tilfelle skriver den ut hvilket teammedlem som er tildelt oppgaven.
             for (let i = 0; i < assignedList.length; i++) {
                 if (assignedList[i].taskVal == task.task) {
 
-                    assignedDiv.innerHTML += `${assignedList[i].memVal}`;
+                    listItemMembers.innerHTML += `${assignedList[i].memVal}`;
 
                     if(i < assignedList.length - 1){
-                        assignedDiv.innerHTML += `, `;
+                        listItemMembers.innerHTML += `, `;
                     }
                 }
             }
 
-            divInfo.appendChild(assignedDiv);
-            newDiv.appendChild(divInfo)
+            newDiv.appendChild(divInfo);
+            newDiv.appendChild(listItemExpandBtn);
+            newDiv.appendChild(listItemExanded);
+            listItemExanded.appendChild(listItemMembers);
 
 
             //Drag and drop!
@@ -202,6 +214,7 @@ function renderTasks(outputDiv, listName) {
 
             outputDiv.appendChild(newDiv);
         }
+
     }
 }
 
@@ -210,6 +223,7 @@ function renderLists() {
     let listStorage = JSON.parse(localStorage.getItem("lists"));
     let output = document.getElementById("listOutput");
     output.innerHTML = "";
+    
 
     //For hver liste i localstorage, lag nye lister
     for (let list of listStorage) {
@@ -222,22 +236,29 @@ function renderLists() {
         listHeader.innerHTML += '<img src="img/icons/album.svg" alt="an icon" class="icon"></img>'
         listHeader.innerHTML += `<h3>${list}</h3>`;
         newDiv.appendChild(listHeader);
-
+        
+        let listBody = document.createElement('div');
+        listBody.className = 'list__item--empty';
+        listBody.innerHTML = '<p>Trykk på pluss-tegnet for å legge til en oppgave</p>';
+        newDiv.appendChild(listBody);
 
         //Form for input av ny task, har display="none" som default.
         let inputFormDiv = document.createElement("div");
         inputFormDiv.className = "task__input__form";
         let form = document.createElement("form");
+        form.className = "list__item--form";
         let taskInput = document.createElement("input")
         taskInput.type = "text";
+        taskInput.placeholder = "Legg til en oppgave";
         form.appendChild(taskInput);
-        let addTaskButton = document.createElement("input");
+        let addTaskButton = document.createElement("button");
         addTaskButton.type = "submit";
-        addTaskButton.value = "Add task";
+        addTaskButton.className = "action-btn btn btn--round btn--add"
+        
         //Her kjører vi addTask funksjonen med oppgave og liste som input
         addTaskButton.onclick = function (event) {
             event.preventDefault();
-            addTask(taskInput.value, list)
+            addTask(taskInput.value, list);
         }
         form.appendChild(addTaskButton)
         inputFormDiv.appendChild(form)
@@ -246,17 +267,38 @@ function renderLists() {
         //Knapp for å vise input
         let addTaskButton2 = document.createElement("button");
         addTaskButton2.onclick = function () {
-            showTaskForm(inputFormDiv)
+            showTaskForm(inputFormDiv);
+
         }
         addTaskButton2.className = "list__action-btn btn btn--round btn--add"
         newDiv.appendChild(addTaskButton2);
 
-        output.appendChild(newDiv)
+        output.appendChild(newDiv);
 
         //Input av alle tasks som ligger tilknyttet til denne.
         renderTasks(newDiv, list);
     }
 
+    let addListDiv = document.createElement("div");
+    addListDiv.className = 'list';
+    addListDiv.innerHTML = `
+        <form id="add__list__form" onsubmit="saveList(); return false;" class="list__item--add">
+            <input id="add__list__form--text" type="text" placeholder="Legg til en ny liste">
+            <button id="add__list__form--submit" class="list__action-btn btn btn--round btn--add" type="submit"></button>
+        </form>`;
+
+    output.appendChild(addListDiv);
+
+    addListForm();
+
+}
+
+function addListForm() {
+
+        //Henter ut submitknappen
+        let listNameSubmit = document.getElementById("add__list__form--submit");
+        //Lager listen ved å kalle på createList funksjonen
+        listNameSubmit.onclick = createList;
 }
 
 function changeListName(oldName, newName) {
@@ -277,10 +319,7 @@ function main() {
             ["Må gjøres", "Pågår", "Ferdig"]
         ))
     }
-    //Henter ut submitknappen
-    let listNameSubmit = document.getElementById("add__list__form--submit");
-    //Lager listen ved å kalle på createList funksjonen
-    listNameSubmit.onclick = createList;
+
     //Denne funksjonen rendrer listene uten å måtte refreshe
     renderLists();
     //Denne funksjonen rendrer medlemmene uten å måtte refreshe
@@ -289,6 +328,16 @@ function main() {
     renderOptions();
     //Instantiate micromodal.js
     MicroModal.init();
+
+    //Toggle expand
+    let toggler = document.getElementsByClassName("list__item__expand");
+    for (i = 0; i < toggler.length; i++) {
+        toggler[i].addEventListener('click', function () {
+            this.parentElement.querySelector('.list__item__expanded').classList.toggle('active');
+            this.parentElement.querySelector('.list__item__expanded__controls').classList.toggle('active');
+            this.classList.toggle('arrow-down');
+        })
+}
 
 }
 
