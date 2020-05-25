@@ -143,7 +143,7 @@ input{
 /* Toolbar */
 
 .toolbar {
-    margin: 1rem 10% 0 10%;
+    margin: 0rem 10% 0 10%;
     padding: 2rem 0rem 3rem 0rem;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -287,7 +287,7 @@ main {
     background-position: center;
     background-size: 1rem 1rem;
     background-repeat: no-repeat;
-    display: block;
+    /* display: block; */
     margin: 1rem;
     z-index: 10;
 }
