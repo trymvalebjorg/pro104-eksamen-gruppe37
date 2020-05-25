@@ -1,12 +1,4 @@
 // ReadMore for task
-let toggler = document.getElementsByClassName("list__item__expand");
-for( i = 0; i < toggler.length; i++){
-    toggler[i].addEventListener('click', function() {
-        this.parentElement.querySelector('.list__item__expanded').classList.toggle('active');
-        this.parentElement.querySelector('.list__item__expanded__controls').classList.toggle('active');
-        this.classList.toggle('arrow-down');
-    })
-}
 
 let selectedDot;
 let importanceMenuElements;
@@ -14,7 +6,6 @@ let selectedImportance;
 let notImportant;
 let veryImportant;
 let important;
-
 
 function addImportanceMenu(){
     
@@ -30,14 +21,6 @@ function addImportanceMenu(){
                 <p class="list__item__importance__menu__priority very-important">Veldig viktig</p>
             </div>
         `;
-    
-    /*importanceMenuElements = document.querySelector('.list__item__importance__menu');
-    importanceMenuElements.classList.add('active');*/
-    
-    /*importanceMenuElements = this.document.querySelectorAll('.list__item__importance__menu');
-    for (var i = 0; i < importanceMenuElements.length; ++i) {
-        importanceMenuElements[i].classList.add('active');
-    }*/
 
     importanceMenuElements = document.getElementsByClassName('list__item__importance__menu');
     for (var i = 0; i < importanceMenuElements.length; ++i) {
