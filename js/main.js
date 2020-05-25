@@ -107,11 +107,11 @@ function renderOptions() {
 }
 
 //Funksjon for å legge til tasks, tar imot hvilken oppgave og en liste
-function addTask(task, list) {
+function addTask(task, date, list) {
     let storage = JSON.parse(localStorage.getItem("tasks")) || [];
     
     //Pusher oppgaven OG hvilken liste
-    storage.push({ task: task, list: list })
+    storage.push({ task: task, date: date, list: list })
 
     localStorage.setItem("tasks", JSON.stringify(storage))
     //Kaller på render lists funksjonen, som også tar seg av å legge til oppgaver
@@ -251,6 +251,14 @@ function renderLists() {
         taskInput.type = "text";
         taskInput.placeholder = "Legg til en oppgave";
         form.appendChild(taskInput);
+        let dateInput = document.createElement("input");
+        
+        flatpickr(dateInput, {
+            enableTime: true,
+            dateFormat: "Y-m-d H:i",
+        });
+
+        form.appendChild(dateInput);
         let addTaskButton = document.createElement("button");
         addTaskButton.type = "submit";
         addTaskButton.className = "action-btn btn btn--round btn--add"
@@ -258,7 +266,7 @@ function renderLists() {
         //Her kjører vi addTask funksjonen med oppgave og liste som input
         addTaskButton.onclick = function (event) {
             event.preventDefault();
-            addTask(taskInput.value, list);
+            addTask(taskInput.value, dateInput.value, list);
             //hvorfor fyrer ikke denne?
             inputFormDiv.classList.toggle('none');
         }
