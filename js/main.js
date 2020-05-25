@@ -268,7 +268,6 @@ function renderLists() {
         let addTaskButton2 = document.createElement("button");
         addTaskButton2.onclick = function () {
             showTaskForm(inputFormDiv);
-
         }
         addTaskButton2.className = "list__action-btn btn btn--round btn--add"
         newDiv.appendChild(addTaskButton2);
