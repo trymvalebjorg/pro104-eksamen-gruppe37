@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/micromodal.css">
     <link rel="stylesheet" href="css/flatpickr.min.css">
+    <link rel="stylesheet" href="css/importance.css">
 </head>
 
 <body>
@@ -19,20 +20,21 @@
         <div class="toolbar">
             <div class="toolbar__members">
                 <p id="toolbar__members--output">Medlemmer:</p>
-                <button data-micromodal-trigger="modal-1" class="action-btn btn btn--round btn--primary btn--add"></button>
+                <button data-micromodal-trigger="modal-1" class="btn--morph btn--add" id="btn--add-member"></button>
             </div>
 
+            <div id="assign__member__div">
+                <form id="assign__member__form" onsubmit="assignTask(event)">
+                    <select id="assign__member__form--task">
+                    </select>
+                    <select id="assign__member__form--member">
+                    </select>
+                    <button id="assign__member__form--submit" type="submit" class="btn--morph">Tildel oppgave</button>
+                </form>
+            </div>
         </div>
         <!-- ASSIGN MEMBER FORM -->
-        <div id="assign__member__div" class="toolbar">
-            <form id="assign__member__form" onsubmit="assignTask(event)">
-                <select id="assign__member__form--task">
-                </select>
-                <select id="assign__member__form--member">
-                </select>
-                <input id="assign__member__form--submit" type="submit" value="Assign task">
-            </form>
-        </div>
+
     </header>
     <div class="list__item__text--task" id="test"></div>
 
@@ -69,6 +71,7 @@
 
   <script src="js/flatpickr.min.js"></script>
   <script src="js/micromodal.min.js"></script>
+  <script src="js/importance.js"></script>
   <script src="js/main.js"></script>
 
 </body>

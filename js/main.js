@@ -252,17 +252,18 @@ function renderLists() {
         taskInput.placeholder = "Legg til en oppgave";
         form.appendChild(taskInput);
         let dateInput = document.createElement("input");
-        dateInput.type = "radio";
+        dateInput.type = "button";
         
         flatpickr(dateInput, {
             enableTime: true,
             dateFormat: "d-m-Y H:i",
-            time_24hr: true
+            time_24hr: true,
+            minDate: "today"
         });
 
-        dateInput.className = 'btn--calendar'
-
+        dateInput.className = 'btn--calendar btn'
         form.appendChild(dateInput);
+
         let addTaskButton = document.createElement("button");
         addTaskButton.type = "submit";
         addTaskButton.className = "action-btn btn btn--round btn--add"
@@ -277,15 +278,14 @@ function renderLists() {
             inputFormDiv.classList.toggle('none');
         }
 
-        form.appendChild(addTaskButton)
-        inputFormDiv.appendChild(form)
+        form.appendChild(addTaskButton);
+        inputFormDiv.appendChild(form);
         newDiv.appendChild(inputFormDiv);
         
-        //Knapp for å vise input
-        let addTaskButton2 = document.createElement("button");
-        addTaskButton2.onclick = function () {
-            inputFormDiv.classList.toggle('none');
-        }
+        // //Knapp for å vise input
+        // let addTaskButton2 = document.createElement("button");
+        // addTaskButton2.onclick = function () {
+        // }
 
         output.appendChild(newDiv);
 
@@ -298,7 +298,7 @@ function renderLists() {
     addListDiv.innerHTML = `
         <form id="add__list__form" onsubmit="saveList(); return false;" class="list__item--add">
             <input id="add__list__form--text" type="text" placeholder="Legg til en ny liste">
-            <button id="add__list__form--submit" class="list__action-btn btn btn--round btn--add" type="submit"></button>
+            <button id="add__list__form--submit" class="btn--morph--white btn--add" type="submit"></button>
         </form>`;
 
     output.appendChild(addListDiv);
