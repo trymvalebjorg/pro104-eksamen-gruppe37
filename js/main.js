@@ -22,9 +22,6 @@ function assignTask(event) {
     //Definerer en variabel for "riktig oppgave", brukt senere for å linke input fieldet med en oppgave skrevet i en liste.
     let correctTask = document.getElementsByClassName("list__item__text--task");
 
-    //Henter ut list item, der oppgaven er og der medlemmet skal tildeles
-    let listDiv = document.getElementsByClassName("list__item");
-
     //Henter direkte verdier fra input fields
     let taskVal = taskValue.value;
     let memVal = memberValue.value;
@@ -32,22 +29,24 @@ function assignTask(event) {
     let divInfo = document.createElement('div');
     divInfo.className = "list__item__text";
 
+    let listItem = document.getElementsByClassName("list__item__text");
     //Looper gjennom alle oppgavene, og sjekker om teksten inni matcher verdien i input fieldet
     for (let i = 0; i < correctTask.length; i++) {
         //Hvis innholdet i listen er likt som verdien i input fieldet
         if (correctTask[i].innerText == taskVal) {
+            if(listItem[i].innerHTML.includes(memVal)){
+                alert("Already assigned");
+            } else {
+                assignedList.push({ taskVal, memVal });
+                localStorage.setItem("assignedList", JSON.stringify(assignedList));
+            }
             //Hvis det stemmer, push verdiene til localstorage arrayet
-            assignedList.push({ taskVal, memVal });
             //Sett assignedList til localStorage(oversikt over hvem som gjør hva)
             //Hvis den spesifikke div'en i listen har verdien av taskVal, skriv deretter ut diven
-            for (let i2 = 0; i2 < listDiv.length; i2++) {
-                if (listDiv[i2].innerText.includes(taskVal)) {
-                    localStorage.setItem("assignedList", JSON.stringify(assignedList));
-                }
-            }
         }
     }
 }
+
 
 
 //Funksjon for å legge til medlemmer
@@ -149,7 +148,7 @@ function renderTasks(outputDiv, listName) {
             newDiv.className = "list__item"
             newDiv.innerHTML += '<figure class="list__item__importance dot dot--yellow"></figure>'
 
-            
+
 
             //Task basert info i div
             let divInfo = document.createElement("div");
@@ -163,15 +162,20 @@ function renderTasks(outputDiv, listName) {
 
 
             //Sjekker om assignlisten har samme task verdi som tasks, og hvis dette er tilfelle skriver den ut hvilket teammedlem som er tildelt oppgaven.
-            for(let i = 0; i < assignedList.length; i++){
-                if(assignedList[i].taskVal == task.task){ 
-                    assignedDiv.innerHTML += `${assignedList[i].memVal} `;
+            for (let i = 0; i < assignedList.length; i++) {
+                if (assignedList[i].taskVal == task.task) {
+
+                    assignedDiv.innerHTML += `${assignedList[i].memVal}`;
+
+                    if(i < assignedList.length - 1){
+                        assignedDiv.innerHTML += `, `;
+                    }
                 }
             }
-         
+
             divInfo.appendChild(assignedDiv);
             newDiv.appendChild(divInfo)
-            
+
 
             //Drag and drop!
             newDiv.setAttribute("draggable", true);
@@ -183,8 +187,8 @@ function renderTasks(outputDiv, listName) {
                 event.preventDefault();
                 let taskData = event.dataTransfer.getData("taskName")
                 let alleTasks = JSON.parse(localStorage.getItem("tasks"))
-                for(let oppgave of alleTasks){
-                    if(oppgave.task == taskData){
+                for (let oppgave of alleTasks) {
+                    if (oppgave.task == taskData) {
                         oppgave.list = task.list;
                     }
                 }
@@ -195,7 +199,7 @@ function renderTasks(outputDiv, listName) {
             newDiv.addEventListener("dragstart", function (event) {
                 event.dataTransfer.setData("taskName", task.task)
             })
-            
+
             outputDiv.appendChild(newDiv);
         }
     }
@@ -286,7 +290,7 @@ function main() {
     renderMembers();
     //Denne funksjonen rendrer oppgaver og medlemmer i drop-down menyen automatisk
     renderOptions();
-    
+
 }
 
 
