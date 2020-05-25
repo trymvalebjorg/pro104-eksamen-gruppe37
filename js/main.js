@@ -316,7 +316,7 @@ function dragAndDropTask(){
     
         item.addEventListener('dragend', function () {
             setTimeout(function () {
-                draggedItem.style.display = 'block';
+                draggedItem.style.display = 'grid';
                 draggedItem = null;
             }, 0);
         })
