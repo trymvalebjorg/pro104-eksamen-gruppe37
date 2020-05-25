@@ -1,13 +1,13 @@
-//Denne funksjonen sjekker om formen sin display er "display:none",
-function showTaskForm(formDiv) {
-    //Hvis displayet er skjult, så sett verdien av displayet til block
-    if (formDiv.style.display == "") {
-        formDiv.style.display = "block";
-        //Hvis displayet er synlig, gjør det det til display none igjen
-    } else {
-        formDiv.style.display = "";
-    }
-}
+// //Denne funksjonen sjekker om formen sin display er "display:none",
+// function showTaskForm(formDiv) {
+//     //Hvis displayet er skjult, så sett verdien av displayet til block
+//     if (formDiv.style.display == "") {
+//         formDiv.style.display = "block";
+//         //Hvis displayet er synlig, gjør det det til display none igjen
+//     } else {
+//         formDiv.style.display = "";
+//     }
+// }
 
 //Ikke ferdig
 function assignTask(event) {
@@ -67,27 +67,6 @@ function addMember(event) {
     renderMembers();
 }
 
-function renderOptions() {
-    //Henter ut localStorage
-    let memberList = JSON.parse(localStorage.getItem("memberList"));
-    let taskList = JSON.parse(localStorage.getItem("tasks"));
-    //Henter ut select-tagsa
-    let assignTaskSelect = document.getElementById("assign__member__form--task");
-    let assignMemberSelect = document.getElementById("assign__member__form--member");
-
-    for (let i = 0; i < memberList.length; i++) {
-        assignMemberSelect.innerHTML += `
-            <option>${memberList[i].memberName}</option>
-        `;
-    }
-
-    for (let i2 = 0; i2 < taskList.length; i2++) {
-        assignTaskSelect.innerHTML += `
-            <option>${taskList[i2].task}</option>
-        `;
-    }
-}
-
 //Funksjon for å vise medlemmer
 function renderMembers() {
     //Henter ut member list fra localstorage
@@ -106,31 +85,33 @@ function renderMembers() {
     }
 }
 
-//Funksjon for å dynamisk lage nye lister
-function createList(event) {
-    event.preventDefault();
-    //Henter ut lists fra localstorage
-    let listStorage = JSON.parse(localStorage.getItem("lists")) || [];
+function renderOptions() {
+    //Henter ut localStorage
+    let memberList = JSON.parse(localStorage.getItem("memberList")) || [];
+    let taskList = JSON.parse(localStorage.getItem("tasks"));
+    //Henter ut select-tagsa
+    let assignTaskSelect = document.getElementById("assign__member__form--task");
+    let assignMemberSelect = document.getElementById("assign__member__form--member");
 
-    //Input fra bruker
-    let listName = document.getElementById("add__list__form--text");
+    for (let i = 0; i < memberList.length; i++) {
+        assignMemberSelect.innerHTML += `
+            <option>${memberList[i].memberName}</option>
+        `;
+    }
 
-    //Pusher verdien av listenavnet til localstorage
-    listStorage.push(listName.value);
-    //Resetter input-verdien
-    listName.value = "";
-    //Legger det i localStorage
-    localStorage.setItem("lists", JSON.stringify(listStorage));
-    //Kaller på main funksjonen, som har en onsubmit som lagrer listen
-    main();
+    for (let i2 = 0; i2 < taskList.length; i2++) {
+        assignTaskSelect.innerHTML += `
+            <option>${taskList[i2].task}</option>
+        `;
+    }
 }
 
 //Funksjon for å legge til tasks, tar imot hvilken oppgave og en liste
-function addTask(task, list) {
-    let storage = JSON.parse(localStorage.getItem("tasks")) || []
+function addTask(task, date, list) {
+    let storage = JSON.parse(localStorage.getItem("tasks")) || [];
     
     //Pusher oppgaven OG hvilken liste
-    storage.push({ task: task, list: list })
+    storage.push({ task: task, date: date, list: list })
 
     localStorage.setItem("tasks", JSON.stringify(storage))
     //Kaller på render lists funksjonen, som også tar seg av å legge til oppgaver
@@ -153,7 +134,7 @@ function renderTasks(outputDiv, listName) {
             //Task basert info i div
             let divInfo = document.createElement("div");
             divInfo.className = "list__item__text";
-            divInfo.innerHTML += `<p class="list__item__text--date">15. mai // 08:00</p>`;
+            divInfo.innerHTML += `<p class="list__item__text--date">${task.date}</p>`;
             divInfo.innerHTML += `<p class="list__item__text--task">${task.task}</p>`;
 
             let listItemExpandBtn = document.createElement("div");
@@ -216,9 +197,28 @@ function renderTasks(outputDiv, listName) {
     }
 }
 
+//Funksjon for å dynamisk lage nye lister
+function createList(event) {
+    event.preventDefault();
+    //Henter ut lists fra localstorage
+    let listStorage = JSON.parse(localStorage.getItem("lists")) || [];
+
+    //Input fra bruker
+    let listName = document.getElementById("add__list__form--text");
+
+    //Pusher verdien av listenavnet til localstorage
+    listStorage.push(listName.value);
+    //Resetter input-verdien
+    listName.value = "";
+    //Legger det i localStorage
+    localStorage.setItem("lists", JSON.stringify(listStorage));
+    //Kaller på main funksjonen, som har en onsubmit som lagrer listen
+    main();
+}
+
 function renderLists() {
     //Henter ut lists fra localstorage
-    let listStorage = JSON.parse(localStorage.getItem("lists"));
+    let listStorage = JSON.parse(localStorage.getItem("lists")) || [];
     let output = document.getElementById("listOutput");
     output.innerHTML = "";
     
@@ -251,10 +251,10 @@ function renderLists() {
         listHeader.innerHTML += `<h3>${list}</h3>`;
         newDiv.appendChild(listHeader);
         
-        let listBody = document.createElement('div');
-        listBody.className = 'list__item--empty';
-        listBody.innerHTML = '<p>Trykk på pluss-tegnet for å legge til en oppgave</p>';
-        newDiv.appendChild(listBody);
+        // let listBody = document.createElement('div');
+        // listBody.className = 'list__item--empty';
+        // listBody.innerHTML = '<p>Trykk på pluss-tegnet for å legge til en oppgave</p>';
+        // newDiv.appendChild(listBody);
 
         //Form for input av ny task, har display="none" som default.
         let inputFormDiv = document.createElement("div");
@@ -265,26 +265,41 @@ function renderLists() {
         taskInput.type = "text";
         taskInput.placeholder = "Legg til en oppgave";
         form.appendChild(taskInput);
+        let dateInput = document.createElement("input");
+        dateInput.type = "button";
+        
+        flatpickr(dateInput, {
+            enableTime: true,
+            dateFormat: "d-m-Y H:i",
+            time_24hr: true,
+            minDate: "today"
+        });
+
+        dateInput.className = 'btn--calendar btn'
+        form.appendChild(dateInput);
+
         let addTaskButton = document.createElement("button");
         addTaskButton.type = "submit";
         addTaskButton.className = "action-btn btn btn--round btn--add"
+        addTaskButton.style.display = "none";
         
+
         //Her kjører vi addTask funksjonen med oppgave og liste som input
         addTaskButton.onclick = function (event) {
             event.preventDefault();
-            addTask(taskInput.value, list);
+            addTask(taskInput.value, dateInput.value, list);
+            //hvorfor fyrer ikke denne?
+            inputFormDiv.classList.toggle('none');
         }
-        form.appendChild(addTaskButton)
-        inputFormDiv.appendChild(form)
-        newDiv.appendChild(inputFormDiv)
 
-        //Knapp for å vise input
-        let addTaskButton2 = document.createElement("button");
-        addTaskButton2.onclick = function () {
-            showTaskForm(inputFormDiv);
-        }
-        addTaskButton2.className = "list__action-btn btn btn--round btn--add"
-        newDiv.appendChild(addTaskButton2);
+        form.appendChild(addTaskButton);
+        inputFormDiv.appendChild(form);
+        newDiv.appendChild(inputFormDiv);
+        
+        // //Knapp for å vise input
+        // let addTaskButton2 = document.createElement("button");
+        // addTaskButton2.onclick = function () {
+        // }
 
         output.appendChild(newDiv);
 
@@ -297,20 +312,12 @@ function renderLists() {
     addListDiv.innerHTML = `
         <form id="add__list__form" onsubmit="saveList(); return false;" class="list__item--add">
             <input id="add__list__form--text" type="text" placeholder="Legg til en ny liste">
-            <button id="add__list__form--submit" class="list__action-btn btn btn--round btn--add" type="submit"></button>
+            <button id="add__list__form--submit" class="btn--morph--white btn--add" type="submit"></button>
         </form>`;
 
     output.appendChild(addListDiv);
 
     addListForm();
-}
-
-function addListForm() {
-
-        //Henter ut submitknappen
-        let listNameSubmit = document.getElementById("add__list__form--submit");
-        //Lager listen ved å kalle på createList funksjonen
-        listNameSubmit.onclick = createList;
 }
 
 function changeListName(oldName, newName) {
@@ -323,14 +330,20 @@ function changeListName(oldName, newName) {
     localStorage.setItem("lists", JSON.stringify(storage));
 }
 
+function addListForm() {
+        //Henter ut submitknappen
+        let listNameSubmit = document.getElementById("add__list__form--submit");
+        //Lager listen ved å kalle på createList funksjonen
+        listNameSubmit.onclick = createList;
+}
 
 function main() {
     //Setter opp default lister
-    if (!JSON.parse(localStorage.getItem("lists"))) {
-        localStorage.setItem("lists", JSON.stringify(
-            ["Må gjøres", "Pågår", "Ferdig"]
-        ))
-    }
+    // if (!JSON.parse(localStorage.getItem("lists"))) {
+    //     localStorage.setItem("lists", JSON.stringify(
+    //         ["Må gjøres", "Pågår", "Ferdig"]
+    //     ))
+    // }
 
     //Denne funksjonen rendrer listene uten å måtte refreshe
     renderLists();
@@ -349,7 +362,7 @@ function main() {
             this.parentElement.querySelector('.list__item__expanded__controls').classList.toggle('active');
             this.classList.toggle('arrow-down');
         })
-}
+    }
 
 }
 

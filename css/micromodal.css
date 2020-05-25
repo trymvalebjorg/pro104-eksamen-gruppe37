@@ -2,9 +2,6 @@
   Basic Modal Styles
 \**************************/
 
-.modal {
-
-}
   
   .modal__overlay {
     position: fixed;
@@ -20,7 +17,7 @@
   
   .modal__container {
     background-color: #fff;
-    padding: 30px;
+    padding: 5rem;
     max-width: 500px;
     max-height: 100vh;
     border-radius: 4px;
@@ -37,13 +34,14 @@
   .modal__title {
     margin-top: 0;
     margin-bottom: 0;
-    color: #00449e;
-    box-sizing: border-box;
   }
   
   .modal__close {
     background: transparent;
     border: 0;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
   }
   
   .modal__header .modal__close:before { content: "\2715"; }
@@ -52,39 +50,7 @@
     margin-top: 2rem;
     margin-bottom: 2rem;
     color: rgba(0,0,0,.8);
-  }
-  
-  .modal__btn {
-    padding-left: 1rem;
-    padding-right: 1rem;
-    padding-top: .5rem;
-    padding-bottom: .5rem;
-    background-color: #e6e6e6;
-    color: rgba(0,0,0,.8);
-    border-radius: .25rem;
-    border-style: none;
-    border-width: 0;
-    cursor: pointer;
-    -webkit-appearance: button;
-    text-transform: none;
-    overflow: visible;
-    margin: 0;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-    -webkit-transform: translateZ(0);
-    transform: translateZ(0);
-    transition: -webkit-transform .25s ease-out;
-    transition: transform .25s ease-out;
-    transition: transform .25s ease-out,-webkit-transform .25s ease-out;
-  }
-  
-  .modal__btn:focus, .modal__btn:hover {
 
-  }
-  
-  .modal__btn-primary {
-    background-color: #00449e;
-    color: #fff;
   }
   
   
