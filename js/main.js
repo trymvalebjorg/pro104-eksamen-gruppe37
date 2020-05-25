@@ -270,9 +270,6 @@ function changeListName(oldName, newName) {
 }
 
 
-
-
-
 function main() {
     //Setter opp default lister
     if (!JSON.parse(localStorage.getItem("lists"))) {
@@ -292,6 +289,5 @@ function main() {
     renderOptions();
 
 }
-
 
 main();
