@@ -287,6 +287,8 @@ function main() {
     renderMembers();
     //Denne funksjonen rendrer oppgaver og medlemmer i drop-down menyen automatisk
     renderOptions();
+    //Instantiate micromodal.js
+    MicroModal.init();
 
 }
 
