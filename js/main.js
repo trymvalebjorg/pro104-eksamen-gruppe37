@@ -134,7 +134,7 @@ function renderTasks(outputDiv, listName) {
             //Task basert info i div
             let divInfo = document.createElement("div");
             divInfo.className = "list__item__text";
-            divInfo.innerHTML += `<p class="list__item__text--date">15. mai // 08:00</p>`;
+            divInfo.innerHTML += `<p class="list__item__text--date">${task.date}</p>`;
             divInfo.innerHTML += `<p class="list__item__text--task">${task.task}</p>`;
 
             let listItemExpandBtn = document.createElement("div");
@@ -252,16 +252,22 @@ function renderLists() {
         taskInput.placeholder = "Legg til en oppgave";
         form.appendChild(taskInput);
         let dateInput = document.createElement("input");
+        dateInput.type = "radio";
         
         flatpickr(dateInput, {
             enableTime: true,
-            dateFormat: "Y-m-d H:i",
+            dateFormat: "d-m-Y H:i",
+            time_24hr: true
         });
+
+        dateInput.className = 'btn--calendar'
 
         form.appendChild(dateInput);
         let addTaskButton = document.createElement("button");
         addTaskButton.type = "submit";
         addTaskButton.className = "action-btn btn btn--round btn--add"
+        addTaskButton.style.display = "none";
+        
 
         //Her kjører vi addTask funksjonen med oppgave og liste som input
         addTaskButton.onclick = function (event) {

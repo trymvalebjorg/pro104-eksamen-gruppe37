@@ -76,8 +76,17 @@ input {
     background-image: url(../img/icons/confirm--white.svg);
 }
 
-.btn--upload{
+.btn--upload {
     background-image: url(../img/icons/upload--white.svg);
+}
+
+.btn--calendar {
+    height: 4rem;
+    width: 4rem;
+    background-image: url(../img/icons/calendar.svg);
+    background-position: center;
+    background-size: 3rem 3rem;
+    background-repeat: no-repeat;
 }
 
 .action-btn {
