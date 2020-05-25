@@ -29,7 +29,7 @@ function assignTask(event) {
     let divInfo = document.createElement('div');
     divInfo.className = "list__item__text";
 
-    let listItem = document.getElementsByClassName("list__item__text");
+    let listItem = document.getElementsByClassName("list__item");
     //Looper gjennom alle oppgavene, og sjekker om teksten inni matcher verdien i input fieldet
     for (let i = 0; i < correctTask.length; i++) {
         //Hvis innholdet i listen er likt som verdien i input fieldet
@@ -211,10 +211,8 @@ function renderTasks(outputDiv, listName) {
             newDiv.addEventListener("dragstart", function (event) {
                 event.dataTransfer.setData("taskName", task.task)
             })
-
             outputDiv.appendChild(newDiv);
         }
-
     }
 }
 
@@ -229,6 +227,22 @@ function renderLists() {
     for (let list of listStorage) {
         let newDiv = document.createElement("div")
         newDiv.className = "list";
+        newDiv.addEventListener("dragover", function(event){
+            event.preventDefault();
+        })
+        newDiv.addEventListener("drop", function(event){
+            event.preventDefault();
+            
+            let taskData = event.dataTransfer.getData("taskName")
+            let alleTasks = JSON.parse(localStorage.getItem("tasks"));
+            for (let oppgave of alleTasks) {
+                if (oppgave.task == taskData) {
+                    oppgave.list = list;
+                }
+            }
+            localStorage.setItem("tasks", JSON.stringify(alleTasks));
+            renderLists();
+        })
 
         //lager header
         let listHeader = document.createElement("div");
@@ -289,7 +303,6 @@ function renderLists() {
     output.appendChild(addListDiv);
 
     addListForm();
-
 }
 
 function addListForm() {
