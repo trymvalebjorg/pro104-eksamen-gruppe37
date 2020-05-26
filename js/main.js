@@ -191,7 +191,16 @@ function renderTasks(outputDiv, listName) {
             listItemMembers.innerHTML += 'Assigned to: '
 
             let listItemExpandedControls = document.createElement("div");
-            listItemExpandedControls.className = ""
+            listItemExpandedControls.className = "list__item__expanded__controls";
+
+            let listItemEditBtn = document.createElement("button");
+            listItemEditBtn.className = 'list__item__expanded__btn btn btn--grey btn--round btn--edit';
+
+            let listItemUploadBtn = document.createElement("button");
+            listItemUploadBtn.className = 'list__item__expanded__btn btn btn--grey btn--round btn--upload';
+
+            let listItemDeleteBtn = document.createElement("button");
+            listItemDeleteBtn.className = 'list__item__expanded__btn btn btn--red btn--round btn--remove';
 
 
             //Sjekker om assignlisten har samme task verdi som tasks, og hvis dette er tilfelle skriver den ut hvilket teammedlem som er tildelt oppgaven.
@@ -209,6 +218,10 @@ function renderTasks(outputDiv, listName) {
             newDiv.appendChild(importance);
             newDiv.appendChild(divInfo);
             newDiv.appendChild(listItemExpandBtn);
+            newDiv.appendChild(listItemExpandedControls);
+            listItemExpandedControls.appendChild(listItemEditBtn);
+            listItemExpandedControls.appendChild(listItemUploadBtn);
+            listItemExpandedControls.appendChild(listItemDeleteBtn);
             newDiv.appendChild(listItemExanded);
             listItemExanded.appendChild(listItemMembers);
 
