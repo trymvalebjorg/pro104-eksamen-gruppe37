@@ -2,7 +2,6 @@
   Basic Modal Styles
 \**************************/
 
-  
   .modal__overlay {
     position: fixed;
     top: 0;
@@ -17,7 +16,7 @@
   
   .modal__container {
     background-color: #fff;
-    padding: 5rem;
+    padding: 1rem 4rem 3rem 2rem;
     max-width: 500px;
     max-height: 100vh;
     border-radius: 4px;
@@ -50,13 +49,11 @@
     margin-top: 2rem;
     margin-bottom: 2rem;
     color: rgba(0,0,0,.8);
-
   }
-  
-  
+
   
   /**************************\
-    Demo Animation Style
+    Animation Style
   \**************************/
   @keyframes mmfadeIn {
       from { opacity: 0; }

@@ -133,6 +133,7 @@ function addTask(task, date, importance, list) {
     localStorage.setItem("tasks", JSON.stringify(storage))
     //Kaller på render lists funksjonen, som også tar seg av å legge til oppgaver
     renderLists();
+    location.reload();
 }
 
 function changeTaskImportance(taskName, importance) {
@@ -161,61 +162,26 @@ function renderTasks(outputDiv, listName) {
             importance.className = `list__item__importance__menu__dot dot ${task.importance}`;
 
             importance.onclick = function(){
-                let userAnswer = prompt("pick a color, either red, green or yellow");
 
-                let newColor = userAnswer.toUpperCase();
-                
-                switch(newColor){
-                    case "RED":
-                        let dotRed = "dot--red";
-                        importance.className = `list__item__importance__menu__dot dot ${task.importance}`;
-                        changeTaskImportance(task.task, dotRed);
-                        location.reload();
-                        break;
+                MicroModal.show('modal-importance');
+                let greenLi = document.getElementById('importance--green');
+                let yellowLi = document.getElementById('importance--yellow');
+                let redLi = document.getElementById('importance--red');
 
-                    case "YELLOW":
-                        let dotYellow = "dot--yellow";
-                        importance.className = `list__item__importance__menu__dot dot ${task.importance}`;
-                        changeTaskImportance(task.task, dotYellow);
-                        location.reload();
-                        break;
-                        
-                    case "GREEN":
-                        let dotGreen = "dot--green";
-                        importance.className = `list__item__importance__menu__dot dot ${task.importance}`;
-                        changeTaskImportance(task.task, dotGreen);
-                        location.reload();
-                        break;
-                } 
-            }
+                greenLi.addEventListener('click', function() {
+                    changeTaskImportance(task.task, 'dot--green');
+                    location.reload();
+                })
 
-            importance.onclick = function(){
-                let userAnswer = prompt("pick a color, either red, green or yellow");
+                yellowLi.addEventListener('click', function() {
+                    changeTaskImportance(task.task, 'dot--yellow');
+                    location.reload();
+                })
 
-                let newColor = userAnswer.toUpperCase();
-                
-                switch(newColor){
-                    case "RED":
-                        let dotRed = "dot--red";
-                        importance.className = `list__item__importance__menu__dot dot ${task.importance}`;
-                        changeTaskImportance(task.task, dotRed);
-                        location.reload();
-                        break;
-
-                    case "YELLOW":
-                        let dotYellow = "dot--yellow";
-                        importance.className = `list__item__importance__menu__dot dot ${task.importance}`;
-                        changeTaskImportance(task.task, dotYellow);
-                        location.reload();
-                        break;
-                        
-                    case "GREEN":
-                        let dotGreen = "dot--green";
-                        importance.className = `list__item__importance__menu__dot dot ${task.importance}`;
-                        changeTaskImportance(task.task, dotGreen);
-                        location.reload();
-                        break;
-                } 
+                redLi.addEventListener('click', function() {
+                    changeTaskImportance(task.task, 'dot--red');
+                    location.reload();
+                })
             }
 
             //Task basert info i div
@@ -239,10 +205,7 @@ function renderTasks(outputDiv, listName) {
             listItemExpandedControls.className = "list__item__expanded__controls";
 
             let listItemEditBtn = document.createElement("button");
-            listItemEditBtn.className = 'list__item__expanded__btn btn btn--grey btn--round btn--edit';
-
-            let listItemUploadBtn = document.createElement("button");
-            listItemUploadBtn.className = 'list__item__expanded__btn btn btn--grey btn--round btn--upload';
+            listItemEditBtn.className = 'list__item__expanded__btn btn btn--grey btn--round btn--edit'; 
 
             //Her må vi delete
             let listItemDeleteBtn = document.createElement("button");
@@ -281,7 +244,6 @@ function renderTasks(outputDiv, listName) {
             newDiv.appendChild(listItemExpandBtn);
             newDiv.appendChild(listItemExpandedControls);
             listItemExpandedControls.appendChild(listItemEditBtn);
-            listItemExpandedControls.appendChild(listItemUploadBtn);
             listItemExpandedControls.appendChild(listItemDeleteBtn);
             newDiv.appendChild(listItemExanded);
             listItemExanded.appendChild(listItemMembers);
