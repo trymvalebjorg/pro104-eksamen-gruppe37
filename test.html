@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eksamen PRO104, Gruppe 37</title>
+    <link rel="stylesheet" href="css/test.css">
+    <link rel="stylesheet" href="css/micromodal.css">
+    <link rel="stylesheet" href="css/flatpickr.min.css">
+</head>
+
+<body>
+    <header>
+        <div class="navbar">
+            <h3 class="navbar__logo">Eksamen</h3>
+        </div>
+
+        <div class="toolbar">
+            <div class="toolbar__members">
+                <p id="toolbar__members--output">Medlemmer:</p>
+                <button data-micromodal-trigger="modal-1" class="action-btn btn btn--round btn--primary btn--add"></button>
+            </div>
+
+        </div>
+        <!-- ASSIGN MEMBER FORM -->
+        <div id="assign__member__div" class="toolbar">
+            <form id="assign__member__form" onsubmit="assignTask(event)">
+                <select id="assign__member__form--task">
+                </select>
+                <select id="assign__member__form--member">
+                </select>
+                <input id="assign__member__form--submit" type="submit" value="Assign task">
+            </form>
+        </div>
+    </header>
+    <div class="list__item__text--task" id="test"></div>
+
+    <main id="listOutput">
+        
+    </main>
+    <footer>
+    </footer>
+
+
+  <div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
+    <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+      <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+        <header class="modal__header">
+          <h2 class="modal__title" id="modal-1-title">
+            Legg til et medlem
+          </h2>
+          <button class="modal__close" aria-label="Close modal" data-micromodal-close></button>
+        </header>
+        <div class="modal__content" id="modal-1-content">
+            <div id="add__member__div">
+                <form id="add__member__form" onsubmit="addMember(event)">
+                    <label for="add__member__form--text">Navn: </label>
+                    <input type="text" id="add__member__form--text">
+            </div>
+        </div>
+        <footer class="modal__footer">
+          <button data-micromodal-close id="add__member__form--submit" class="modal__btn modal__btn-primary">Legg til </button>
+        </footer>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/flatpickr.min.js"></script>
+  <script src="js/micromodal.min.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/test.js"></script>
+
+</body>
+
+</html>
