@@ -261,10 +261,7 @@ function renderLists() {
         inputFormDiv.className = "task__input__form";
         let form = document.createElement("form");
         form.className = "list__item--form";
-        let taskInput = document.createElement("input")
-        taskInput.type = "text";
-        taskInput.placeholder = "Legg til en oppgave";
-        form.appendChild(taskInput);
+
         let dateInput = document.createElement("input");
         dateInput.type = "button";
         
@@ -278,10 +275,16 @@ function renderLists() {
         dateInput.className = 'btn--calendar btn'
         form.appendChild(dateInput);
 
+        let taskInput = document.createElement("input")
+        taskInput.type = "text";
+        taskInput.placeholder = "Legg til en oppgave";
+        form.appendChild(taskInput);
+
+
         let addTaskButton = document.createElement("button");
         addTaskButton.type = "submit";
-        addTaskButton.className = "action-btn btn btn--round btn--add"
-        addTaskButton.style.display = "none";
+        addTaskButton.className = "btn--morph--white btn--add";
+        addTaskButton.id = "btn--add-task"; 
         
 
         //Her kjører vi addTask funksjonen med oppgave og liste som input
