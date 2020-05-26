@@ -124,7 +124,7 @@ select {
     padding-top: 1rem;
 }
 
-#btn--add-task {
+.btn--add-task {
     margin-left: 1rem;
     height: 4rem;
     width: 4rem;
@@ -184,7 +184,7 @@ select {
     height: 2rem;
     width: 2rem;
     border-radius: 50%;
-    display: inline-block;
+    place-self: center;
 }
 
 .dot--red {
@@ -303,10 +303,10 @@ main {
 /* List items */
 .list__item {
     display: grid;
-    grid-template-columns: 1fr 3fr 1fr;
+    grid-template-columns: 1fr 5fr 1fr;
     border-bottom: 1px solid rgba(112,112,112,.2);
-    padding: 2rem;
-    place-items: center;
+    padding: 1.5rem;
+    align-items: center;
 }
 
 .list__item--form {
@@ -406,6 +406,10 @@ main {
 .list__item__expanded__images img {
     width: 5rem;
     height: 5rem;
+}
+
+.list__item__expanded__members__assigned {
+    font-size: 1.2rem;
 }
 
 .active {
