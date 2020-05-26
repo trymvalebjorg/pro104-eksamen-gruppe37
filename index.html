@@ -19,8 +19,9 @@
 
         <div class="toolbar">
             <div class="toolbar__members">
-                <p id="toolbar__members--output">Medlemmer:</p>
-                <button data-micromodal-trigger="modal-1" class="btn--morph btn--add" id="btn--add-member"></button>
+                <div class="toolbar__members__output">
+                  <button data-micromodal-trigger="modal-1" class="btn--morph btn--add" id="btn--add-member"></button>
+                </div>
             </div>
 
             <div id="assign__member__div">
@@ -57,9 +58,14 @@
         <div class="modal__content" id="modal-1-content">
             <div id="add__member__div">
                 <form id="add__member__form" onsubmit="addMember(event)">
-                    <label for="add__member__form--text">Navn: </label>
+                    <label for="add__member__form--text">Navn:</label>
                     <input type="text" id="add__member__form--text">
+                    <label for="image">Last opp bilde:</label>
+                    <input type="file" name="image" onchange="handleFileSelect(event)">
             </div>
+
+            <div id="image-preview"></div>
+
         </div>
         <footer class="modal__footer">
           <button data-micromodal-close id="add__member__form--submit" class="modal__btn modal__btn-primary">Legg til </button>

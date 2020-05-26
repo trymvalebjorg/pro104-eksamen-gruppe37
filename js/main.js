@@ -47,6 +47,18 @@ function assignTask(event) {
     }
 }
 
+function handleFileSelect(event) {
+    function handleFileLoad(event) {
+        const previewDiv = document.getElementById('image-preview');
+        previewDiv.innerHTML = `<img src="${event.target.result}"/>`;
+        document.querySelector('[name="image"]').dataset.image = event.target.result;
+    }
+
+    const reader = new FileReader();
+    reader.onload = handleFileLoad;
+    reader.readAsDataURL(event.target.files[0])
+}
+
 //Funksjon for å legge til medlemmer
 function addMember(event) {
     event.preventDefault();
@@ -54,17 +66,21 @@ function addMember(event) {
     let memberInput = document.getElementById("add__member__form--text");
     //Memberinputet sin verdi (navnet)
     let memberName = memberInput.value;
+
+    let profilePic = document.querySelector('[name="image"]').dataset.image;
     //Lager en member liste i local storage
     let memberList = JSON.parse(localStorage.getItem("memberList")) || [];
 
     //Pusher input-verdien (altså medlemnavn) til localstorage
-    memberList.push({ memberName });
+    memberList.push({ memberName, profilePic});
     //Resetter valuen
     memberInput.value = "";
     //Setter det i memberList inne i localStorage
     localStorage.setItem("memberList", JSON.stringify(memberList));
     //Kaller på renderMembers funksjonen for å få printet ut navnet
     renderMembers();
+    location.reload();
+
 }
 
 //Funksjon for å vise medlemmer
@@ -72,16 +88,14 @@ function renderMembers() {
     //Henter ut member list fra localstorage
     let memberList = JSON.parse(localStorage.getItem("memberList")) || [];
     //Henter outputdiv for å skrive ut verdien som blir hentet fra localstorage
-    let toolbarMemberOutput = document.getElementById("toolbar__members--output");
-    toolbarMemberOutput.innerHTML = "Medlemmer: ";
+    let toolbarMemberOutput = document.querySelector('.toolbar__members__output');
     //Looper gjennom å skriver ut alle member-navn som er lagret i localstorage
     for (let i = 0; i < memberList.length; i++) {
         //Printer det ut
-        toolbarMemberOutput.innerHTML += `${memberList[i].memberName}`;
-        //Hvis telleren vår er en mindre enn lengden på hele arrayet, legg til et komma for å separere navnene
-        if (i < memberList.length - 1) {
-            toolbarMemberOutput.innerHTML += ", "
-        }
+        toolbarMemberOutput.innerHTML += `<div class="toolbar__members__output__members">
+                                            <h3 class="member-name">${memberList[i].memberName.charAt(0)}</h3>
+                                            <img class="profile-pic" src="${memberList[i].profilePic}" />
+                                          </div>`;
     }
 }
 
@@ -143,6 +157,34 @@ function renderTasks(outputDiv, listName) {
             let importance = document.createElement("figure");
             importance.className = `list__item__importance__menu__dot dot ${task.importance}`;
 
+            importance.onclick = function(){
+                let userAnswer = prompt("pick a color, either red, green or yellow");
+
+                let newColor = userAnswer.toUpperCase();
+                
+                switch(newColor){
+                    case "RED":
+                        let dotRed = "dot--red";
+                        importance.className = `list__item__importance__menu__dot dot ${task.importance}`;
+                        changeTaskImportance(task.task, dotRed);
+                        location.reload();
+                        break;
+
+                    case "YELLOW":
+                        let dotYellow = "dot--yellow";
+                        importance.className = `list__item__importance__menu__dot dot ${task.importance}`;
+                        changeTaskImportance(task.task, dotYellow);
+                        location.reload();
+                        break;
+                        
+                    case "GREEN":
+                        let dotGreen = "dot--green";
+                        importance.className = `list__item__importance__menu__dot dot ${task.importance}`;
+                        changeTaskImportance(task.task, dotGreen);
+                        location.reload();
+                        break;
+                } 
+            }
 
             //Task basert info i div
             let divInfo = document.createElement("div");

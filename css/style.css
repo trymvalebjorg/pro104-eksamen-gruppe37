@@ -37,7 +37,6 @@ select {
     background: 96% / 15% no-repeat #e0e5ec;
   }
   
-
 /* Figures/icons */
 .icon {
     width: 2rem;
@@ -117,9 +116,6 @@ select {
     height: 4rem;
     width: 4rem;
 }
-
-
-
 
 .btn--red {
     background-color: #DB5656;
@@ -206,12 +202,39 @@ select {
     padding: 2rem 0rem 3rem 0rem;
     display: grid;
     grid-template-columns: repeat(2, auto);
-    place-items: center;
 }
 
-.toolbar__members button, #toolbar__members--output {
+.toolbar__members {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    justify-items: start;
+}
+
+.toolbar__members button {
     display: inline-block;
     vertical-align: middle;
+}
+
+.toolbar__members__output {
+
+}
+
+.toolbar__members__output img {
+    vertical-align: middle;
+}
+
+.toolbar__members__output__members {
+    display: inline-block;
+    position: relative;
+    text-align: center;
+    color: white;
+}
+
+.toolbar__members__output__members h3 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 /* Main */
@@ -381,7 +404,11 @@ main {
 
 .profile-pic {
     border-radius: 50%;
-    height: 3rem;
+    height: 4rem;
+    width: 4rem;
+    display: inline-block;
+    box-shadow:  1rem 1rem 3rem #8f9397, 
+    -1rem -1rem 3rem #ffffff;
 }
 
 .btn--add-member {
