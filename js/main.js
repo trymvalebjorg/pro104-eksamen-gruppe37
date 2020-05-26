@@ -314,6 +314,8 @@ function renderLists() {
     for (let list of listStorage) {
         let newDiv = document.createElement("div")
         newDiv.className = "list";
+
+        
         newDiv.addEventListener("dragover", function(event){
             event.preventDefault();
         })
@@ -333,9 +335,34 @@ function renderLists() {
 
         //lager header
         let listHeader = document.createElement("div");
+
+        
         listHeader.className = "list__header";
         listHeader.innerHTML += '<img src="img/icons/album.svg" alt="an icon" class="icon"></img>'
         listHeader.innerHTML += `<h3>${list}</h3>`;
+        //delete btn
+        let deleteListBtn = document.createElement("button");
+        deleteListBtn.className = "list__item__expanded__btn btn btn--red btn--round btn--remove";
+
+        deleteListBtn.onclick = function(event){
+            event.preventDefault();
+                console.log("clicked");
+                
+                //Her må checkbox-kode legges til
+
+                let listStorage = JSON.parse(localStorage.getItem("lists"));
+                for(let i = 0; i < listStorage.length; i++){
+                    if(listStorage[i]== list){
+                        listStorage.splice(i, 1);
+                    }
+                }
+                
+                localStorage.setItem("lists", JSON.stringify(listStorage));
+                location.reload();
+
+        }
+
+        listHeader.append(deleteListBtn);
         newDiv.appendChild(listHeader);
         
         // let listBody = document.createElement('div');
@@ -374,6 +401,7 @@ function renderLists() {
         addTaskButton.type = "submit";
         addTaskButton.className = "btn--morph--white btn--add btn--add-task";        
 
+
         //Her kjører vi addTask funksjonen med oppgave og liste som input
         addTaskButton.onclick = function (event) {
             event.preventDefault();
@@ -381,7 +409,6 @@ function renderLists() {
             //hvorfor fyrer ikke denne?
             inputFormDiv.classList.toggle('none');
         }
-
         form.appendChild(addTaskButton);
         inputFormDiv.appendChild(form);
         newDiv.appendChild(inputFormDiv);
