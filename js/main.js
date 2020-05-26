@@ -34,11 +34,14 @@ function assignTask(event) {
     for (let i = 0; i < correctTask.length; i++) {
         //Hvis innholdet i listen er likt som verdien i input fieldet
         if (correctTask[i].innerText == taskVal) {
-            if(listItem[i].innerHTML.includes(memVal)){
-                alert("Already assigned");
-            } else {
-                assignedList.push({ taskVal, memVal });
-                localStorage.setItem("assignedList", JSON.stringify(assignedList));
+            for(let j = 0; j < listItem.length; j++){
+                if(listItem[j].innerHTML.includes(memVal)){
+                    alert("Already assigned");
+                } else {
+                    assignedList.push({ taskVal, memVal });
+                    localStorage.setItem("assignedList", JSON.stringify(assignedList));
+                    location.reload();
+                }
             }
             //Hvis det stemmer, push verdiene til localstorage arrayet
             //Sett assignedList til localStorage(oversikt over hvem som gjør hva)
@@ -206,6 +209,9 @@ function renderTasks(outputDiv, listName) {
             listItemDeleteBtn.onclick = function(event){
                 event.preventDefault();
                 console.log("clicked");
+                
+                //Her må checkbox-kode legges til
+
                 let taskStorage = JSON.parse(localStorage.getItem("tasks"));
                 for(let i = 0; i < taskStorage.length; i++){
                     if(taskStorage[i].task == task.task){
