@@ -51,6 +51,20 @@
     color: rgba(0,0,0,.8);
   }
 
+  .modal__btn {
+    border-radius: 60px;
+    background: #fffff;
+    box-shadow:  1rem 1rem 3rem #8f9397, 
+                 -1rem -1rem 3rem #ffffff;
+    border: none;
+
+    background-position: center;
+    background-size: 1rem 1rem;
+    background-repeat: no-repeat;
+    width: 6rem;
+    height: 3rem;
+  }
+
   
   /**************************\
     Animation Style

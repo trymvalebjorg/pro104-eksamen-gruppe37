@@ -1,15 +1,4 @@
-// //Denne funksjonen sjekker om formen sin display er "display:none",
-// function showTaskForm(formDiv) {
-//     //Hvis displayet er skjult, så sett verdien av displayet til block
-//     if (formDiv.style.display == "") {
-//         formDiv.style.display = "block";
-//         //Hvis displayet er synlig, gjør det det til display none igjen
-//     } else {
-//         formDiv.style.display = "";
-//     }
-// }
-
-//Ikke ferdig
+//Assigns task to localstorage
 function assignTask(event) {
     event.preventDefault();
 
@@ -50,6 +39,7 @@ function assignTask(event) {
     }
 }
 
+//Handle file select
 function handleFileSelect(event) {
     function handleFileLoad(event) {
         const previewDiv = document.getElementById('image-preview');
@@ -136,7 +126,7 @@ function addTask(task, date, importance, list) {
     location.reload();
 }
 
-
+//Change list name
 function changeListName(oldName, newName) {
     let storage = JSON.parse(localStorage.getItem("lists"))
     for (let i = 0; i < storage.length; i++) {
@@ -147,6 +137,7 @@ function changeListName(oldName, newName) {
     localStorage.setItem("lists", JSON.stringify(storage));
 }
 
+//Change taskimportance
 function changeTaskImportance(taskName, importance) {
     let storage = JSON.parse(localStorage.getItem("tasks"))
     for (let i = 0; i < storage.length; i++) {
@@ -157,6 +148,8 @@ function changeTaskImportance(taskName, importance) {
     localStorage.setItem("tasks", JSON.stringify(storage));
 }
 
+
+//Render tasks
 function renderTasks(outputDiv, listName) {
     let storage = JSON.parse(localStorage.getItem("tasks")) || [];
     let assignedList = JSON.parse(localStorage.getItem("assignedList")) || [];
@@ -220,7 +213,7 @@ function renderTasks(outputDiv, listName) {
 
             //Her må vi delete
             let listItemDeleteBtn = document.createElement("button");
-            listItemDeleteBtn.className = 'list__item__expanded__btn btn btn--red btn--round btn--remove';
+            listItemDeleteBtn.className = 'list__item__expanded__btn btn btn--morph--grey btn--round btn--delete';
 
             listItemDeleteBtn.onclick = function(event){
                 event.preventDefault();
@@ -303,6 +296,7 @@ function createList(event) {
     main();
 }
 
+//Render lists
 function renderLists() {
     //Henter ut lists fra localstorage
     let listStorage = JSON.parse(localStorage.getItem("lists")) || [];
@@ -342,7 +336,8 @@ function renderLists() {
         listHeader.innerHTML += `<h3>${list}</h3>`;
         //delete btn
         let deleteListBtn = document.createElement("button");
-        deleteListBtn.className = "list__item__expanded__btn btn btn--red btn--round btn--remove";
+        deleteListBtn.className = "btn--morph btn--remove--dark";
+        deleteListBtn.id = "btn--remove-list";
 
         deleteListBtn.onclick = function(event){
             event.preventDefault();
@@ -365,11 +360,6 @@ function renderLists() {
         listHeader.append(deleteListBtn);
         newDiv.appendChild(listHeader);
         
-        // let listBody = document.createElement('div');
-        // listBody.className = 'list__item--empty';
-        // listBody.innerHTML = '<p>Trykk på pluss-tegnet for å legge til en oppgave</p>';
-        // newDiv.appendChild(listBody);
-
         //Form for input av ny task, har display="none" som default.
         let inputFormDiv = document.createElement("div");
         inputFormDiv.className = "task__input__form";
@@ -412,11 +402,6 @@ function renderLists() {
         form.appendChild(addTaskButton);
         inputFormDiv.appendChild(form);
         newDiv.appendChild(inputFormDiv);
-        
-        // //Knapp for å vise input
-        // let addTaskButton2 = document.createElement("button");
-        // addTaskButton2.onclick = function () {
-        // }
 
         output.appendChild(newDiv);
 
