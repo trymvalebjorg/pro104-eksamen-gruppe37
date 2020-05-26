@@ -125,7 +125,6 @@ function changeTaskImportance(taskName, importance) {
             storage[i].importance = importance;
         }
     }
-
     localStorage.setItem("tasks", JSON.stringify(storage));
 }
 
@@ -140,9 +139,39 @@ function renderTasks(outputDiv, listName) {
             //Hoveddiv
             let newDiv = document.createElement("div");
             newDiv.className = "list__item"
+
             let importance = document.createElement("figure");
             importance.className = `list__item__importance__menu__dot dot ${task.importance}`;
 
+
+            importance.onclick = function(){
+                let userAnswer = prompt("pick a color, either red, green or yellow");
+
+                let newColor = userAnswer.toUpperCase();
+                
+                switch(newColor){
+                    case "RED":
+                        let dotRed = "dot--red";
+                        importance.className = `list__item__importance__menu__dot dot ${task.importance}`;
+                        changeTaskImportance(task.task, dotRed);
+                        location.reload();
+                        break;
+
+                    case "YELLOW":
+                        let dotYellow = "dot--yellow";
+                        importance.className = `list__item__importance__menu__dot dot ${task.importance}`;
+                        changeTaskImportance(task.task, dotYellow);
+                        location.reload();
+                        break;
+                        
+                    case "GREEN":
+                        let dotGreen = "dot--green";
+                        importance.className = `list__item__importance__menu__dot dot ${task.importance}`;
+                        changeTaskImportance(task.task, dotGreen);
+                        location.reload();
+                        break;
+                } 
+            }
 
             //Task basert info i div
             let divInfo = document.createElement("div");
@@ -294,6 +323,7 @@ function renderLists() {
         taskInput.placeholder = "Legg til en oppgave";
         form.appendChild(taskInput);
 
+        //fargen
         let importance = "dot--green";
 
         let addTaskButton = document.createElement("button");
@@ -381,7 +411,6 @@ function main() {
             this.classList.toggle('arrow-down');
         })
     }
-
 }
 
 main();
