@@ -107,15 +107,26 @@ function renderOptions() {
 }
 
 //Funksjon for å legge til tasks, tar imot hvilken oppgave og en liste
-function addTask(task, date, list) {
+function addTask(task, date, importance, list) {
     let storage = JSON.parse(localStorage.getItem("tasks")) || [];
     
     //Pusher oppgaven OG hvilken liste
-    storage.push({ task: task, date: date, list: list })
+    storage.push({ task: task, date: date, importance: importance, list: list })
 
     localStorage.setItem("tasks", JSON.stringify(storage))
     //Kaller på render lists funksjonen, som også tar seg av å legge til oppgaver
     renderLists();
+}
+
+function changeTaskImportance(taskName, importance) {
+    let storage = JSON.parse(localStorage.getItem("tasks"))
+    for (let i = 0; i < storage.length; i++) {
+        if (storage[i].task == taskName) {
+            storage[i].importance = importance;
+        }
+    }
+
+    localStorage.setItem("tasks", JSON.stringify(storage));
 }
 
 function renderTasks(outputDiv, listName) {
@@ -129,7 +140,9 @@ function renderTasks(outputDiv, listName) {
             //Hoveddiv
             let newDiv = document.createElement("div");
             newDiv.className = "list__item"
-            newDiv.innerHTML += '<figure class="list__item__importance dot dot--yellow"></figure>'
+            let importance = document.createElement("figure");
+            importance.className = `list__item__importance__menu__dot dot ${task.importance}`;
+
 
             //Task basert info i div
             let divInfo = document.createElement("div");
@@ -164,6 +177,7 @@ function renderTasks(outputDiv, listName) {
                 }
             }
 
+            newDiv.appendChild(importance);
             newDiv.appendChild(divInfo);
             newDiv.appendChild(listItemExpandBtn);
             newDiv.appendChild(listItemExanded);
@@ -280,6 +294,7 @@ function renderLists() {
         taskInput.placeholder = "Legg til en oppgave";
         form.appendChild(taskInput);
 
+        let importance = "dot--green";
 
         let addTaskButton = document.createElement("button");
         addTaskButton.type = "submit";
@@ -290,7 +305,7 @@ function renderLists() {
         //Her kjører vi addTask funksjonen med oppgave og liste som input
         addTaskButton.onclick = function (event) {
             event.preventDefault();
-            addTask(taskInput.value, dateInput.value, list);
+            addTask(taskInput.value, dateInput.value, importance, list);
             //hvorfor fyrer ikke denne?
             inputFormDiv.classList.toggle('none');
         }
