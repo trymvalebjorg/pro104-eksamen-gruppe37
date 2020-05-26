@@ -199,9 +199,22 @@ function renderTasks(outputDiv, listName) {
             let listItemUploadBtn = document.createElement("button");
             listItemUploadBtn.className = 'list__item__expanded__btn btn btn--grey btn--round btn--upload';
 
+            //Her må vi delete
             let listItemDeleteBtn = document.createElement("button");
             listItemDeleteBtn.className = 'list__item__expanded__btn btn btn--red btn--round btn--remove';
 
+            listItemDeleteBtn.onclick = function(event){
+                event.preventDefault();
+                console.log("clicked");
+                let taskStorage = JSON.parse(localStorage.getItem("tasks"));
+                for(let i = 0; i < taskStorage.length; i++){
+                    if(taskStorage[i].task == task.task){
+                        taskStorage.splice(i, 1);
+                    }
+                }
+                localStorage.setItem("tasks", JSON.stringify(taskStorage));
+                location.reload();
+            }
 
             //Sjekker om assignlisten har samme task verdi som tasks, og hvis dette er tilfelle skriver den ut hvilket teammedlem som er tildelt oppgaven.
             for (let i = 0; i < assignedList.length; i++) {
